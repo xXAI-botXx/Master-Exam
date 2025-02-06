@@ -6,6 +6,7 @@ This project contains my Master Exam (planning, writing, ...)
     - [Plan](#plan)
     - [Schriftliches](#schriftliches)
     - [Source](#source)
+    - [Data](#data)
     - [Fragen](#fragen)
 
 
@@ -109,6 +110,19 @@ Here all important resources (most likely papers) are listed with the probably m
 
 Themen: Generative Modelle, Abbildung von Physikalischen Prozessen mit NN, Abbildung von Physikalischen Prozessen mit generativen Modellen 
 
+**Urban Sound Propagation: a Benchmark for 1-Step Generative Modeling of Complex Physical Systems**<br>
+```
+@article{spitznagel2024,
+	title={Urban Sound Propagation: a Benchmark for 1-Step Generative Modeling of Complex Physical Systems}, 
+	author={Martin Spitznagel and Janis Keuper},
+	year={2024},
+	url={https://arxiv.org/abs/2403.10904},
+	doi={10.48550/arXiv.2403.10904}
+}
+```
+- template statement 1
+
+
 
 **Template-Paper-Name**<br>
 ```
@@ -128,9 +142,34 @@ Themen: Generative Modelle, Abbildung von Physikalischen Prozessen mit NN, Abbil
 
 
 
+
+
+
+---
+### Data
+
+Welche Datensätze gibt es bereits zum Thema "Schallausbreitung im Freien", "Phsyiksimulation" (auch interessant?).
+
+**urban-sound-data**<br>
+```
+ -> size: 100.000 rgb images
+ -> channels: r, g, b
+ -> url: https://www.urban-sound-data.org/
+ -> task: Urban Sound Propagation Prediction
+ -> input: RGB Images? -> RED colored are the buildings
+ -> label: Gray images?
+ -> A benchmark (fits perfect!)
+```
+
+
+
+
+
+
 ---
 ### Fragen
 
+- Besteht die Aufgabe darin den Benschmark von "Urban Sound Propagation: a Benchmark for 1-Step Generative Modeling of Complex Physical Systems" mit mehr generativen Modellen zu erweitern?
 - Analyse und Evaluation von aktuellen generativen Ansätzen physikalische Zusammenhänge abzubilden -> **Wird hier nur die Schallausbreitung oder mehr erwartet?**
 - Sollen die generativen Modelle selbst trainiert oder vortrainiert getestet werden?
   - Wahscheinlich eher selbst trainieren

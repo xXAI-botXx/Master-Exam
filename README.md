@@ -74,6 +74,31 @@ Der Latex Code ist auf Overleaf und hier wird der Code ebenfalls ohne die Bilder
 
 https://www.overleaf.com/project/679f743ec9a1ac78e5db574b
 
+Es wurde die Vorlage der HS-Offenburg verwendet und in Overleaf geuploaded.
+Auf 'Menu' gibt es einige Einstellungen und auch Optionen zum Exportieren des Codes. Der Code wird von mir häufig als ZIP-Datei exportiert/heruntergeladen, dann extrahiere ich ihn in den Latex-Ordner und aktualisiere den Latex-Ordner in diesem Git-Projekt. Die .gitignore-Datei stellt sicher, dass die PDF selbst und die Bilder nicht getrackt werden.
+
+> Es ist wichtig das **main document** auf **thesis.tex** festzulegen, da overleaf preamble.tex als standard automatisch findet (da es die Documentenklasse festlegt) -> dies ist jedoch falsch und führt zu einer endlosen Compilierung, bis der Speicher vollläuft.
+
+
+Alle weiteren Optionen sind hier gelistet:
+- Compiler: pdfLaTeX
+- TeX Live version: 2024
+- Main document: thesis.tex
+- Spell check: English (American)
+- Auto-complete: On
+- Auto-close Brackets: On
+- Code check: On
+- Equation preview: On
+- Editor theme: textmate
+- Overall theme: Default
+- Keybindings: None
+- Font Size: 12px
+- Font Family: Lucida / Source Code Pro
+- Line Height: Normal
+- PDF Viewer: Overleaf
+
+
+
 
 
 

@@ -116,20 +116,20 @@
 \setlength{\seitenanfang}{0mm}       % Korrektur der vertikalen Position
 \setlength{\seitenbreite}{297mm}
 
-%\noindent \includegraphics[width=7cm, left]{hso.png}\hfill \includegraphics[width=2cm, right]{edeka.png} \\
+% \noindent \includegraphics[width=7cm, left]{hso.png}\hfill \includegraphics[width=9cm, right]{imla.png} \\
 \captionsetup[figure]{labelformat=empty}
 \noindent 
 \begin{figure}
-	\includegraphics[width=6cm,center]{hso.png}
-% Wenn ein Unternehmenslogo mit abgedruckt werden soll,
-% kann dies wie folgt integriert werden.	
-%	\begin{subfigure}[b]{0.5\textwidth}
-%		\includegraphics[width=7cm,left]{hso.jpg}
-%	\end{subfigure} 
-%	\begin{subfigure}[b]{0.5\textwidth}
-%		\centering
-%		\includegraphics[width=1.8cm,right]{edeka.png}
-%	\end{subfigure} 
+    \begin{subfigure}[b]{0.55\textwidth}
+        \centering
+		\raisebox{0.5cm}{\includegraphics[width=7cm,left]{hso.png}}
+	\end{subfigure} 
+    %\hfill
+	\begin{subfigure}[b]{0.55\textwidth}
+		\centering
+		\includegraphics[width=8.5cm,right]{imla.png}
+        \includegraphics[width=6.5cm,left]{hk.png}
+	\end{subfigure} 
 	\caption[]{}
 \end{figure}
 \captionsetup[figure]{labelformat=simple}

@@ -8,6 +8,7 @@ This project contains my Master Exam (planning, writing, ...)
     - [Schriftliches](#schriftliches)
     - [Source](#source)
     - [Data](#data)
+    - [Image-to-Image Translation Methods](#image-to-image-translation-methods)
     - [Progress](#progress)
     - [Meetings](#meetings)
     - [Fragen](#fragen)
@@ -115,7 +116,36 @@ Alle weiteren Optionen sind hier gelistet:
 
 Here all important resources (most likely papers) are listed with the probably most helpful statements.
 
-Themen: Generative Modelle, Abbildung von Physikalischen Prozessen mit NN, Abbildung von Physikalischen Prozessen mit generativen Modellen 
+Themen: Image-to-Image Translation, Generative Modelle, Abbildung von Physikalischen Prozessen mit NN, Abbildung von Physikalischen Prozessen mit generativen Modellen 
+
+**AI-Guided Noise Reduction for Urban Geothermal Drilling**<br>
+```
+@article{ladwig2024,
+	title={AI-Guided Noise Reduction for Urban Geothermal Drilling}, 
+	author={Daniel Ladwig and Martin Spitznagel and Jan Vaillant and Klaus Dorer and Janis Keuper},
+	year={2024},
+	url={https://opus.hs-offenburg.de/frontdoor/index/index/docId/10000},
+	doi={10.60643/urai.v2024p85}
+}
+```
+- Deep Reinforcement Learning Agent balances noise minimization and drilling efficiency by using Drill-LSTM machine state forecast and Sound-GAN sound propagation/distribution prediction
+- Domain: Urban geothermal energy production -> gain/use energy from geothermal sources in high populated areas
+- Problem: Drilling for installing geothermal technology generates great sound/noise pollution, while the legal requirements often cap the noise to 35dB at night while the deep drilling operations have to operate 24/7
+- Sound-GAN: 3 different image-to-image generative deeplearning models where trained on 15.000 labeled data (GAN based, UNet and DDPM Diffusion)
+  - Outperfomes traditional sound propagation simulations in processing speed by 50.000 times
+  - Mean absolute error: 0.55dB
+  - Data was normalized to: 1.0 show max dB of a component, to 0.5
+  - Input: fixed grayscaled OpenStreetMap (OSM) image, where black pixels are buildings and white pixels are free space
+  - Hyperparameters: 50 epochs, 20% data for testing
+  - Loss:
+    - GAN: combination of Binary Cross Entropy Loss & L1 Loss 
+    - UNet & Diffusion: Mean Squared Error
+
+  - Evaluation: Mean Absolute Error + Weighted Mean Absolute Percentage Error
+  - GAN outperformed the other 2 models in every aspect
+
+
+
 
 **Urban Sound Propagation: a Benchmark for 1-Step Generative Modeling of Complex Physical Systems**<br>
 ```
@@ -128,6 +158,36 @@ Themen: Generative Modelle, Abbildung von Physikalischen Prozessen mit NN, Abbil
 }
 ```
 - template statement 1
+
+
+
+**PhysicsGen: Can Generative Models Learn from Images to Predict Complex Physical Relations?**<br>
+```
+@article{spitznagel2025,
+	title={PhysicsGen: Can Generative Models Learn from Images to Predict Complex Physical Relations?}, 
+	author={Martin Spitznagel and Jan Vaillant and Janis Keuper},
+	year={2025},
+	url={https://arxiv.org/abs/2503.05333},
+	doi={10.48550/arXiv.2503.05333}
+}
+```
+- template statement 1
+- ...
+
+
+
+**Evaluierung der physikalischen Korrektheit von Normalizing Flows bei Bild-zu-Bild Transformationen in Schallausbreitungssimulationen**<br>
+```
+@article{eckerle2025,
+	title={Evaluierung der physikalischen Korrektheit von Normalizing Flows bei Bild-zu-Bild Transformationen in Schallausbreitungssimulationen}, 
+	author={Achim Eckerle},
+	year={2025},
+	url={},
+	doi={}
+}
+```
+- template statement 1
+- ...
 
 
 
@@ -167,6 +227,93 @@ Welche Datensätze gibt es bereits zum Thema "Schallausbreitung im Freien", "Phs
  -> label: Gray images?
  -> A benchmark (fits perfect!)
 ```
+
+
+
+
+
+---
+
+### Image-to-Image Translation Methods
+
+
+
+#### **Generative Models**
+
+These models learn to translate images from one domain to another by capturing the probability distribution of the target images.
+
+- **Conditional Generative Adversarial Networks (cGANs)**
+    - *Pix2Pix* → Classical cGAN for paired data
+    - *Pix2PixHD* → Extension of Pix2Pix for high-resolution images
+    - *PUGAN (Perceptual Upsampling GAN)* → Enhances texture and detail reconstruction
+    - *FEM-GAN (Feature-Enhanced Mapping GAN)* → Utilizes additional features for translation
+    - *SPADE (Spatially-Adaptive Normalization GAN)* → Excels at structure-preserving translations
+    - *StarGAN v2* → Multi-domain image-to-image translation
+
+- **Cycle-Consistent Generative Adversarial Networks (CycleGAN & Variants)**
+    - *CycleGAN* → Unsupervised translation for unpaired data
+    - *CUT (Contrastive Unpaired Translation)* → Reduces overfitting and removes cycle consistency requirement
+    - *UNIT (Unsupervised Image-to-Image Translation Network)* → Combines GANs with Variational Autoencoders (VAEs)
+
+- **Variational Autoencoders (VAEs)**
+	- *Conditional Variational Autoencoders (CVAE)* → Models a probability distribution over output images
+
+- **Diffusion Models & Score-Based Generative Models**
+    - *Conditional Diffusion Models* → Modern approach for controlled image transformation
+    - *Score-Based Generative Models* → Uses stochastic differential equations for image synthesis
+
+- **Normalizing Flow-Based Models**
+	- *Conditional Normalizing Flows* → Uses invertible neural networks for transformations
+
+
+
+#### **Encoder-Decoder CNNs**
+
+These methods directly map input images to target images with a deterministic architecture.
+
+- **U-Net & Variants**
+    - *U-Net* → Widely used for segmentation and image translation
+    - *Attention U-Net* → Integrates mechanisms for focusing on relevant image areas
+    - *ResU-Net* → Uses ResNet blocks for deeper architecture
+    - *U-Net++* → Incorporates nested skip connections for better detail preservation
+  
+- **Fully Convolutional Networks (FCNs)**
+    - *FCN-8s, FCN-16s, FCN-32s* → Variations with different granularity
+  
+- **DeepLab Series**
+    - *DeepLab v3+* → Combines atrous convolution with feature pyramids
+
+
+
+#### **Convolutional Regression Networks (CRNs)**
+
+These methods combine CNNs with regression mechanisms for precise continuous outputs.
+
+- *ResNet + FCN* → Combines residual learning with fully convolutional networks
+- *EfficientNet + Upsampling-Decoder* → Efficient architecture for high-resolution predictions
+- *ViT (Vision Transformer) + Decoder* → Uses Transformer models for image-to-image regression
+
+
+
+#### **Physic-Based Models**
+
+These methods integrate physical principles to improve modeling.
+
+- *PINNs (Physics-Informed Neural Networks)* → Incorporates physical equations into training
+- *CNN + PDE-Solver* → Combines convolutional networks with numerical solvers for differential equations
+
+
+
+#### **Additional Methods**
+
+- *Hybrid Models (GAN + CNN)* → Combines advantages of both approaches
+- *Graph Neural Networks (GNNs)* → Can be useful for wave propagation problems in irregular structures
+
+
+
+
+
+> In general a higher number epochs could maybe help, many generative models need much training time
 
 
 
@@ -236,8 +383,20 @@ XX Uhr alle 2 Wochen.<br>
 Zoom Link: ...
 
 **14.03.2025 Startgespräch Herr Keuper und ich:**
-- Aufgabenstellung/Thema:
-- Input/Output: 
+
+- Input/Output: Bild zu Bild Generierung
+- Paper lesen (4 Stück)
+- 1 Mal pro Woche zusammensetzen
+- Bei Meetings mit dabei (Dienstags und Donnerstags) -> intern, Doktoranten und bei Herrenknecht
+- Fächer: 
+  - Studium Generale (Mi. 9:45-11:15 Uhr A303)
+  - Akt Meth Masch Lernen (Do. 14:00-17:15 Uhr A301) -> Aktuelle Methoden des Maschinellen Lernens und deren Anwendung
+  - Einmalig: Erstsemestereinführung (Di. 18.03 9:30-10:30 Uhr E311/E412/E008)
+  - Nicht Data Science! -> Herr Keuper kümmert sich um die Anrechnung
+
+- Bei Fragen gerne im Google Chat schreiben
+- Unklarheiten: 
+  - Aufgabenstellung/Thema: Was soll nun genau im Master getan werden? -> Weitere Modelle und Experimente unternehmen
 
 
 
@@ -247,24 +406,8 @@ Zoom Link: ...
 ---
 ### Fragen
 
-- Geht es darum wirklich physikalische (nur Schallausbreitungs) Daten zu generieren?
-  -> bietet genug Stoff für Master
-
-  Oder um Image-to-Image Generierung (Fortsetzung von Sound Propagation Benchmark)
-  -> bietet nicht genug Stoff für Master
-- Analyse und Evaluation von aktuellen generativen Ansätzen physikalische Zusammenhänge abzubilden -> **Wird hier nur die Schallausbreitung oder mehr erwartet?**
-- Sollen die generativen Modelle selbst trainiert oder vortrainiert getestet werden?
-  - Wahscheinlich eher selbst trainieren
-- Was ist mit "- Mitarbeit im Forschungsprojekt" gemeint? Eigentlich ja nur indirekt oder? Kein direktes Ziel, oder?
-- Wie kann folgendes Ziel realistisch sein? "Praktische Anwendung der
-Ergebnisse auf realen
-Baustellen". Das Projekt kann doch nur indirekt helfen und nicht direkt auf der baustelle einsatz finden....oder?
-- Was soll das model am Ende als Input bekommen? Ein Satellitenbild -> mit oder ohne Gebäuden eingezeichnet? Oder bekommt es gar keinen Input und generiert einfach so Bilder mit Schallausbreitung und generiert auch noch die Städtische Umgebung?
-
-
-- Gibt es schon generative modelle? Sollen diese irgendwie auch verwendet werden?
-- Wie sehen die Daten aus?
-- Wie soll der Input/Output aussehen? (und bei der Inferenz? -> soll einfach generiert werden?)
+- Aufgabenstellung/Thema: Was soll nun genau im Master getan werden? -> Weitere Modelle und Experimente unternehmen
+-  What if we would give an RGB image as input -> the model could maybe learn to use more than only binary (building/not building) -> other objects also behave with the sound propagation 
 
 
 
@@ -273,6 +416,90 @@ Baustellen". Das Projekt kann doch nur indirekt helfen und nicht direkt auf der 
 
 ---
 ### Das sagt die KI
+
+````
+Below is an overview of the main classes of generative models—and some representative methods—you could consider for image-to-image translation in your task (converting urban satellite RGB images into grey-scale maps representing sound propagation):
+
+---
+
+### 1. **Conditional Generative Adversarial Networks (cGANs)**
+- **Pix2Pix:**  
+  Designed for paired image translation tasks, Pix2Pix uses a conditional GAN framework where the generator learns to map an input image to an output image (with the discriminator helping enforce realism). This method is particularly well-suited if you have aligned pairs of satellite images and corresponding sound propagation maps.  
+  *Key Reference:* Isola et al., “Image-to-Image Translation with Conditional Adversarial Networks.”
+
+- **Other cGAN Variants:**  
+  Many modifications and improvements on the original Pix2Pix have emerged, such as using different architectures (e.g., U-Net-based generators) or loss functions (e.g., adding perceptual or L1/L2 losses) to better capture fine details or regression nuances.
+
+---
+
+### 2. **Unpaired Image Translation Methods**
+If paired data (i.e., perfectly aligned input-output pairs) is scarce, you might consider models that work with unpaired datasets:
+
+- **CycleGAN:**  
+  Uses cycle-consistency losses to learn mappings between two domains even when paired examples are not available. This can be useful if you can collect separate sets of satellite images and sound propagation maps.
+  
+- **UNIT (Unsupervised Image-to-Image Translation):**  
+  Assumes a shared latent space between the two domains and learns a mapping through this common representation.
+  
+- **MUNIT (Multimodal Unsupervised Image-to-Image Translation):**  
+  Extends UNIT to allow for multimodal outputs, which might be useful if your sound propagation mapping has inherent ambiguities.
+  
+- **CUT (Contrastive Unpaired Translation):**  
+  A more recent method that uses contrastive learning to preserve the content of the input image while changing its style according to the target domain.
+
+---
+
+### 3. **Autoencoder-Based Approaches**
+- **Conditional Variational Autoencoders (CVAE):**  
+  CVAEs incorporate the conditioning signal (your satellite image) into the encoding-decoding process. They tend to produce smoother outputs and can be easier to train than GANs, although they might lack some of the sharpness achievable with adversarial training.
+
+- **U-Net Architectures:**  
+  While not generative models by definition, U-Nets (often used in segmentation tasks) are widely incorporated in the generator part of GANs (e.g., Pix2Pix) because their skip connections help retain high-resolution details from the input.
+
+---
+
+### 4. **Diffusion Models and Score-Based Generative Models**
+- **Conditional Diffusion Models:**  
+  Recently popularized for their ability to generate high-quality images, these models gradually denoise a noisy image in a process conditioned on the input. They have been applied successfully to image-to-image tasks and might be adapted for your regression-like output.
+  
+- **Score-Based Models:**  
+  These models learn to generate images by estimating the gradient (score) of the data distribution. Like diffusion models, they can be conditioned on an input image to guide the generation process.
+
+---
+
+### 5. **Normalizing Flows**
+- **Conditional Normalizing Flows:**  
+  These are invertible models that learn the exact likelihood of the data. When conditioned on an input image, they can be used for image-to-image translation tasks and offer exact likelihood estimation, which might be beneficial for understanding uncertainty in sound propagation outputs.
+
+---
+
+### Considerations for Your Task
+- **Data Availability:**  
+  - **Paired Data:** If you have a dataset of satellite images and corresponding sound propagation maps, methods like Pix2Pix or CVAEs are natural choices.  
+  - **Unpaired Data:** If the datasets are collected separately, CycleGAN, UNIT, or CUT might be more applicable.
+  
+- **Output Nature:**  
+  Since your output is a grey-scale map representing sound propagation (likely a continuous-valued field), consider modifying loss functions (e.g., using L1/L2 losses) or network architectures to better handle regression tasks rather than categorical outputs.
+
+- **Physical Consistency:**  
+  Depending on the complexity of the sound propagation phenomena, you might want to integrate domain-specific knowledge (e.g., physics-based constraints) into the training process, either by designing custom loss functions or hybrid models.
+
+- **Recent Trends:**  
+  Diffusion and score-based models have recently shown impressive results in generating detailed and high-fidelity images. They might be particularly attractive if you are looking for state-of-the-art quality and are comfortable with the typically higher computational cost of training these models.
+
+---
+
+### Summary
+In summary, your options include:
+
+- **Paired Approaches:** Pix2Pix and its cGAN variants, Conditional VAEs, and U-Net based architectures.
+- **Unpaired Approaches:** CycleGAN, UNIT, MUNIT, and CUT.
+- **Modern Alternatives:** Conditional diffusion models, score-based generative models, and conditional normalizing flows.
+
+The best choice depends on your specific dataset (paired vs. unpaired), the nature of the mapping from satellite imagery to sound propagation, and the desired trade-offs between training complexity and output fidelity.
+````
+
+
 
 ```
 Um die Schallausbreitung einer Bohrung in einer Stadt zu berechnen und herauszufinden, wo es wie laut ist, gibt es verschiedene mathematische Ansätze, abhängig von der Genauigkeit und dem Maßstab. Hier ist eine schrittweise Vorgehensweise mit verschiedenen Methoden:
@@ -1382,7 +1609,6 @@ for epoch in range(num_epochs):
 
 Falls Sie weitere Fragen zur Implementierung oder zu spezifischen Details haben, lassen Sie es mich wissen!
 ```
-
 
 
 

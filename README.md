@@ -119,7 +119,9 @@ Here all important resources (most likely papers) are listed with the probably m
 Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or *Physics-Based Supervised One-to-One Image Translation*.
 
 
-**AI-Guided Noise Reduction for Urban Geothermal Drilling**<br>
+
+**AI-Guided Noise Reduction for Urban Geothermal Drilling**
+
 ```
 @article{ladwig2024,
 	title={AI-Guided Noise Reduction for Urban Geothermal Drilling}, 
@@ -147,8 +149,8 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
 
 
 
+**Urban Sound Propagation: a Benchmark for 1-Step Generative Modeling of Complex Physical Systems**
 
-**Urban Sound Propagation: a Benchmark for 1-Step Generative Modeling of Complex Physical Systems**<br>
 ```
 @article{spitznagel2024,
 	title={Urban Sound Propagation: a Benchmark for 1-Step Generative Modeling of Complex Physical Systems}, 
@@ -158,11 +160,32 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
 	doi={10.48550/arXiv.2403.10904}
 }
 ```
-- template statement 1
+- 100.000 512x512 image-to-image dataset for predicting sound propagation from real 2d building maps drawn from OpenStreetmap (as a benchmark)
+  - annotated with simulated sound maps (with NoiseModelling v4)
+- Already have a baseline with U-Net, GAN and Diffusion -> Good in simple cases but struggle in more complex scenarios
+  - Pix2Pix-base GAN
+  - Standart U-Net
+  - Denoising Diffusion Probabilistic
+    Model
+- the propagation of sound over time is described via partial differential wave equations
+- Hyperparameters:
+  - Each model was constructed upon a unified U-Net backbone, scaling from 64 to 1028 channels, and then
+    reconverging to 64
+  - Batchsize: 18
+  - Epochs: 50
+  - early stopping criterion (3 epochs patience) with validation loss for preventing overfitting
+- Evaluation:
+  - Mean Absolute Error
+  - Weighted Mean Absolute Percentage Error
+  - Additionally, to assess how well each model captured the reflections or diffractions we specifically measured both metrics in areas not in direct line of sight to the central signal source in the OSM images. This assessment was conducted by performing ray tracing from the sound
+    source, allowing us to evaluate the models’ effectiveness in prediction propagations in Line-of-Sight (LoS) and outside Line-of-Sight (NLoS) by reflection and diffraction.
+
+- Speed up from generative models up to 20.000 compared to simulations
 
 
 
-**PhysicsGen: Can Generative Models Learn from Images to Predict Complex Physical Relations?**<br>
+**PhysicsGen: Can Generative Models Learn from Images to Predict Complex Physical Relations?**
+
 ```
 @article{spitznagel2025,
 	title={PhysicsGen: Can Generative Models Learn from Images to Predict Complex Physical Relations?}, 
@@ -172,12 +195,28 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
 	doi={10.48550/arXiv.2503.05333}
 }
 ```
-- template statement 1
-- ...
+- the paper investigate the capabilities of modern generative models to learn detailed, complex and physically correct mappings from image pairs
+- Need for new/other generative models for physical corretness (speed up is already given compared to differential equation based simulations)
+- presents the *PhysicsGen* Benchmark
+  - 300.000 image-pairs for 3 different taks (wave propagation, closed form lens distortion and time series prediction of motion dynamics)
+- baseline evaluation with 
+  - Pix2Pix
+  - U-Net
+  - Convolutional Autoencoder
+  - Variational Autoencoder
+  - Denoising Diffusion Probabilistic Models
+  - Stable Diffusion
+  - Denoising Diffusion Bridge Models 
+
+- Result: High Speedup, good accuracy, fundamental problems to learn higher order physical relations
+
+- Our analysis shows that while current generativemodels are promising significant speedups, there are still many open questions regarding their physical correctness.
 
 
 
-**Evaluierung der physikalischen Korrektheit von Normalizing Flows bei Bild-zu-Bild Transformationen in Schallausbreitungssimulationen**<br>
+
+**Evaluierung der physikalischen Korrektheit von Normalizing Flows bei Bild-zu-Bild Transformationen in Schallausbreitungssimulationen**
+
 ```
 @article{eckerle2025,
 	title={Evaluierung der physikalischen Korrektheit von Normalizing Flows bei Bild-zu-Bild Transformationen in Schallausbreitungssimulationen}, 
@@ -192,7 +231,7 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
 
 
 
-**Pix2Pix: Image-to-Image Translation with Conditional Adversarial Networks**<br>
+**Pix2Pix: Image-to-Image Translation with Conditional Adversarial Networks**
 
 ```
 @article{isola2016,
@@ -233,6 +272,7 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
 
 
 **U-GAT-IT: Unsupervised Generative Attentional Networks with Adaptive Layer-Instance Normalization**<br>(unsupervised...maybe not ideal)
+
 ```
 @article{kim2019,
 	title={{U-GAT-IT:} Unsupervised Generative Attentional Networks with Adaptive Layer-Instance Normalization for Image-to-Image Translation}, 
@@ -251,7 +291,8 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
 
 
 
-**One-to-one Mapping for Unpaired Image-to-image Translation**<br>
+**One-to-one Mapping for Unpaired Image-to-image Translation**
+
 ```
 @article{shen2020,
 	title={One-to-one Mapping for Unpaired Image-to-image Translation}, 
@@ -268,7 +309,8 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
 
 #### General
 
-**An Overview of Image-to-Image Translation Using Generative Adversarial Networks**<br>
+**An Overview of Image-to-Image Translation Using Generative Adversarial Networks**
+
 ```
 @InProceedings{,
 	title={An Overview of Image-to-Image Translation Using Generative Adversarial Networks}, 
@@ -286,7 +328,8 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
 
 
 
-**Image-to-Image Translation: Methods and Applications**<br>
+**Image-to-Image Translation: Methods and Applications**
+
 ```
 @article{pang2022,
 	title={Image-to-Image Translation: Methods and Applications}, 
@@ -303,7 +346,29 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
 
 
 
-**Template-Paper-Name**<br>
+**Physics-based Deep Learning**
+
+```
+@article{thuerey2021,
+	title={Physics-based Deep Learning}, 
+	author={Nils Thuerey and
+              Philipp Holl and
+              Maximilian M{\"{u}}ller and
+              Patrick Schnell and
+              Felix Trost and
+              Kiwon Um},
+	year={2021},
+	month={September},
+	url={https://arxiv.org/abs/2109.05237},
+	doi={10.48550/arXiv.2109.05237}
+}
+```
+- ...
+
+
+
+**Template-Paper-Name**
+
 ```
 @article{,
 	title={}, 
@@ -350,32 +415,30 @@ Welche Datensätze gibt es bereits zum Thema "Schallausbreitung im Freien", "Phs
 
 
 
-#### **Generative Models**
+#### (Classical) **Generative Models**
 
 These models learn to translate images from one domain to another by capturing the probability distribution of the target images.
 
 - **Conditional Generative Adversarial Networks (cGANs)**
     - *Pix2Pix* → Classical cGAN for paired data
-    - *Pix2PixHD* → Extension of Pix2Pix for high-resolution images
-    - *PUGAN (Perceptual Upsampling GAN)* → Enhances texture and detail reconstruction
-    - *FEM-GAN (Feature-Enhanced Mapping GAN)* → Utilizes additional features for translation
+    - Pix2Pix mit Vision Transformer
     - *SPADE (Spatially-Adaptive Normalization GAN)* → Excels at structure-preserving translations
-    - *StarGAN v2* → Multi-domain image-to-image translation
-
 - **Cycle-Consistent Generative Adversarial Networks (CycleGAN & Variants)**
     - *CycleGAN* → Unsupervised translation for unpaired data
     - *CUT (Contrastive Unpaired Translation)* → Reduces overfitting and removes cycle consistency requirement
     - *UNIT (Unsupervised Image-to-Image Translation Network)* → Combines GANs with Variational Autoencoders (VAEs)
-
 - **Variational Autoencoders (VAEs)**
-	- *Conditional Variational Autoencoders (CVAE)* → Models a probability distribution over output images
-
+  - *Conditional Variational Autoencoders (CVAE)* → Models a probability distribution over output images
 - **Diffusion Models & Score-Based Generative Models**
     - *Conditional Diffusion Models* → Modern approach for controlled image transformation
     - *Score-Based Generative Models* → Uses stochastic differential equations for image synthesis
-
 - **Normalizing Flow-Based Models**
-	- *Conditional Normalizing Flows* → Uses invertible neural networks for transformations
+  - *Conditional Normalizing Flows* → Uses invertible neural networks for transformations
+- **Energy-Based Models**
+    - Conditional Energy-Based Models
+    - Adversarial Energy-Based Models (EBM-GANs)
+    - Score-Based Conditional Generative Modeling (Diffusion als EBM)
+
 
 
 

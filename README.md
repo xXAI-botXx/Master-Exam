@@ -116,7 +116,8 @@ Alle weiteren Optionen sind hier gelistet:
 
 Here all important resources (most likely papers) are listed with the probably most helpful statements.
 
-Themen: Image-to-Image Translation, Generative Modelle, Abbildung von Physikalischen Prozessen mit NN, Abbildung von Physikalischen Prozessen mit generativen Modellen 
+Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or *Physics-Based Supervised One-to-One Image Translation*.
+
 
 **AI-Guided Noise Reduction for Urban Geothermal Drilling**<br>
 ```
@@ -187,6 +188,117 @@ Themen: Image-to-Image Translation, Generative Modelle, Abbildung von Physikalis
 }
 ```
 - template statement 1
+- ...
+
+
+
+**Pix2Pix: Image-to-Image Translation with Conditional Adversarial Networks**<br>
+
+```
+@article{isola2016,
+	title={Image-to-Image Translation with Conditional Adversarial Networks}, 
+	author={Phillip Isola and
+              Jun{-}Yan Zhu and
+              Tinghui Zhou and
+              Alexei A. Efros},
+	year={2016},
+	url={https://arxiv.org/abs/1611.07004},
+	doi={10.48550/arXiv.1611.07004},
+	journal={CoRR},
+    volume={abs/1611.07004},
+}
+```
+- ...
+
+
+#### Unsupervised
+
+**CycleGAN: Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks**<br>(unsupervised...maybe not ideal)
+```
+@article{zhu2017,
+	title={Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks}, 
+	author={Jun{-}Yan Zhu and
+              Taesung Park and
+              Phillip Isola and
+              Alexei A. Efros},
+	year={2017},
+	url={http://arxiv.org/abs/1703.10593},
+	doi={10.48550/arXiv.1703.10593},
+	journal={CoRR},
+    volume={abs/1703.10593},
+}
+```
+- ...
+
+
+
+**U-GAT-IT: Unsupervised Generative Attentional Networks with Adaptive Layer-Instance Normalization**<br>(unsupervised...maybe not ideal)
+```
+@article{kim2019,
+	title={{U-GAT-IT:} Unsupervised Generative Attentional Networks with Adaptive Layer-Instance Normalization for Image-to-Image Translation}, 
+	author={Junho Kim and
+              Minjae Kim and
+              Hyeonwoo Kang and
+              Kwanghee Lee},
+	year={2019},
+	url={http://arxiv.org/abs/1907.10830},
+	doi={10.48550/arXiv.1907.10830},
+	journal={CoRR},
+    volume={abs/1907.10830},
+}
+```
+- ...
+
+
+
+**One-to-one Mapping for Unpaired Image-to-image Translation**<br>
+```
+@article{shen2020,
+	title={One-to-one Mapping for Unpaired Image-to-image Translation}, 
+	author={Zengming Shen and S. Kevin Zhou and Yifan Chen and Bogdan Georgescu and Xuqi Liu and Thomas Huang},
+	year={2020},
+	month={March},
+	url={https://openaccess.thecvf.com/content_WACV_2020/html/Shen_One-to-one_Mapping_for_Unpaired_Image-to-image_Translation_WACV_2020_paper.html},
+	doi={10.48550/arXiv.1909.04110},
+	booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+}
+```
+- ...
+
+
+#### General
+
+**An Overview of Image-to-Image Translation Using Generative Adversarial Networks**<br>
+```
+@InProceedings{,
+	title={An Overview of Image-to-Image Translation Using Generative Adversarial Networks}, 
+	author={Xin Chen and Caiyan Jia},
+	year={2021},
+	month={February},
+	url={https://link.springer.com/chapter/10.1007/978-3-030-68780-9_31},
+	doi={10.1007/978-3-030-68780-9_31},
+	booktitle={Pattern Recognition. ICPR International Workshops and Challenges},
+	pages={366--380},
+	isbn={978-3-030-68780-9}
+}
+```
+- ...
+
+
+
+**Image-to-Image Translation: Methods and Applications**<br>
+```
+@article{pang2022,
+	title={Image-to-Image Translation: Methods and Applications}, 
+	author={Yingxue Pang and Jianxin Lin and Tao Qin and Zhibo Chen},
+	year={2022},
+	url={},
+	doi={10.1109/TMM.2021.3109419},
+	journal={IEEE Transactions on Multimedia}, 
+	volume={24},
+	pages={3859-3881}
+}
+```
 - ...
 
 

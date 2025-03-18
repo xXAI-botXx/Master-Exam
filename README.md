@@ -3,12 +3,13 @@
 This project contains my Master Exam (planning, writing, ...)
 
 - [Master-Exam](#master-exam)
-    - [Projekt Details](#projekt-details)
+    - [Project Details](#project-details)
     - [Plan](#plan)
-    - [Schriftliches](#schriftliches)
+    - [Writing](#writing)
     - [Source](#source)
     - [Data](#data)
     - [Image-to-Image Translation Methods](#image-to-image-translation-methods)
+    - [Research](#research)
     - [Progress](#progress)
     - [Meetings](#meetings)
     - [Fragen](#fragen)
@@ -20,43 +21,58 @@ This project contains my Master Exam (planning, writing, ...)
 
 
 ---
-### Projekt Details
+### Project Details
 
-**Titel:** Können generative Modelle komplexe Zusammenhänge lernen?
 
-**Aufgabe:** (Problemstellung)<br>
-Es soll untersucht werden, ob generative Modelle physikalisch korrekte Daten erzeugen können. Spezifisch wird die Generierung der Schallausbreitung in städtischen Gebieten untersucht.
 
-- Input: Satellitenbild -> mit Gebäuden? Kein Input?
-- Output: Schallausbreitung (Schallfrequenz für jeden Pixel)
+**Title:** Can generative models learn complex relationships?
 
-**Weitere Bedingungen:**
+
+
+**Task:** (problem/research question)<br>The aim is to investigate whether generative models can generate physically correct data. Specifically, the generation of sound propagation in urban areas will be investigated.
+
+- Input: Satellite image + temperatur + humidity + source power (dB)
+
+- Output: Sound propagation (sound frequency for each pixel)
+
+  
+
+**Additional Conditions:**
+
 - Python + Pytroch?
+
 - ...
 
-**Ziele:**
-- Analyse und Evaluation von aktuellen generativen Ansätzen physikalische Zusammenhänge abbilden zu können
-  - Erstellung eines Trainingdatensatzes (genug Daten? Evtl. mit synthetischen Daten erweitern?)
-  - Entwicklung eines BenchmarksMetriken zur Bewertung von generativen Modellen
-  - Aktuelle generative Ansätze herauserarbeiten
-  - Aktuelle generative Ansätze implementieren
-  - Aktuelle generative Ansätze trainieren oder vortrainiert?
-- Mitarbeit im Forschungsprojekt (?)
-- Schreiben der Masterarbeit
+  
+
+**Goals:**
+
+- Analysis and evaluation of current generative approaches to map physical relationships
+- Creation of a training dataset (enough data? Possibly extend with synthetic data?)
+- Development of a benchmark metric to evaluate generative models
+- Elaborate current generative approaches
+- Implement current generative approaches
+- Train or pre-train current generative approaches?
+- Collaboration in the research project (?)
+- Writing the Master's thesis
 
 
 
-**Thesen:**
-1. Generative Modelle können die Wahrscheinlichkeiten komplexer physikalischer Vorgänge anhand eines Bildes vorhersagen
-2. Generative Modelle sind nicht für deterministische Aufgaben geeignet und folgerichtig, müssen die Modelle angepasst werden, um deterministisch zu sein -> jenachdem wie man es einsetz bzw. was der input ist
+**Theses:** (sort out and adjust)
 
-=> Hängt von der eigentlich und ganz genauen Aufgabenstellung ab!!!
+1. Generative models can predict the probabilities of complex physical processes based on an image
+2. Physical Constraints and focuses are important/improve the accuracy of physical correct generations
+3. PINNs are better capable to generate physical correct generations/images as classical/modern generative models/methods
+4. ...
 
 
-**Koorperation:**<br>
-Das Projekt wird in Kooperation mit der Herrenknecht Vertikal GmbH und dem Institute for Machine Learning and Analytics im Rahmen des BMBF geförderten Forschungsprojekts KI-Bohrer durchgeführt.
+
+**Coorparation:**<br>The project is being carried out in cooperation with Herrenknecht Vertikal GmbH and the Institute for Machine Learning and Analytics (IMLA) as part of the BMBF-funded KI-Bohrer research project.
+
 - https://www.ki-bohrer.de/
 - https://imla.hs-offenburg.de/
+
+
 
 
 
@@ -64,32 +80,32 @@ Das Projekt wird in Kooperation mit der Herrenknecht Vertikal GmbH und dem Insti
 ---
 ### Plan
 
-1. Thema deines Masters finden
-2. Recherche -> Rausschreiben in md file
-3. Thema aktualisieren + These(n) definieren
-4. Experimentenplan aufstellen (wie messbar?)
-5. Experimente aufsetzen (evtl. architekturen erstellen)
-6. Experiment durchführen (trainieren + ergebnis)
-7. anfangen zu schreiben / schreibplan
+1. Find the exact topic of your master's degree (with research question and subtopics)
+2. Research of this topic
+3. Update topic + define thesis(es)
+4. Set up experiment plan (how measurable?)
+5. Set up experiments (possibly create architectures)
+6. Perform experiment (train + result)
+7. Start writing / writing plan
 8. ...
 
 
 
 
 ---
-### Schriftliches
+### Writing
 
-Der Latex Code ist auf Overleaf und hier wird der Code ebenfalls ohne die Bilder geupdated.
+The latex code is on Overleaf and here the code is also updated without the images.
 
 https://www.overleaf.com/project/679f743ec9a1ac78e5db574b
 
-Es wurde die Vorlage der HS-Offenburg verwendet und in Overleaf geuploaded.
-Auf 'Menu' gibt es einige Einstellungen und auch Optionen zum Exportieren des Codes. Der Code wird von mir häufig als ZIP-Datei exportiert/heruntergeladen, dann extrahiere ich ihn in den Latex-Ordner und aktualisiere den Latex-Ordner in diesem Git-Projekt. Die .gitignore-Datei stellt sicher, dass die PDF selbst und die Bilder nicht getrackt werden.
+The HS-Offenburg template was used and uploaded to Overleaf.
+On ‘Menu’ there are some settings and also options for exporting the code. I often export/download the code as a ZIP file, then extract it to the Latex folder and update the Latex folder in this Git project. The .gitignore file ensures that the PDF itself and the images are not tracked.
 
-> Es ist wichtig das **main document** auf **thesis.tex** festzulegen, da overleaf preamble.tex als standard automatisch findet (da es die Documentenklasse festlegt) -> dies ist jedoch falsch und führt zu einer endlosen Compilierung, bis der Speicher vollläuft.
+> It is important to set the **main document** to **thesis.tex** as overleaf will automatically find preamble.tex by default (as it sets the document class) -> however, this is wrong and will lead to endless compilation until memory runs out.
 
 
-Alle weiteren Optionen sind hier gelistet:
+All other options are listed here:
 - Compiler: pdfLaTeX
 - TeX Live version: 2024
 - Main document: thesis.tex
@@ -116,7 +132,11 @@ Alle weiteren Optionen sind hier gelistet:
 
 Here all important resources (most likely papers) are listed with the probably most helpful statements.
 
-Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or *Physics-Based Supervised One-to-One Image Translation*.
+Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or *Physics-Based Supervised One-to-One Image Translation for predicting sound propagation*.
+
+
+
+Also see: [GitHub - ShenZheng2000/Awesome-Image-to-Image-Translation: This repository contains representative papers for image-to-image translation (I2IT).](https://github.com/ShenZheng2000/Awesome-Image-to-Image-Translation)
 
 
 
@@ -179,8 +199,23 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
   - Weighted Mean Absolute Percentage Error
   - Additionally, to assess how well each model captured the reflections or diffractions we specifically measured both metrics in areas not in direct line of sight to the central signal source in the OSM images. This assessment was conducted by performing ray tracing from the sound
     source, allowing us to evaluate the models’ effectiveness in prediction propagations in Line-of-Sight (LoS) and outside Line-of-Sight (NLoS) by reflection and diffraction.
-
 - Speed up from generative models up to 20.000 compared to simulations
+- Baseline Dataset (25.000 paired datapoints)
+  - Basic sound propagation without any complex propagation phenomenon
+  - Geometric propagation + air absorption
+  - Baseline accuracy
+
+- Diffraction Dataset (25.000 paired datapoints)
+  - Extent the base sound propagation with diffraction effects at building edges
+
+- Reflection Dataset (25.000 paired datapoints)
+  - Extent the base sound propagation with multiple reflections on building facades (counts to 3 reflection orders)
+
+- Combined Dataset (25.000 paired datapoints)
+  - Combines base sound propagation, air absorption, buidling edge diffractions and reflections from building facades
+  - Valid by:
+    - Temperature: -20C to +40C
+    - Sound power level: 60 dB to 99 dB
 
 
 
@@ -207,11 +242,8 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
   - Denoising Diffusion Probabilistic Models
   - Stable Diffusion
   - Denoising Diffusion Bridge Models 
-
 - Result: High Speedup, good accuracy, fundamental problems to learn higher order physical relations
-
 - Our analysis shows that while current generativemodels are promising significant speedups, there are still many open questions regarding their physical correctness.
-
 
 
 
@@ -226,8 +258,26 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
 	doi={}
 }
 ```
-- template statement 1
-- ...
+- evaluates the physical accuracy of Normalizing Flows for image-to-image transformations in
+  urban sound propagation simulations
+- Used Mean Absolute Error (MAE), the Weighted Mean Absolute Percentage
+  Error (wMAPE), and the Structural Similarity Index (SSIM), capturing both local deviations and
+  global structural properties of the generated sound maps
+- Model: "Full Glow"
+- Non-Line-of-Sight (NLoS) MAE of 0.65 and Line-of-Sight (LoS) MAE of 1.84 (in baseline scenarios)
+- In diffraction cases, the LoS MAE of 0.79 and the NLoS MAE of 2.63
+- Multiple effects like reflection and diffraction intersect are still challenging and refining physical constraints and expanding the traindata could improve the performance
+- Division of the data sets. Each of these data sets is divided into the following subsets:
+  - Training dataset: 19,908 scenarios (approx. 20k, 80.0%)
+  - Validation data set: 3732 scenarios (approx. 3.5k, 15.0%)
+  - Test data set: 1,245 scenarios (approx. 1.5k, 5.0%)
+- with 19 908 trainingsamples 108h on a NVIDIA GeForce RTX 4090 with 24 GB VRAM
+- Usage of Gradient-Checkpointing not needed and slowed the training process
+- Improvements:
+  - More trainingdata (and with not german cities for more variety)
+  - Add phsical loss to normalizing flow approach
+  - Add physical details to all layers of normalizing flow
+
 
 
 
@@ -412,6 +462,7 @@ Welche Datensätze gibt es bereits zum Thema "Schallausbreitung im Freien", "Phs
 ---
 
 ### Image-to-Image Translation Methods
+for physical correctness
 
 
 
@@ -421,7 +472,7 @@ These models learn to translate images from one domain to another by capturing t
 
 - **Conditional Generative Adversarial Networks (cGANs)**
     - *Pix2Pix* → Classical cGAN for paired data
-    - Pix2Pix mit Vision Transformer
+    - *Pix2Pix mit Vision Transformer*
     - *SPADE (Spatially-Adaptive Normalization GAN)* → Excels at structure-preserving translations
 - **Cycle-Consistent Generative Adversarial Networks (CycleGAN & Variants)**
     - *CycleGAN* → Unsupervised translation for unpaired data
@@ -434,6 +485,7 @@ These models learn to translate images from one domain to another by capturing t
     - *Score-Based Generative Models* → Uses stochastic differential equations for image synthesis
 - **Normalizing Flow-Based Models**
   - *Conditional Normalizing Flows* → Uses invertible neural networks for transformations
+  - *Full Glow*
 - **Energy-Based Models**
     - Conditional Energy-Based Models
     - Adversarial Energy-Based Models (EBM-GANs)
@@ -489,6 +541,348 @@ These methods integrate physical principles to improve modeling.
 
 
 > In general a higher number epochs could maybe help, many generative models need much training time
+
+
+
+
+
+---
+
+### Research
+
+Launch title: Can generative models learn complex relationships?
+
+
+
+Task(s): 
+
+Improving **Physics-Based Supervised One-to-One Image Translation for Predicting Sound Propagation** with:
+
+- new architectures
+  - Vision Transformer ([Tensor-to-Image](https://github.com/YigitGunduc/tensor-to-image))
+  - TransUNet (ViT + U-Net)
+  - DeepONet (for Image-to-Image Translation)
+- changing Feature Extraction
+  - CNN (standard)
+  - ResNet (pretrained(?))
+  - Visiontransformer -> TransPix2Pix
+- add physical loss (with PINN?) -> maybe a pretraining without physical loss and then a fine-tuning with physical loss
+  - try with which models? Autenencoder? Pix2Pix? FullGlow?
+- extending the dataset? (Augmentation? New Data? Other existing datasets?)
+  - add augmentations
+    - random cropping
+    - flipping
+    - rotation
+    - noise injection
+    - random padding
+- improving Hyperparameters? (longer trainingtime needed? -> enough data for that?)
+  - apply overfitting preventing techniques => Dropout, Weight Decay, Batch Normalization, Early Stopping
+- using transfer learning (available?)
+
+
+
+Based on:
+
+- Base-Project: *AI-Guided Noise Reduction for Urban Geothermal Drilling*
+- Dataset: *Urban Sound Propagation: a Benchmark for 1-Step Generative Modeling of Complex Physical Systems*
+- Baseline: *PhysicsGen: Can Generative Models Learn from Images to Predict Complex Physical Relations?*
+- Normalizing-Flow: *Evaluierung der physikalischen Korrektheit von Normalizing Flows bei Bild-zu-Bild Transformationen in Schallausbreitungssimulationen*
+
+
+
+Example Physical Loss:
+
+````python
+import torch
+import torch.nn as nn
+
+class SoundPropagationLoss(nn.Module):
+    def __init__(self, temperature_factor=0.002, humidity_factor=0.003, alpha=0.01):
+        super().__init__()
+        self.temperature_factor = temperature_factor
+        self.humidity_factor = humidity_factor
+        self.alpha = alpha  # Weight for regularization
+
+    def forward(self, predicted_image, source_power, temperature, humidity, distance_map):
+        """
+        Computes a physics-informed loss based on sound propagation principles.
+        
+        Arguments:
+        - predicted_image: Tensor of predicted sound intensity (grayscale image).
+        - source_power: Scalar, initial power level in dB.
+        - temperature: Scalar, ambient temperature.
+        - humidity: Scalar, relative humidity.
+        - distance_map: Tensor of distances (same shape as predicted_image).
+        
+        Returns:
+        - physics_loss: Scalar loss value.
+        """
+
+        # Compute geometric divergence loss (logarithmic distance loss)
+        div_loss = 20 * torch.log10(distance_map + 1e-6)  # Add small value to prevent log(0)
+
+        # Compute atmospheric absorption loss (depends on temp & humidity)
+        alpha = self.temperature_factor * (temperature / 300) + self.humidity_factor * (humidity / 50)
+        atm_loss = alpha * distance_map
+
+        # Compute expected received intensity
+        expected_image = source_power - div_loss - atm_loss
+
+        # Compute loss (MSE between expected and predicted)
+        physics_loss = nn.MSELoss()(predicted_image, expected_image)
+
+        return self.alpha * physics_loss
+````
+
+And another example:
+
+```` python
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import torch.autograd as autograd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.ndimage import laplace  # For PDE approximation
+
+# Decoder/ Generation -> only an example
+class UNet(nn.Module):
+    def __init__(self, in_channels=1, out_channels=1):
+        super(UNet, self).__init__()
+        
+        def conv_block(in_ch, out_ch):
+            return nn.Sequential(
+                nn.Conv2d(in_ch, out_ch, kernel_size=3, padding=1),
+                nn.ReLU(inplace=True),
+                nn.Conv2d(out_ch, out_ch, kernel_size=3, padding=1),
+                nn.ReLU(inplace=True),
+            )
+        
+        self.encoder = nn.Sequential(
+            conv_block(in_channels, 64),
+            nn.MaxPool2d(2),
+            conv_block(64, 128),
+            nn.MaxPool2d(2),
+        )
+        
+        self.decoder = nn.Sequential(
+            nn.ConvTranspose2d(128, 64, kernel_size=2, stride=2),
+            conv_block(64, 64),
+            nn.ConvTranspose2d(64, out_channels, kernel_size=2, stride=2),
+            nn.Sigmoid()  # Normalize to [0,1]
+        )
+    
+    def forward(self, x):
+        x = self.encoder(x)
+        x = self.decoder(x)
+        return x
+    
+# === loss ===
+def laplacian_2d(u):
+    """Computes the discrete Laplacian using finite differences."""
+    return torch.tensor(laplace(u.numpy(), mode='reflect'))
+
+def wave_equation_residual(u, c=343.0, dt=0.01):
+    """Computes the residual of the wave equation: ∂²u/∂t² - c²∇²u = 0"""
+    laplacian = laplacian_2d(u)
+    residual = (u - 2 * u + u) / dt**2 - c**2 * laplacian
+    return residual
+
+def compute_loss(pred, target, lambda_pde=0.1):
+    mse_loss = nn.MSELoss()(pred, target)
+    
+    # Compute PDE residual loss
+    pde_residual = wave_equation_residual(pred)
+    physics_loss = torch.mean(pde_residual**2)
+    
+    total_loss = mse_loss + lambda_pde * physics_loss
+    return total_loss
+
+# === Traning ===
+# Initialize model, optimizer
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = UNet().to(device)
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+# Example Training Loop
+for epoch in range(100):
+    optimizer.zero_grad()
+    
+    # Example input: Urban sound map
+    urban_map = torch.rand(1, 1, 128, 128).to(device)  # Random placeholder data
+    target_wavefield = torch.rand(1, 1, 128, 128).to(device)  # Ground truth
+    
+    pred_wavefield = model(urban_map)
+    loss = compute_loss(pred_wavefield, target_wavefield)
+    
+    loss.backward()
+    optimizer.step()
+    
+    if epoch % 10 == 0:
+        print(f"Epoch {epoch}, Loss: {loss.item()}")
+````
+
+DeepONet:
+
+````python
+import torch
+import torch.nn as nn
+
+class DeepONet(nn.Module):
+    def __init__(self, img_size=64, in_channels=3, branch_hidden=128, trunk_hidden=128):
+        super().__init__()
+        # Branch network (learns the function input)
+        self.branch = nn.Sequential(
+            nn.Conv2d(in_channels, branch_hidden, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(branch_hidden, branch_hidden, kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.Flatten()
+        )
+
+        # Trunk network (learns the output coordinate space)
+        self.trunk = nn.Sequential(
+            nn.Linear(2, trunk_hidden),
+            nn.ReLU(),
+            nn.Linear(trunk_hidden, branch_hidden)
+        )
+
+        # Final projection
+        self.fc = nn.Linear(branch_hidden, 3)  # Output RGB image values
+
+    def forward(self, x, coords):
+        branch_out = self.branch(x)  # Extract global features
+        trunk_out = self.trunk(coords)  # Learn spatial dependencies
+        combined = branch_out * trunk_out  # Merge features
+        output = self.fc(combined)  # Map to image space
+        return output.view(x.shape[0], 3, x.shape[2], x.shape[3])  # Reshape to image
+
+# Example usage
+model = DeepONet()
+input_image = torch.randn(4, 3, 64, 64)  # (batch, channels, height, width)
+coords = torch.randn(4, 2)  # Spatial coordinates
+output_image = model(input_image, coords)
+print(output_image.shape)  # Expected: (4, 3, 64, 64)
+````
+
+Vision Transformer:
+
+````python
+import torch
+import torch.nn as nn
+
+class VisionTransformer(nn.Module):
+    def __init__(self, img_size=64, patch_size=8, in_channels=3, hidden_dim=256, num_layers=6, num_heads=8):
+        super().__init__()
+        self.patch_embed = nn.Conv2d(in_channels, hidden_dim, kernel_size=patch_size, stride=patch_size)
+        self.pos_embed = nn.Parameter(torch.randn(1, (img_size // patch_size) ** 2, hidden_dim))
+
+        encoder_layer = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=hidden_dim * 4)
+        self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
+
+        self.decoder = nn.Linear(hidden_dim, patch_size * patch_size * in_channels)
+        self.out_conv = nn.ConvTranspose2d(hidden_dim, in_channels, kernel_size=patch_size, stride=patch_size)
+
+    def forward(self, x):
+        batch_size, channels, height, width = x.shape
+        patches = self.patch_embed(x)  # In Patches aufteilen
+        patches = patches.flatten(2).transpose(1, 2)  # (batch, num_patches, hidden_dim)
+        patches += self.pos_embed  # Positionale Einbettung
+
+        encoded = self.encoder(patches)  # Transformer-Encoder
+
+        decoded = self.decoder(encoded)  # In Pixel-Werte zurückprojizieren
+        decoded = decoded.transpose(1, 2).view(batch_size, -1, height // 8, width // 8)
+        output = self.out_conv(decoded)  # In Bild umwandeln
+        return output
+
+# Beispielnutzung
+model = VisionTransformer()
+input_image = torch.randn(4, 3, 64, 64)
+output_image = model(input_image)
+print(output_image.shape)  # Erwartet: (4, 3, 64, 64)
+````
+
+TransUNet:
+
+````python
+import torch
+import torch.nn as nn
+
+class TransUNet(nn.Module):
+    def __init__(self, img_size=64, patch_size=8, in_channels=3, hidden_dim=256, num_heads=8, num_layers=6):
+        super().__init__()
+        self.patch_embed = nn.Conv2d(in_channels, hidden_dim, kernel_size=patch_size, stride=patch_size)
+        self.pos_embed = nn.Parameter(torch.randn(1, (img_size // patch_size) ** 2, hidden_dim))
+
+        encoder_layer = nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dim_feedforward=hidden_dim * 4)
+        self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
+
+        self.upconv1 = nn.ConvTranspose2d(hidden_dim, 128, kernel_size=3, stride=2, padding=1, output_padding=1)
+        self.upconv2 = nn.ConvTranspose2d(128, 64, kernel_size=3, stride=2, padding=1, output_padding=1)
+        self.out_conv = nn.Conv2d(64, in_channels, kernel_size=1)
+
+    def forward(self, x):
+        batch_size, channels, height, width = x.shape
+        patches = self.patch_embed(x)  # Bild in Patches umwandeln
+        patches = patches.flatten(2).transpose(1, 2)  # (batch, num_patches, hidden_dim)
+        patches += self.pos_embed  # Positionale Einbettung
+
+        encoded = self.encoder(patches)  # Transformer-Encoder
+
+        # Reshape zurück ins Bildformat
+        h, w = height // 8, width // 8
+        encoded = encoded.transpose(1, 2).view(batch_size, -1, h, w)
+
+        # U-Net Decoder
+        x = self.upconv1(encoded)
+        x = self.upconv2(x)
+        output = self.out_conv(x)
+        return output
+
+# Beispielnutzung
+model = TransUNet()
+input_image = torch.randn(4, 3, 64, 64)
+output_image = model(input_image)
+print(output_image.shape)  # Erwartet: (4, 3, 64, 64)
+````
+
+Custom ResNet Transformer Model:
+
+````python
+import torch
+import torch.nn as nn
+import torchvision.models as models
+
+class ResNetEncoder(nn.Module):
+    def __init__(self, resnet_model):
+        super(ResNetEncoder, self).__init__()
+        self.encoder = nn.Sequential(*list(resnet_model.children())[:-2])  # Removing the last layers
+        
+    def forward(self, x):
+        return self.encoder(x)
+
+class TransformerDecoder(nn.Module):
+    def __init__(self, embed_size, num_heads, num_layers, hidden_dim):
+        super(TransformerDecoder, self).__init__()
+        self.transformer = nn.Transformer(d_model=embed_size, num_heads=num_heads, num_layers=num_layers)
+        self.fc_out = nn.Linear(embed_size, hidden_dim)
+    
+    def forward(self, x, memory):
+        x = self.transformer(x, memory)
+        return self.fc_out(x)
+
+class ImageTranslationModel(nn.Module):
+    def __init__(self, resnet_model):
+        super(ImageTranslationModel, self).__init__()
+        self.encoder = ResNetEncoder(resnet_model)
+        self.decoder = TransformerDecoder(embed_size=256, num_heads=8, num_layers=6, hidden_dim=64)
+
+    def forward(self, x):
+        encoded = self.encoder(x)
+        decoded = self.decoder(encoded, encoded)  # using the same encoded features as memory
+        return decoded
+````
 
 
 
@@ -583,6 +977,7 @@ Zoom Link: ...
 
 - Aufgabenstellung/Thema: Was soll nun genau im Master getan werden? -> Weitere Modelle und Experimente unternehmen
 -  What if we would give an RGB image as input -> the model could maybe learn to use more than only binary (building/not building) -> other objects also behave with the sound propagation 
+-  4 Models for 4 tasks or 1 model for 4 tasks? -> I think 4 models for 4 tasks
 
 
 

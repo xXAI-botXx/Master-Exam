@@ -893,6 +893,14 @@ class ImageTranslationModel(nn.Module):
 ### Progress
 
 **März 2025:**
+- read 4 core papers
+- thought about possible research questions and optimizings
+- started with the noisemodelling simulation software
+- setted 2 first experiments
+  - Train 2x models, one which gets simple sound propagation as input and the other gets the plain input -> which perform better on the reflexion (sub)dataset
+  - Adaptive sampling -> train data should contain much more complex examples + add regularizations against overfitting
+
+- created simple sound propagation dataset with equal building setup for basic and reflection simulation (comming)
 - ...
 
 **April 2025:**
@@ -951,7 +959,109 @@ class ImageTranslationModel(nn.Module):
 XX Uhr alle 2 Wochen.<br>
 Zoom Link: ...
 
-**14.03.2025 Startgespräch Herr Keuper und ich:**
+
+
+**21.03.2025 Software Tool Einführung:**
+Participants: Martin, Ich
+Location: Zoom
+Time: 10:00 O'Clock
+
+- the noise simulation works with receivers. on the location of a receiver the sound volume will get calculated. The *delta*-distance says how many receiver should there every x steps (receiver grid) + there come additional receiver on every buildings edges
+
+- the noise simulation software got a bit expanded to allow receiver grid and receiver on the edes of buildings
+
+- a simulation process creates a local database for the data and so only one process at the time is possible. To still be bale to make multiple generation processes the project uses multiple docker containers to be able to run multiple simulations at the time + they got used with computing devices in a kubernetes cluster but now only one note of this cluster is in use with about 250 kernels for computing
+
+  - connect to the note/cluster/server via SSH and VS Code
+
+- the normal simulation process is: GPS data + optionally temperatur, humidity, ... = satelite image + sound propagation image 
+
+- the simplified simulation process is: shapes = satelite image + sound propagation image
+  - Only a few shapes are spawned randomly to keep it more simple (example usecase: testing)
+  - create_custom_dataset....py
+  - Available buildings can be processed by the run command or with a json file -> both have to processed in the --buildings parameter 
+
+- there are 4 cases: basic, reflection, diffraction, combined
+  - basic: simple wave propagation
+  - reflection: basic with bouncing from buildings (order decides how often it bounces) -> similar to ray-tracing
+  - diffraction: how the sound waves are moving behind a building (around it)
+  - combined: basic + reflection + diffraction + other properties (temperature, humidity, ...) -> will be added as additional channel for each property
+
+- run command: 
+  ```cmd
+  docker run noisemodellingapi:test --buildings "[[[0,0], [0,50], [50,50],[0,0]], [[0,0], [0,80], [40, 80], [40,0], [0,0]]]" --linux
+  ```
+
+- I have to create: the same constellation with basic and reflection -> maybe I can create both in the same simulation run, or I create the exact building location and create the 2 simulations with it, or I run it as basic and then extract and use the exact building spwan and give it to the next simulation with reflection on -> or think about it...there are many possible solutions 
+
+  - but the simulation/wrapper/process must be adjusted so fixed locations are the input
+  - look how the students made that the input is not GPS else the shape
+
+- config.cfg contains standard parameters (delta distance, reflection, ...)
+
+- 256x256 size is standard (I can also only use still)
+
+- standard: lwd500 =  95dB (-> 500 hz)
+
+- LAEQ = is the right output format, ignore LEQ (adjusts the frequences to the human hearing) -> you can turn this off
+
+- look at the project, the scripts and how it works (look at both branches, the GPS and the shape way)
+
+  - look at the changes
+
+- scripts folder: wrapper for controlling the simulation -> if you pass --linux the bash files will be running, else the bat files
+
+- to do:
+
+  - try to sample some datapoints with the simpler generation (1 or 2 samples) via local docker
+  - can the python wrapper be changed to directly control the simulation and not the bash scripts?
+  - could the 2 branches get merged? it would be nice to control the input as parameter
+  - CONF_DIFF_HORIZONTAL -> pass no value = false and pass any value =  true BUT should be 0=false and 1=true  (diffraction = sound propagation moving around buildings)
+
+- Martin do:
+  - add me to github
+  - send noise modelling simulation software (with small adjustment to the grid creation)
+  - in future the convert exe might be needed
+  
+- good start/example: example_usage.ipynb
+
+- simulation controllable over python wrapper
+
+  - python wrapper( batch-files( Gruvy-Files ) )
+
+- program to show shape files: OGIS
+
+- idea could be RGB images as input so that the AI can learn to use more environment features
+
+  - problem: the labled data does not contain such environment data (trees, ground information, ...)
+  - with real world sound propagation data possible, else not -> or a more advanced sound propagation synth dataset with unreal if such is possible
+
+- source definition in source_config.geojson
+
+- when loading the input the projection type of the given coordinates are passed, most likely using the EPSG:3857 projection = it will interpret the coordinates as GPS format
+
+- Pix2Pix GAN is good for the experiments (a image loader is already available in [this repo](https://github.com/LouisW2202/pytorch-CycleGAN-and-pix2pix)
+
+
+
+**20.03.2025 Zweites Meeting:**
+Participants: Keuper, Martin, Ich
+Location: C108
+Time: 13:30 O'Clock
+
+- There is a less complex dataset + describing document for it
+- Introduction to the simulation/dataset creation is important -> stated tomorrow
+- 2 first Approaches
+  - Train 2x models, one which gets simple sound propagation as input and the other gets the plain input -> which perform better on the reflexion (sub)dataset
+  - Adaptive sampling -> train data should contain much more complex examples + add regularizations against overfitting
+- Start with the stepped input experiment on simpler dataset (maybe have to generate new data)
+
+
+
+**10.03.2025 Startgespräch Herr Keuper und ich:**
+Participants: Keuper,, Ich
+Location: Zoom
+Time: 10:00 O'Clock
 
 - Input/Output: Bild zu Bild Generierung
 - Paper lesen (4 Stück)

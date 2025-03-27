@@ -10,6 +10,7 @@ This project contains my Master Exam (planning, writing, ...)
     - [Data](#data)
     - [Image-to-Image Translation Methods](#image-to-image-translation-methods)
     - [Research](#research)
+    - [Commands](#commands)
     - [Progress](#progress)
     - [Meetings](#meetings)
     - [Fragen](#fragen)
@@ -886,6 +887,46 @@ class ImageTranslationModel(nn.Module):
 
 
 
+---
+
+### Commands
+
+Running the simulation software:
+
+``````
+docker build -t noisemodellingapi:test .
+``````
+
+``````
+docker run -v "$(pwd)/output:/app/debug_output" noisemodellingapi:test --buildings "[[[0,0], [0,50], [50,50],[0,0]], [[0,0], [0,80], [40, 80], [40,0], [0,0]]]" --linux --n_samples 1
+``````
+
+-> see *create_custom_dataset_multiprocessing.py* for all options
+
+
+
+Create a *run.sh*:
+```bash
+rm -r ./output
+mkdir ./output
+chmod 777 ./output
+touch ./output/.gitkeep
+
+docker build -t noisemodellingapi:test .
+
+docker run -v "$(pwd)/output:/app/debug_output" noisemodellingapi:test --buildings "[[[0,0], [0,50], [50,50],[0,0]], [[0,0], [0,80], [40, 80], [40,0], [0,0]]]" --linux --n_samples 3
+```
+
++ give it the right rights::
+```bash
+chmod +x ./run.sh
+```
+
+Now you can run it:
+```bash
+./run.sh
+```
+
 
 
 
@@ -956,8 +997,22 @@ class ImageTranslationModel(nn.Module):
 ---
 ### Meetings
 
-XX Uhr alle 2 Wochen.<br>
-Zoom Link: ...
+
+
+**27.03.2025 General Progression**
+
+Participants: Keuper, Martin, Ich
+Location: C108
+Time: 13:30 O'Clock
+
+- next steps:
+  - adjust arguments, so that they are consistent: use pydantic and give bash configs over python arguments
+    - Also common pythom arguments over pydantic? -> yes (not 100% sure, ask!)
+    - fix that all arguments come with the same way
+  - adjust random shape generation pipeline to run simulation with same shapes and different settings (reflexion, ...)
+  - generate 10.000 datapoints -> 10.000 with basic physic + 10.000 with reflexion 1
+  - make experiment with [pix2pix GAN](https://github.com/LouisW2202/pytorch-CycleGAN-and-pix2pix) -> experiment checks if noisemap without physics improve performance over normal image as input
+- in future should have a own master repo (this here? or from the university?)
 
 
 
@@ -988,10 +1043,15 @@ Time: 10:00 O'Clock
   - combined: basic + reflection + diffraction + other properties (temperature, humidity, ...) -> will be added as additional channel for each property
 
 - run command: 
+  
+  ``````
+  docker build --no-cache -t noisemodellingapi:test .
+  ``````
+  
   ```cmd
   docker run noisemodellingapi:test --buildings "[[[0,0], [0,50], [50,50],[0,0]], [[0,0], [0,80], [40, 80], [40,0], [0,0]]]" --linux
   ```
-
+  
 - I have to create: the same constellation with basic and reflection -> maybe I can create both in the same simulation run, or I create the exact building location and create the 2 simulations with it, or I run it as basic and then extract and use the exact building spwan and give it to the next simulation with reflection on -> or think about it...there are many possible solutions 
 
   - but the simulation/wrapper/process must be adjusted so fixed locations are the input

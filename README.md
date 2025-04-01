@@ -1020,6 +1020,41 @@ Now you can run it:
 
 
 
+**27.03.2025 MAR KI Meeting**
+
+Participants: Keuper, Dorer, Sven, Louis, Paul, Lukas, Ich
+Location: C108
+Time: 13:30 O'Clock
+
+- Tomorrow presentation of Masters in Campus West (8 Uhr)
+- Data Science Class can be visited but don't have to be visited
+- 50% project => report (progress report, will be discussed in more detail...literature work) + probably 20% pitch (sell topic)
+- 3 dates + today's
+  - Make slides (presentation) for the meetings
+  - upload slides -> a few slides are enough
+- 1st date: Work packages this semester + how to proceed (informal presentation) -> 22.04.2025 2 pm
+- 2nd literature presentation (informal)
+- 3rd final report (how did it go? ...) -> graded
+- grading for everything as a whole (rather exchange, no grade stress)
+- master thesis, focus can shift again
+- goal for the master: submit publication (make paper) or more ...
+  - for example I could publicate a paper about my results of the image to image prediction in geotermal drilling context and then continue with another (maybe similiar) topic
+- My master can also maybe go about other projects -> first geotermal drilling, but then maybe it will change
+- Everbody told about his project. Me:
+  - AI drill project
+  - Drilling in inner cities -> Geothermal energies
+  - AI controlled -> quieter
+  - Subtask: Prediction of sound propagation
+  - Simulation too slow
+  - Generative models faster but less precise
+  - How to optimize/improve generative models
+- Sven: Magma Reinforcment Learning of 3 Robot types with only one model and a one-hot-encoded number => learning together from each other (?)
+- Paul: Uniklinik Freiburg, "Magic Pen" like semantic segmentation with U-net and persons first input (one organ have many picture slides)
+- Lukas: Sick explanaible decision making during classification, to get closer to varyfying machine learning apporaches in critical robotic situations
+- Louis: Baden-IT -> Support Agent System via LLM and with context learning of solutions for problems
+
+
+
 **27.03.2025 General Progression**
 
 Participants: Keuper, Martin, Ich

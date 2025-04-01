@@ -942,12 +942,33 @@ Now you can run it:
   - Adaptive sampling -> train data should contain much more complex examples + add regularizations against overfitting
 
 - created simple sound propagation dataset with equal building setup for basic and reflection simulation (comming)
-- ...
+- parsing arguments all with one yaml file (without python arguments) and with pydantic (validation)
+- parsing all arguments over arguments to the scripts and do not use config file in scripts
+- fixing horizontal diffraction -> it is a flag argument, set or not set
+- allowing multiple settings: -> new naming ```id = {i}_{cur_reflection_order}_{cur_diffraction_order}_{cur_max_reflection_dist}_{cur_max_src_dist}```
+  - horizontal diffraction
+  - reflection order
+  - max reflection distance
+  - max src distance
+
+- added 2 running scripts for easy running (one for unbounded running, so that the local system can be exited)
+- added main.py which is used as a central startpoint
+  - loads config
+  - running the underlying script (pipeline.py or create_custom_dataset_multiprocessing.py)
+
+- new feature summary: multiple settings, united arguments parsing, argument validation, central start script
+- adjusted pipeline.py/Controller and create_custom_dataset_multiprocessing.py to work with the new config/parsing + work with multiple settings
+- config is passed as an object: config does not have to be created via yaml, can also be created in python or via python arguments, should be implemented quickly and work easily
+- most changes in: ConfigHandler, create_custom_dataset_multiprocessing.py, pipeline.py, Controller.py
+- create_custom_dataset_multiprocessing.py tested and do work! + pipeline.py is not tested due to missing locations_ca.csv
 
 **April 2025:**
+
+- started data generation of 10.000 datapoints and 4 different datasets with varying diffraction/reflection -> 1, 2, 3, 4, 5 buildings
 - ...
 
 **Mai 2025:**
+
 - ...
 
 **Juni 2025:**

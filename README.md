@@ -965,6 +965,8 @@ Now you can run it:
 **April 2025:**
 
 - started data generation of 10.000 datapoints and 4 different datasets with varying diffraction/reflection -> 1, 2, 3, 4, 5 buildings
+- "random" error from time to time...there come errors with the database -> trying to delete every id files in the run for a good/working retry
+- added multiprocessing config creation method
 - ...
 
 **Mai 2025:**
@@ -1017,6 +1019,28 @@ Now you can run it:
 
 ---
 ### Meetings
+
+
+
+**03.04.2025 Weekly Meeting**
+
+Participants: Keuper, Martin, Ich
+Location: C108
+Time: 13:30 O'Clock
+
+- Primary Key Missing Error: Error can be another, often consequential error. Groovy just keeps going, even though nothing comes out right
+- Pull error loop even one higher = reload everything (reset start_index in config)
+    - is propably not useful, there is nothing happening over that
+- Work out a plan for the semester 
+    - Familiarization with framework (adaptation)
+    Carry out experiment 1
+    - Literature for experiment 2 (sampling)
+    - Implement literature or own sampling strategies
+- Title for 2. experiment/paper: Physical Informed Sampling
+    - Samples categorization in "how physical as difficult" -> either calculate or estimate (show that estimation already works very well)
+
+- Generate extra heavy data (possibly later)
+- New meeting slot: Friday 1 pm
 
 
 

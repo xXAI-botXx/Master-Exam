@@ -967,6 +967,18 @@ Now you can run it:
 - started data generation of 10.000 datapoints and 4 different datasets with varying diffraction/reflection -> 1, 2, 3, 4, 5 buildings
 - "random" error from time to time...there come errors with the database -> trying to delete every id files in the run for a good/working retry
 - added multiprocessing config creation method
+- maintain datageneration
+- wrote script for extracting single datasets from multiple once
+- prepared "planning" presentation
+- trained 4x Pix2Pix on the 4 datasets
+  - parameter: 
+    - lr = $1\dot10^(-4)$
+    - lr_policy = cosine (to avoid local minima in higher epochs)
+    - optimizer: Adam
+    - adam beta = 50%
+    - epochs = 250 (upgrade from 50 -> to at the same time see, if a higher epoch amount can help further)
+    - GAN Mode: lsga (uses Mean Squared Error not Cross Entropy)
+
 - ...
 
 **Mai 2025:**
@@ -1019,6 +1031,31 @@ Now you can run it:
 
 ---
 ### Meetings
+
+
+
+**25.04.2025 Weekly Meeting**
+
+Participants: Keuper, Martin, Ich
+Location: Zoom
+Time: 13:00 O'Clock
+
+- ...
+
+
+
+**22.04.2025 Planning Presentation**
+
+Participants: MAR 1 AI
+Location: Zoom
+Time: 14:00 O'Clock
+
+- in future could try to use normalizing flows
+- Experiment 2 correction:
+	- based on experiment 1
+	- search physical complex areas + mask all other areas, so that the loss is concentrated on the complex areas
+- Liteartur Tool -> Research Paper/Literature => Bibtex + Latex -> finish until: 13 Mai
+- Data Science Project will be clarified (propably something with LLM)
 
 
 

@@ -140,6 +140,84 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
 Also see: [GitHub - ShenZheng2000/Awesome-Image-to-Image-Translation: This repository contains representative papers for image-to-image translation (I2IT).](https://github.com/ShenZheng2000/Awesome-Image-to-Image-Translation)
 
 
+Papers are collected in Zotero and will be exported to bibtex + will be commented in a documentation. Some information/papers are also here, but it changed to zotero and the tex documentation.<br>
+Papers to process (add to Zotero + little summary -> take aways):
+- https://arxiv.org/abs/1708.02002
+- https://www.sciencedirect.com/science/article/pii/S0306457322000504
+- https://www.arxiv.org/pdf/2409.20031
+- https://openreview.net/pdf?id=js2ssA77fX
+- https://proceedings.neurips.cc/paper/2021/hash/e0cd3f16f9e883ca91c2a4c24f47b3d9-Abstract.html
+- https://ieeexplore.ieee.org/abstract/document/9465428
+- https://arxiv.org/abs/2308.00947
+- https://www.sciencedirect.com/science/article/pii/S1566253522001683
+- https://www.cv-foundation.org/openaccess/content_cvpr_2016/html/Shrivastava_Training_Region-Based_Object_CVPR_2016_paper.html
+- https://proceedings.mlr.press/v80/ren18a.html
+- https://openaccess.thecvf.com/content_iccv_2017/html/Dong_Class_Rectification_Hard_ICCV_2017_paper.html
+- https://dl.acm.org/doi/abs/10.1145/1553374.1553380
+- https://link.springer.com/article/10.1007/s11263-022-01611-x
+- https://ieeexplore.ieee.org/abstract/document/9392296
+- https://arxiv.org/abs/2308.08468
+- https://arxiv.org/abs/2205.06858
+- https://arxiv.org/pdf/1710.11431
+
+
+- https://arxiv.org/abs/1903.07291
+- https://arxiv.org/abs/1611.07004
+- https://arxiv.org/abs/2110.04627
+
+
+- https://arxiv.org/abs/2012.09841
+- https://arxiv.org/abs/2309.12106
+- https://openaccess.thecvf.com/content/ICCV2021/papers/Fuoli_Fourier_Space_Losses_for_Efficient_Perceptual_Image_Super-Resolution_ICCV_2021_paper.pdf
+- https://arxiv.org/abs/2007.08579
+- https://arxiv.org/abs/2006.09661
+- https://arxiv.org/abs/2010.08895
+- https://arxiv.org/abs/2012.09841
+- https://arxiv.org/abs/2111.05826
+- https://epubs.siam.org/doi/abs/10.1137/18M1225409
+- https://ieeexplore.ieee.org/abstract/document/8945120
+- https://arxiv.org/abs/2010.08103
+- https://www.nature.com/articles/s42254-021-00314-5
+- https://research.ebsco.com/c/gizthx/search/details/4nx6hvvm6v?db=asx
+- https://hal.science/hal-02405722/
+- https://link.springer.com/article/10.1007/s10668-024-05504-6
+- https://arxiv.org/abs/2101.11986
+- https://arxiv.org/abs/2105.15203
+- https://www.sciencedirect.com/science/article/pii/S1746809423011400
+- https://ieeexplore.ieee.org/abstract/document/10062649
+- https://arxiv.org/html/2408.06000v1
+
+
+- https://proceedings.mlr.press/v119/sanchez-gonzalez20a
+- https://www.nature.com/articles/s41598-021-01045-4
+- https://pubs.aip.org/asa/jasa/article-abstract/157/4/3017/3344527/Sounds-of-the-deep-How-input-representation-model?redirectedFrom=fulltext
+
+
+- https://arxiv.org/abs/1912.11474
+- https://arxiv.org/abs/2002.09405
+- https://arxiv.org/abs/2211.08570
+- https://arxiv.org/abs/1804.09298
+- https://ieeexplore.ieee.org/abstract/document/5704567
+- https://arxiv.org/abs/1706.08224
+- https://arxiv.org/html/2403.17639v1
+- https://arxiv.org/abs/1611.07004
+- https://arxiv.org/abs/2105.13067
+
+
+- https://scholar.google.de/scholar?hl=de&as_sdt=0%2C5&as_vis=1&q=graph+neural+networks+physical+simulation&btnG=
+- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=image+to+image+translation&btnG=
+- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=input+abstraction+deep+learning&btnG=
+- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=input+modality+ablation+GAN&btnG=
+- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=sound+propagation+neural+networks&btnG=
+- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=survey+paired+image+to+image+translation&btnG=
+- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=region-focused+loss+GAN&btnG=
+- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=physics-informed+sampling&btnG=
+- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=importance+sampling+deep+learning&btnG=
+- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=transformer+for+paired+image+to+image+translation&btnG=
+
+
+=> Check the papers which are already here -> adding to zotero + summary
+
 
 **AI-Guided Noise Reduction for Urban Geothermal Drilling**
 
@@ -905,26 +983,53 @@ docker run -v "$(pwd)/output:/app/debug_output" noisemodellingapi:test --buildin
 
 
 
-Create a *run.sh*:
+Create a *clear.sh*:
 ```bash
-rm -r ./output
-mkdir ./output
-chmod 777 ./output
-touch ./output/.gitkeep
+# find and kill all multiprocessing.py processes
+echo "Find and kill all multiprocessing.py"
+ps aux | grep multiprocessing.py | grep -v grep | awk '{print $2}' | xargs kill -9
 
-docker build -t noisemodellingapi:test .
+echo "Find and kill all running docker container"
+# kill all running docker container
+docker kill $(docker ps -q)
 
-docker run -v "$(pwd)/output:/app/debug_output" noisemodellingapi:test --buildings "[[[0,0], [0,50], [50,50],[0,0]], [[0,0], [0,80], [40, 80], [40,0], [0,0]]]" --linux --n_samples 3
+# clear docker
+echo "Clean Docker"
+
+# Prune everything
+docker container prune -f
+docker image prune -a -f
+docker volume prune -f
+docker network prune -f
+docker builder prune --all -f
 ```
 
-+ give it the right rights::
+Create a *run.sh 64*:
 ```bash
-chmod +x ./run.sh
-```
+# Initialize Conda
+eval "$(conda shell.bash hook)"
 
-Now you can run it:
-```bash
-./run.sh
+# if you don't have the environment run this:
+# conda create -n "$ENV_NAME" -y
+# conda activate "$ENV_NAME"
+# conda install python=3.9 -y
+# conda install pip -y
+# pip install -r ./requirements.txt
+
+# Activate the environment
+conda activate "$ENV_NAME"
+
+mkdir -p ./logs
+
+# Check if a worker argument was provided
+if [ -n "$1" ]; then
+    WORKER_ARG="--worker $1"
+else
+    WORKER_ARG=""
+fi
+
+# Run the simulation  multiprocessor
+nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 ```
 
 

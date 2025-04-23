@@ -1,0 +1,38 @@
+% Main Document %
+
+% Check Compiler: pdflatex --version
+
+% PDF:
+%    Open cmd/powershell + Run: 
+%    		D: && cd D:/Informatik/Projekte/AI
+%    		pdflatex ai.tex
+% EBOOK: 
+%    Download: https://pandoc.org/installing.html
+%    Open cmd/powershell + Run: 
+% 			D: && cd D:/Informatik/Projekte/AI
+%    		pandoc ai.tex -o ai.epub
+
+% Load + Define document
+\documentclass[fontsize=11pt, paper=a4, pagesize=auto]{scrreprt}
+% \documentclass[fontsize=11pt, paper=a4, pagesize=auto]{scrartcl}
+
+\include{preambel}
+
+% Start Document
+\begin{document}
+
+% First pages
+\maketitle
+\tableofcontents
+
+% Add Content
+\include{content/literature}
+% FIXME ...
+
+% \appendix
+% \include{}
+
+\end{document}
+
+
+

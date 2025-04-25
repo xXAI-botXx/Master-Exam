@@ -1139,13 +1139,37 @@ nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 
 
 
-**25.04.2025 Weekly Meeting**
+**02.05.2025 Weekly Meeting**
 
 Participants: Keuper, Martin, Ich
 Location: Zoom
 Time: 13:00 O'Clock
 
 - ...
+
+
+
+**25.04.2025 Weekly Meeting**
+
+Participants: Martin, Ich
+Location: Zoom
+Time: 13:00 O'Clock
+
+- Use "Weights and Bias" ->[website](https://wandb.ai/site/) , register + give API code over parameter by call => maybe use
+  - for simple experiment tracking and result analysis/comparison
+
+- Make training parameter tests (only on one dataset and later the best option apply for all) -> removing artifacts
+  - Validation Dataset create and use (maybe 500 images -> create with your pipeline)
+  - Hyperparameter tuning
+    - reduce amount of epochs (50, 100)
+    - increase amount of epochs (500)
+    - change learnrate schedular from cosine to linear
+    - change batchsize to 1
+    - try batchsize as in the PhysGen paper
+  - Check results at the log file, "Weights and Bias" or/and on test data 
+- Currently conzentrate on literature research (search + summary + importance/relevance -> have to be checked)
+- Martin will check/use the standard pipeline in the new adjusted pipeline -> he will probably merge if everything works + writes you if something is wrong/need help
+- Question to Janis Keuper: What should be included in the literature search / document? Found papers, their take-aways and why they could be/are relevant?
 
 
 

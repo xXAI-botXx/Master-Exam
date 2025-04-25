@@ -1166,6 +1166,7 @@ Time: 13:00 O'Clock
     - change learnrate schedular from cosine to linear
     - change batchsize to 1
     - try batchsize as in the PhysGen paper
+  - Adding Wasserstein Loss?
   - Check results at the log file, "Weights and Bias" or/and on test data 
 - Currently conzentrate on literature research (search + summary + importance/relevance -> have to be checked)
 - Martin will check/use the standard pipeline in the new adjusted pipeline -> he will probably merge if everything works + writes you if something is wrong/need help

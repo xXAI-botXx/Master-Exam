@@ -3,13 +3,15 @@
 import os
 import shutil 
 
-search_idx = "1_1_2500_2500"
+# Change these lines:
+search_idx = "0_0_2500_2500"
+is_validation_data = False
 
-old_buildings_path = "./nms10000/input"
-new_buildings_path = f"./nms10000_{search_idx}/buildings"
+old_buildings_path = "D:/Cache/nms10000/input"
+new_buildings_path = f"D:/Cache/nms10000_{search_idx}{'_val'if is_validation_data else ''}/buildings"
 
-old_interpolated_path = "./nms10000/output"
-new_interpolated_path = f"./nms10000_{search_idx}/interpolated"
+old_interpolated_path = "D:/Cache/nms10000/output"
+new_interpolated_path = f"D:/Cache/nms10000_{search_idx}{'_val'if is_validation_data else ''}/interpolated"
 
 # create new dirs
 os.makedirs(new_buildings_path, exist_ok=False)

@@ -139,26 +139,26 @@ Topic is *Deterministic Physics-Based Supervised Image-to-Image Translation* or 
 
 Also see: [GitHub - ShenZheng2000/Awesome-Image-to-Image-Translation: This repository contains representative papers for image-to-image translation (I2IT).](https://github.com/ShenZheng2000/Awesome-Image-to-Image-Translation)
 
-
 Papers are collected in Zotero and will be exported to bibtex + will be commented in a documentation. Some information/papers are also here, but it changed to zotero and the tex documentation.<br>
 Papers to process (add to Zotero + little summary -> take aways):
-- https://arxiv.org/abs/1708.02002
-- https://www.sciencedirect.com/science/article/pii/S0306457322000504
-- https://www.arxiv.org/pdf/2409.20031
-- https://openreview.net/pdf?id=js2ssA77fX
-- https://proceedings.neurips.cc/paper/2021/hash/e0cd3f16f9e883ca91c2a4c24f47b3d9-Abstract.html
-- https://ieeexplore.ieee.org/abstract/document/9465428
-- https://arxiv.org/abs/2308.00947
-- https://www.sciencedirect.com/science/article/pii/S1566253522001683
-- https://www.cv-foundation.org/openaccess/content_cvpr_2016/html/Shrivastava_Training_Region-Based_Object_CVPR_2016_paper.html
-- https://proceedings.mlr.press/v80/ren18a.html
-- https://openaccess.thecvf.com/content_iccv_2017/html/Dong_Class_Rectification_Hard_ICCV_2017_paper.html
-- https://dl.acm.org/doi/abs/10.1145/1553374.1553380
-- https://link.springer.com/article/10.1007/s11263-022-01611-x
-- https://ieeexplore.ieee.org/abstract/document/9392296
-- https://arxiv.org/abs/2308.08468
-- https://arxiv.org/abs/2205.06858
-- https://arxiv.org/pdf/1710.11431
+
+- [x] https://arxiv.org/abs/1708.02002 ✅-> Weighted Sample Difficulty Loss (Classification)
+- [x] https://www.sciencedirect.com/science/article/pii/S0306457322000504 ❌ -> Unsupervised image-to-image translation with a new loss, but should not be appliable for paired images/physical -> it goes away from the exact pixel wise loss, but for physics we want exact pixels (for style-transfer not)
+- [x] https://www.arxiv.org/pdf/2409.20031 ❌ -> off topic (microphone sound source localization)
+- [x] https://openreview.net/pdf?id=js2ssA77fX ✅-> Random Masking of input (&predictions/loss), to learn the locals and not the whole global and also learn the transfer with less context which increases the training speed and ability to generalize
+- https://proceedings.neurips.cc/paper/2021/hash/e0cd3f16f9e883ca91c2a4c24f47b3d9-Abstract.html ✅ -> similar idea (reduces noisy gradients with saliency maps)
+- https://ieeexplore.ieee.org/abstract/document/9465428 ✅ -> similar idea (creates a weights-map where sharper areas get heavier weighted and so the model can focus more on it, but only the abstract core principle is interesting but everything else seems off topic)
+- https://arxiv.org/abs/2308.00947 ✅ -> similar idea (creates Saliency Maps, which show interesting parts of the image)
+- https://www.sciencedirect.com/science/article/pii/S1566253522001683 ✅ -> similar idea (using saliency maps during training)
+- https://www.cv-foundation.org/openaccess/content_cvpr_2016/html/Shrivastava_Training_Region-Based_Object_CVPR_2016_paper.html ✅ -> Alternative Sampling (just showing more hard examples during training and find hard examples dynamically during training)
+- https://proceedings.mlr.press/v80/ren18a.html ✅ -> Alternative Sampling (just showing more hard examples during training and find hard examples dynamically during training)
+- https://openaccess.thecvf.com/content_iccv_2017/html/Dong_Class_Rectification_Hard_ICCV_2017_paper.html ❌ -> off topic (class imbalance fix)
+- https://dl.acm.org/doi/abs/10.1145/1553374.1553380 ✅ -> Alternative Sampling (like humans showing harder and harder examples)
+- https://link.springer.com/article/10.1007/s11263-022-01611-x ✅ -> similiar as paper before (easy to hard observations)
+- https://ieeexplore.ieee.org/abstract/document/9392296 ✅ -> similiar as paper before (easy to hard observations)
+- https://arxiv.org/abs/2308.08468 ✅ -> make loss physics informed
+- https://arxiv.org/abs/2205.06858 ✅ -> make loss physics informed
+- https://arxiv.org/pdf/1710.11431 ✅ -> make loss physics informed
 
 
 - https://arxiv.org/abs/1903.07291
@@ -202,6 +202,8 @@ Papers to process (add to Zotero + little summary -> take aways):
 - https://arxiv.org/html/2403.17639v1
 - https://arxiv.org/abs/1611.07004
 - https://arxiv.org/abs/2105.13067
+- https://ieeexplore.ieee.org/abstract/document/9528943
+- https://link.springer.com/article/10.1007/s12194-019-00520-y
 
 
 - https://scholar.google.de/scholar?hl=de&as_sdt=0%2C5&as_vis=1&q=graph+neural+networks+physical+simulation&btnG=
@@ -1139,20 +1141,20 @@ nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 
 
 
-**02.05.2025 Weekly Meeting**
+**02.05.2025 Weekly Meeting**<br>
 
-Participants: Keuper, Martin, Ich
-Location: Zoom
+Participants: Keuper, Martin, Ich<br>
+Location: Zoom<br>
 Time: 13:00 O'Clock
 
 - ...
 
 
 
-**25.04.2025 Weekly Meeting**
+**25.04.2025 Weekly Meeting**<br>
 
-Participants: Martin, Ich
-Location: Zoom
+Participants: Martin, Ich<br>
+Location: Zoom<br>
 Time: 13:00 O'Clock
 
 - Use "Weights and Bias" ->[website](https://wandb.ai/site/) , register + give API code over parameter by call => maybe use
@@ -1174,10 +1176,10 @@ Time: 13:00 O'Clock
 
 
 
-**22.04.2025 Planning Presentation**
+**22.04.2025 Planning Presentation**<br>
 
-Participants: MAR 1 AI
-Location: Zoom
+Participants: MAR 1 AI<br>
+Location: Zoom<br>
 Time: 14:00 O'Clock
 
 - in future could try to use normalizing flows
@@ -1189,10 +1191,10 @@ Time: 14:00 O'Clock
 
 
 
-**03.04.2025 Weekly Meeting**
+**03.04.2025 Weekly Meeting**<br>
 
-Participants: Keuper, Martin, Ich
-Location: C108
+Participants: Keuper, Martin, Ich<br>
+Location: C108<br>
 Time: 13:30 O'Clock
 
 - Primary Key Missing Error: Error can be another, often consequential error. Groovy just keeps going, even though nothing comes out right
@@ -1211,10 +1213,10 @@ Time: 13:30 O'Clock
 
 
 
-**27.03.2025 MAR KI Meeting**
+**27.03.2025 MAR KI Meeting**<br>
 
-Participants: Keuper, Dorer, Sven, Louis, Paul, Lukas, Ich
-Location: C108
+Participants: Keuper, Dorer, Sven, Louis, Paul, Lukas, Ich<br>
+Location: C108<br>
 Time: 13:30 O'Clock
 
 - Tomorrow presentation of Masters in Campus West (8 Uhr)
@@ -1246,10 +1248,10 @@ Time: 13:30 O'Clock
 
 
 
-**27.03.2025 General Progression**
+**27.03.2025 General Progression**<br>
 
-Participants: Keuper, Martin, Ich
-Location: C108
+Participants: Keuper, Martin, Ich<br>
+Location: C108<br>
 Time: 13:30 O'Clock
 
 - next steps:
@@ -1263,9 +1265,9 @@ Time: 13:30 O'Clock
 
 
 
-**21.03.2025 Software Tool Einführung:**
-Participants: Martin, Ich
-Location: Zoom
+**21.03.2025 Software Tool Einführung:**<br>
+Participants: Martin, Ich<br>
+Location: Zoom<br>
 Time: 10:00 O'Clock
 
 - the noise simulation works with receivers. on the location of a receiver the sound volume will get calculated. The *delta*-distance says how many receiver should there every x steps (receiver grid) + there come additional receiver on every buildings edges
@@ -1351,9 +1353,9 @@ Time: 10:00 O'Clock
 
 
 
-**20.03.2025 Zweites Meeting:**
-Participants: Keuper, Martin, Ich
-Location: C108
+**20.03.2025 Zweites Meeting:**<br>
+Participants: Keuper, Martin, Ich<br>
+Location: C108<br>
 Time: 13:30 O'Clock
 
 - There is a less complex dataset + describing document for it
@@ -1365,9 +1367,9 @@ Time: 13:30 O'Clock
 
 
 
-**10.03.2025 Startgespräch Herr Keuper und ich:**
-Participants: Keuper,, Ich
-Location: Zoom
+**10.03.2025 Startgespräch Herr Keuper und ich:**<br>
+Participants: Keuper, Ich<br>
+Location: Zoom<br>
 Time: 10:00 O'Clock
 
 - Input/Output: Bild zu Bild Generierung

@@ -9,6 +9,7 @@ This project contains my Master Exam (planning, writing, ...)
     - [Source](#source)
     - [Data](#data)
     - [Image-to-Image Translation Methods](#image-to-image-translation-methods)
+    - [Own Architecture](#own-architecture)
     - [Research](#research)
     - [Commands](#commands)
     - [Progress](#progress)
@@ -146,76 +147,79 @@ Papers to process (add to Zotero + little summary -> take aways):
 - [x] https://www.sciencedirect.com/science/article/pii/S0306457322000504 ❌ -> Unsupervised image-to-image translation with a new loss, but should not be appliable for paired images/physical -> it goes away from the exact pixel wise loss, but for physics we want exact pixels (for style-transfer not)
 - [x] https://www.arxiv.org/pdf/2409.20031 ❌ -> off topic (microphone sound source localization)
 - [x] https://openreview.net/pdf?id=js2ssA77fX ✅-> Random Masking of input (&predictions/loss), to learn the locals and not the whole global and also learn the transfer with less context which increases the training speed and ability to generalize
-- https://proceedings.neurips.cc/paper/2021/hash/e0cd3f16f9e883ca91c2a4c24f47b3d9-Abstract.html ✅ -> similar idea (reduces noisy gradients with saliency maps)
-- https://ieeexplore.ieee.org/abstract/document/9465428 ✅ -> similar idea (creates a weights-map where sharper areas get heavier weighted and so the model can focus more on it, but only the abstract core principle is interesting but everything else seems off topic)
-- https://arxiv.org/abs/2308.00947 ✅ -> similar idea (creates Saliency Maps, which show interesting parts of the image)
-- https://www.sciencedirect.com/science/article/pii/S1566253522001683 ✅ -> similar idea (using saliency maps during training)
-- https://www.cv-foundation.org/openaccess/content_cvpr_2016/html/Shrivastava_Training_Region-Based_Object_CVPR_2016_paper.html ✅ -> Alternative Sampling (just showing more hard examples during training and find hard examples dynamically during training)
-- https://proceedings.mlr.press/v80/ren18a.html ✅ -> Alternative Sampling (just showing more hard examples during training and find hard examples dynamically during training)
-- https://openaccess.thecvf.com/content_iccv_2017/html/Dong_Class_Rectification_Hard_ICCV_2017_paper.html ❌ -> off topic (class imbalance fix)
-- https://dl.acm.org/doi/abs/10.1145/1553374.1553380 ✅ -> Alternative Sampling (like humans showing harder and harder examples)
-- https://link.springer.com/article/10.1007/s11263-022-01611-x ✅ -> similiar as paper before (easy to hard observations)
-- https://ieeexplore.ieee.org/abstract/document/9392296 ✅ -> similiar as paper before (easy to hard observations)
-- https://arxiv.org/abs/2308.08468 ✅ -> make loss physics informed
-- https://arxiv.org/abs/2205.06858 ✅ -> make loss physics informed
-- https://arxiv.org/pdf/1710.11431 ✅ -> make loss physics informed
+- [x] https://proceedings.neurips.cc/paper/2021/hash/e0cd3f16f9e883ca91c2a4c24f47b3d9-Abstract.html ✅ -> similar idea (reduces noisy gradients with saliency maps)
+- [x] https://ieeexplore.ieee.org/abstract/document/9465428 ✅ -> similar idea (creates a weights-map where sharper areas get heavier weighted and so the model can focus more on it, but only the abstract core principle is interesting but everything else seems off topic)
+- [x] https://arxiv.org/abs/2308.00947 ✅ -> similar idea (creates Saliency Maps, which show interesting parts of the image)
+- [x] https://www.sciencedirect.com/science/article/pii/S1566253522001683 ✅ -> similar idea (using saliency maps during training)
+- [x] https://www.cv-foundation.org/openaccess/content_cvpr_2016/html/Shrivastava_Training_Region-Based_Object_CVPR_2016_paper.html ✅ -> Alternative Sampling (just showing more hard examples during training and find hard examples dynamically during training)
+- [x] https://proceedings.mlr.press/v80/ren18a.html ✅ -> Alternative Sampling (just showing more hard examples during training and find hard examples dynamically during training)
+- [x] https://openaccess.thecvf.com/content_iccv_2017/html/Dong_Class_Rectification_Hard_ICCV_2017_paper.html ❌ -> off topic (class imbalance fix)
+- [x] https://dl.acm.org/doi/abs/10.1145/1553374.1553380 ✅ -> Alternative Sampling (like humans showing harder and harder examples)
+- [x] https://link.springer.com/article/10.1007/s11263-022-01611-x ✅ -> similiar as paper before (easy to hard observations)
+- [x] https://ieeexplore.ieee.org/abstract/document/9392296 ✅ -> similiar as paper before (easy to hard observations)
+- [x] https://arxiv.org/abs/2308.08468 ✅ -> make loss physics informed
+- [x] https://arxiv.org/abs/2205.06858 ✅ -> make loss physics informed
+- [x] https://arxiv.org/pdf/1710.11431 ✅ -> make loss physics informed
 
 
-- https://arxiv.org/abs/1903.07291
-- https://arxiv.org/abs/1611.07004
-- https://arxiv.org/abs/2110.04627
+- [x] https://arxiv.org/abs/1903.07291 ❌ -> off topic (spatial normalization for more details)
+- [x] https://arxiv.org/abs/1611.07004 ✅ -> pix2pix one of the basic generative model architectures
+- [x] https://arxiv.org/abs/2110.04627 ❌ -> off topic (NLP GAN with transformer)
 
 
-- https://arxiv.org/abs/2012.09841
-- https://arxiv.org/abs/2309.12106
-- https://openaccess.thecvf.com/content/ICCV2021/papers/Fuoli_Fourier_Space_Losses_for_Efficient_Perceptual_Image_Super-Resolution_ICCV_2021_paper.pdf
-- https://arxiv.org/abs/2007.08579
-- https://arxiv.org/abs/2006.09661
-- https://arxiv.org/abs/2010.08895
-- https://arxiv.org/abs/2012.09841
-- https://arxiv.org/abs/2111.05826
-- https://epubs.siam.org/doi/abs/10.1137/18M1225409
-- https://ieeexplore.ieee.org/abstract/document/8945120
-- https://arxiv.org/abs/2010.08103
-- https://www.nature.com/articles/s42254-021-00314-5
-- https://research.ebsco.com/c/gizthx/search/details/4nx6hvvm6v?db=asx
-- https://hal.science/hal-02405722/
-- https://link.springer.com/article/10.1007/s10668-024-05504-6
-- https://arxiv.org/abs/2101.11986
-- https://arxiv.org/abs/2105.15203
-- https://www.sciencedirect.com/science/article/pii/S1746809423011400
-- https://ieeexplore.ieee.org/abstract/document/10062649
-- https://arxiv.org/html/2408.06000v1
+- [x] https://arxiv.org/abs/2012.09841 ✅ ->  NLP GAN changed to Image GAN with indirect saliency maps
+- [x] https://arxiv.org/abs/2309.12106 ❌ -> off topic (loss for shapes/segmentation with fourier domain -> we does not have much shapes and does not predict shapes)
+- [x] https://openaccess.thecvf.com/content/ICCV2021/papers/Fuoli_Fourier_Space_Losses_for_Efficient_Perceptual_Image_Super-Resolution_ICCV_2021_paper.pdf ❌ -> off topic (loss for shapes/segmentation with fourier domain -> we does not have much shapes and does not predict shapes)
+- [x] https://arxiv.org/abs/2007.08579 ❌ -> off topic
+- [x] https://arxiv.org/abs/2006.09661 ✅ -> Sinus-Activation Function with simple NN layers, could be good used as Decoder (mapping from latent space to image)
+- [x] https://arxiv.org/abs/2010.08895 ✅ -> Fourier Neural Operators (FNOs) are deep learning models that leverage Fourier transforms to efficiently solve partial differential equations by learning the mapping between input and output functions in the frequency domain
+- [ ] https://arxiv.org/abs/2111.05826
+- [ ] https://epubs.siam.org/doi/abs/10.1137/18M1225409
+- [ ] https://ieeexplore.ieee.org/abstract/document/8945120
+- [ ] https://arxiv.org/abs/2010.08103
+- [ ] https://www.nature.com/articles/s42254-021-00314-5
+- [ ] https://research.ebsco.com/c/gizthx/search/details/4nx6hvvm6v?db=asx
+- [ ] https://hal.science/hal-02405722/
+- [ ] https://link.springer.com/article/10.1007/s10668-024-05504-6
+- [ ] https://arxiv.org/abs/2101.11986
+- [ ] https://arxiv.org/abs/2105.15203
+- [ ] https://www.sciencedirect.com/science/article/pii/S1746809423011400
+- [ ] https://ieeexplore.ieee.org/abstract/document/10062649
+- [ ] https://arxiv.org/html/2408.06000v1
 
 
-- https://proceedings.mlr.press/v119/sanchez-gonzalez20a
-- https://www.nature.com/articles/s41598-021-01045-4
-- https://pubs.aip.org/asa/jasa/article-abstract/157/4/3017/3344527/Sounds-of-the-deep-How-input-representation-model?redirectedFrom=fulltext
+- [ ] https://proceedings.mlr.press/v119/sanchez-gonzalez20a
+- [ ] https://www.nature.com/articles/s41598-021-01045-4
+- [ ] https://pubs.aip.org/asa/jasa/article-abstract/157/4/3017/3344527/Sounds-of-the-deep-How-input-representation-model?redirectedFrom=fulltext
 
 
-- https://arxiv.org/abs/1912.11474
-- https://arxiv.org/abs/2002.09405
-- https://arxiv.org/abs/2211.08570
-- https://arxiv.org/abs/1804.09298
-- https://ieeexplore.ieee.org/abstract/document/5704567
-- https://arxiv.org/abs/1706.08224
-- https://arxiv.org/html/2403.17639v1
-- https://arxiv.org/abs/1611.07004
-- https://arxiv.org/abs/2105.13067
-- https://ieeexplore.ieee.org/abstract/document/9528943
-- https://link.springer.com/article/10.1007/s12194-019-00520-y
+- [ ] https://arxiv.org/abs/1912.11474
+- [ ] https://arxiv.org/abs/2002.09405
+- [ ] https://arxiv.org/abs/2211.08570
+- [ ] https://arxiv.org/abs/1804.09298
+- [ ] https://ieeexplore.ieee.org/abstract/document/5704567
+- [ ] https://arxiv.org/abs/1706.08224
+- [ ] https://arxiv.org/html/2403.17639v1
+- [ ] https://arxiv.org/abs/1611.07004
+- [ ] https://arxiv.org/abs/2105.13067
+- [ ] https://ieeexplore.ieee.org/abstract/document/9528943
+- [ ] https://link.springer.com/article/10.1007/s12194-019-00520-y
+- [ ] https://cs230.stanford.edu/projects_spring_2018/reports/8289943.pdf
+- [ ] https://arxiv.org/abs/1704.00028 (https://jonathan-hui.medium.com/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490)
+- [ ] https://weininghu1012.github.io/file/cpsc532L_report.pdf
 
 
-- https://scholar.google.de/scholar?hl=de&as_sdt=0%2C5&as_vis=1&q=graph+neural+networks+physical+simulation&btnG=
-- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=image+to+image+translation&btnG=
-- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=input+abstraction+deep+learning&btnG=
-- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=input+modality+ablation+GAN&btnG=
-- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=sound+propagation+neural+networks&btnG=
-- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=survey+paired+image+to+image+translation&btnG=
-- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=region-focused+loss+GAN&btnG=
-- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=physics-informed+sampling&btnG=
-- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=importance+sampling+deep+learning&btnG=
-- https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=transformer+for+paired+image+to+image+translation&btnG=
+- [ ] https://scholar.google.de/scholar?hl=de&as_sdt=0%2C5&as_vis=1&q=graph+neural+networks+physical+simulation&btnG=
+- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=image+to+image+translation&btnG=
+- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=input+abstraction+deep+learning&btnG=
+- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=input+modality+ablation+GAN&btnG=
+- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=sound+propagation+neural+networks&btnG=
+- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=survey+paired+image+to+image+translation&btnG=
+- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=region-focused+loss+GAN&btnG=
+- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=physics-informed+sampling&btnG=
+- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=importance+sampling+deep+learning&btnG=
+- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=transformer+for+paired+image+to+image+translation&btnG=
+- [ ] Add Core Papers (see below)
 
 
 => Check the papers which are already here -> adding to zotero + summary
@@ -622,6 +626,665 @@ These methods integrate physical principles to improve modeling.
 
 
 > In general a higher number epochs could maybe help, many generative models need much training time
+
+
+
+---
+
+### Own Architecture
+
+My idea is to take the basic Pix2Pix architecture but changing the generator part + loss.
+
+
+
+> The loss can be advanced to WGAN-GL + PDE residual loss (e.g., Helmholtz equation: ∇2p+k2p=0∇2p+k2p=0) -> PINN-style loss. Example loss: 
+> ```python
+> total_loss = α * L1(pred, target)
+>            + β * Helmholtz_Residual(pred, geometry)
+>            + γ * Attention_Weighted_Loss(pred, target, transformer_weights)
+> ```
+
+
+
+Puzzle parts of generation part f(x) -> g(x): 
+
+- CNN (ResNet/U-Net)
+- SIREN
+- FNO
+- PINN
+- Transformer
+- FCN?
+
+
+
+Ideas:
+
+- <a href="#idea_siren_based">SIREN based</a>
+- <a href="#idea_fno_based">FNO based</a>
+- <a href="#idea_cftsm_based">CNN FNO Transformer SIREN Mix</a>
+- <a href="#idea_multi_unet">Multi U-Net</a>
+- <a href="#idea_multi_cftsm">Multi U-Net CNN FNO Transformer SIREN Mix</a>
+
+
+
+> You should probably add skip-connections!
+
+
+
+#### <a name="idea_siren_based">SIREN based</a>
+
+Architecture:
+
+- Input: Meshgrid coordinates (x, y), optional positional + Fourier encodings
+
+- Network:
+
+  - 6 × Linear(256), with sine activations
+
+  - Final: Linear → scalar output (pressure at (x,y))
+
+- Inference: Predict pressure for each of the 256×256 pixels
+
+Why: Models continuous spatial functions, handles high-frequency variation, e.g., standing waves, diffraction.
+
+
+
+#### <a name="idea_fno_based">FNO based</a>
+
+Architecture:
+
+- Input: 256×256×C tensor (fields, materials, geometry)
+
+- Layers:
+
+  - 4 × [FFT2D → Complex Weight Multiplication (K modes) → iFFT2D → Add skip + ReLU]
+
+  - Final Layer: 1×1 Conv to map feature to output pressure
+
+- Output: 256×256×1
+
+Why: Efficient for global field interactions; ideal for physics with wave propagation behavior.
+
+
+
+Example Code:
+
+```python
+from neuralop.models import FNO
+import torch
+
+model = FNO(n_modes=(16, 16), hidden_channels=64, in_channels=1, out_channels=1, dimension=2)
+
+x = torch.randn(1, 1, 256, 256)
+y = model(x)
+print(y.shape)  # [1, 1, 256, 256]
+```
+
+
+
+
+
+#### <a name="idea_cftsm_based">CNN FNO Transformer SIREN Mix</a>
+
+``````
+        Input: 256x256xC (e.g., geometry, material, boundary data)
+           ↓
+  CNN Encoder (U-Net / ResNet-style): extracts local features
+           ↓
+      FNO Layer(s): models long-range frequency-aware field behavior
+           ↓
+  Latent Transformer Block:
+                    - Attention over spatial regions
+                    - Acts as a saliency filter: learns where to focus
+           ↓
+     SIREN Decoder (predicts continuous field from coordinates + latent features)
+           ↓
+        Output: 256x256x1 (e.g., sound pressure / SPL map)
+
+
+Optional -> Decoder (CNN-based): upsample with skip connections
+``````
+
+Explanaiton of Components:
+
+| Component   | Purpose                                         |
+| ----------- | ----------------------------------------------- |
+| CNN         | Captures **local features**                     |
+| FNO         | Models **global frequency interactions**        |
+| Transformer | **Learns saliency** dynamically in latent space |
+| SIREN       | Refines sharp, **continuous signal** edges      |
+
+Example Code:
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+from einops import rearrange
+
+# --- SIREN Layer ---
+class SineLayer(nn.Module):
+    def __init__(self, in_features, out_features, is_first=False, omega_0=30):
+        super().__init__()
+        self.omega_0 = omega_0
+        self.is_first = is_first
+        self.linear = nn.Linear(in_features, out_features)
+        self.init_weights()
+
+    def init_weights(self):
+        with torch.no_grad():
+            if self.is_first:
+                self.linear.weight.uniform_(-1 / self.linear.in_features, 1 / self.linear.in_features)
+            else:
+                self.linear.weight.uniform_(-
+                    (6 / self.linear.in_features) ** 0.5 / self.omega_0,
+                    (6 / self.linear.in_features) ** 0.5 / self.omega_0
+                )
+
+    def forward(self, x):
+        return torch.sin(self.omega_0 * self.linear(x))
+
+# --- Simple CNN Encoder ---
+class SimpleCNNEncoder(nn.Module):
+    def __init__(self, in_channels=3, base_channels=64):
+        super().__init__()
+        self.encoder = nn.Sequential(
+            nn.Conv2d(in_channels, base_channels, 4, 2, 1),  # 128x128
+            nn.ReLU(),
+            nn.Conv2d(base_channels, base_channels * 2, 4, 2, 1),  # 64x64
+            nn.ReLU(),
+            nn.Conv2d(base_channels * 2, base_channels * 4, 4, 2, 1),  # 32x32
+            nn.ReLU(),
+            nn.Conv2d(base_channels * 4, base_channels * 8, 4, 2, 1),  # 16x16
+            nn.ReLU(),
+        )
+
+    def forward(self, x):
+        return self.encoder(x)  # [B, C, 16, 16]
+
+# --- Dummy FNO block (simplified) ---
+class DummyFNO(nn.Module):
+    def __init__(self, in_channels, out_channels):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Conv2d(in_channels, out_channels, 1),
+            nn.GELU(),
+            nn.Conv2d(out_channels, out_channels, 1),
+        )
+
+    def forward(self, x):
+        return self.net(x)  # Keep shape
+
+# --- Transformer Block ---
+class LatentTransformer(nn.Module):
+    def __init__(self, dim, heads=4, depth=2):
+        super().__init__()
+        self.layers = nn.TransformerEncoder(
+            nn.TransformerEncoderLayer(d_model=dim, nhead=heads),
+            num_layers=depth
+        )
+
+    def forward(self, x):
+        # x: [B, C, H, W] -> [B, H*W, C]
+        B, C, H, W = x.shape
+        x = rearrange(x, 'b c h w -> b (h w) c')
+        x = self.layers(x)
+        return x  # [B, HW, C]
+
+# --- SIREN Decoder ---
+class SIRENDecoder(nn.Module):
+    def __init__(self, coord_dim, latent_dim, hidden=256):
+        super().__init__()
+        self.net = nn.Sequential(
+            SineLayer(coord_dim + latent_dim, hidden, is_first=True),
+            SineLayer(hidden, hidden),
+            SineLayer(hidden, hidden),
+            nn.Linear(hidden, 1)  # output scalar value per coordinate
+        )
+
+    def forward(self, coords, latent_features):
+        # coords: [B, N, 2], latent_features: [B, N, C]
+        x = torch.cat([coords, latent_features], dim=-1)
+        return self.net(x)  # [B, N, 1]
+
+# --- Full Model ---
+class HybridSIRENFNOModel(nn.Module):
+    def __init__(self, in_channels=3, latent_dim=512):
+        super().__init__()
+        self.encoder = SimpleCNNEncoder(in_channels, base_channels=64)
+        self.fno = DummyFNO(512, 512)
+        self.transformer = LatentTransformer(dim=512)
+        self.decoder = SIRENDecoder(coord_dim=2, latent_dim=512)
+
+    def forward(self, image, coords):
+        feat_cnn = self.encoder(image)  # [B, 512, 16, 16]
+        feat_fno = self.fno(feat_cnn)   # [B, 512, 16, 16]
+        feat_comb = feat_cnn + feat_fno  # Combine CNN and FNO features
+
+        # Transformer latent attention
+        latent_seq = self.transformer(feat_comb)  # [B, 256, 512] if 16x16
+
+        # Upsample latent features to match coordinates (assumes coords is Nx2 for 256x256)
+        B, N, _ = coords.shape
+        latent_map = latent_seq.reshape(B, 16, 16, 512).permute(0, 3, 1, 2)  # [B, C, 16, 16]
+        latent_up = F.interpolate(latent_map, size=(256, 256), mode='bilinear')  # [B, C, 256, 256]
+        latent_flat = rearrange(latent_up, 'b c h w -> b (h w) c')  # [B, N, C]
+
+        # Decode
+        output = self.decoder(coords, latent_flat)  # [B, N, 1]
+        return output
+```
+
+
+
+#### <a name="idea_multi_unet">Multi U-Net</a>
+
+Idea:
+
+``````
+Input Image
+   │
+ ┌────────────┬────────────┐
+ │            │            │            
+WaveEncoder   DiffEncoder  ReflEncoder
+ │            │            │
+WaveDecoder   DiffDecoder  ReflDecoder
+ │            │            │
+ └──────┬─────┴─────┬──────┘
+        │   Fusion Layer (Add / Learn / Transformer)
+        ▼
+     Final Output
+``````
+
+Example Code:
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class WaveEncoder(nn.Module):
+    def __init__(self):
+        super(WaveEncoder, self).__init__()
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1)
+        self.conv3 = nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1)
+        self.pool = nn.MaxPool2d(2, 2)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = self.pool(F.relu(self.conv3(x)))
+        return x
+
+class DiffEncoder(nn.Module):
+    def __init__(self):
+        super(DiffEncoder, self).__init__()
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1)
+        self.conv3 = nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1)
+        self.pool = nn.MaxPool2d(2, 2)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = self.pool(F.relu(self.conv3(x)))
+        return x
+
+class ReflEncoder(nn.Module):
+    def __init__(self):
+        super(ReflEncoder, self).__init__()
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1)
+        self.conv3 = nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1)
+        self.pool = nn.MaxPool2d(2, 2)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = self.pool(F.relu(self.conv3(x)))
+        return x
+
+class WaveDecoder(nn.Module):
+    def __init__(self):
+        super(WaveDecoder, self).__init__()
+        self.conv1 = nn.Conv2d(256, 128, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(128, 64, kernel_size=3, stride=1, padding=1)
+        self.conv3 = nn.Conv2d(64, 3, kernel_size=3, stride=1, padding=1)
+        self.upconv1 = nn.ConvTranspose2d(128, 128, kernel_size=2, stride=2)
+        self.upconv2 = nn.ConvTranspose2d(64, 64, kernel_size=2, stride=2)
+
+    def forward(self, x):
+        x = self.upconv1(F.relu(self.conv1(x)))
+        x = self.upconv2(F.relu(self.conv2(x)))
+        x = self.conv3(F.relu(x))
+        return x
+
+class DiffDecoder(nn.Module):
+    def __init__(self):
+        super(DiffDecoder, self).__init__()
+        self.conv1 = nn.Conv2d(256, 128, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(128, 64, kernel_size=3, stride=1, padding=1)
+        self.conv3 = nn.Conv2d(64, 3, kernel_size=3, stride=1, padding=1)
+        self.upconv1 = nn.ConvTranspose2d(128, 128, kernel_size=2, stride=2)
+        self.upconv2 = nn.ConvTranspose2d(64, 64, kernel_size=2, stride=2)
+
+    def forward(self, x):
+        x = self.upconv1(F.relu(self.conv1(x)))
+        x = self.upconv2(F.relu(self.conv2(x)))
+        x = self.conv3(F.relu(x))
+        return x
+
+class ReflDecoder(nn.Module):
+    def __init__(self):
+        super(ReflDecoder, self).__init__()
+        self.conv1 = nn.Conv2d(256, 128, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(128, 64, kernel_size=3, stride=1, padding=1)
+        self.conv3 = nn.Conv2d(64, 3, kernel_size=3, stride=1, padding=1)
+        self.upconv1 = nn.ConvTranspose2d(128, 128, kernel_size=2, stride=2)
+        self.upconv2 = nn.ConvTranspose2d(64, 64, kernel_size=2, stride=2)
+
+    def forward(self, x):
+        x = self.upconv1(F.relu(self.conv1(x)))
+        x = self.upconv2(F.relu(self.conv2(x)))
+        x = self.conv3(F.relu(x))
+        return x
+
+class FusionLayer(nn.Module):
+    def __init__(self):
+        super(FusionLayer, self).__init__()
+
+    def forward(self, wave_out, diff_out, refl_out):
+        # Here, you can combine the outputs in various ways.
+        # Simple average for demonstration, can be replaced with learned fusion or attention.
+        return (wave_out + diff_out + refl_out) / 3
+
+class SoundPropModel(nn.Module):
+    def __init__(self):
+        super(SoundPropModel, self).__init__()
+        self.wave_encoder = WaveEncoder()
+        self.diff_encoder = DiffEncoder()
+        self.refl_encoder = ReflEncoder()
+        
+        self.wave_decoder = WaveDecoder()
+        self.diff_decoder = DiffDecoder()
+        self.refl_decoder = ReflDecoder()
+        
+        self.fusion_layer = FusionLayer()
+
+    def forward(self, x):
+        # Encoding paths for each effect
+        wave_features = self.wave_encoder(x)
+        diff_features = self.diff_encoder(x)
+        refl_features = self.refl_encoder(x)
+        
+        # Decoding paths for each effect
+        wave_out = self.wave_decoder(wave_features)
+        diff_out = self.diff_decoder(diff_features)
+        refl_out = self.refl_decoder(refl_features)
+        
+        # Fusion of all decoder outputs
+        final_output = self.fusion_layer(wave_out, diff_out, refl_out)
+        return final_output
+
+# Instantiate the model
+model = SoundPropModel()
+
+# Print the model architecture
+print(model)
+```
+
+
+
+#### <a name="idea_multi_cftsm">Multi U-Net CNN FNO Transformer SIREN Mix</a>
+
+Idea:
+
+``````
+Input Image
+   │
+ ┌───────────────┬───────────────┐
+ │               │               │            
+CNN-Encoder     FNO-Encoder     FNO-Encoder
+ │               │               │
+SIREN-Decoder     CNN-Decoder     CNN-Decoder
+ │               │               │
+ └──────┬────────┴─────┬─────────┘
+        │   Fusion Layer (Add / Learn / Transformer)
+        ▼
+     Final Output
+``````
+
+
+
+Feel free to change flexible. For example maybe SIREN, FNO and CNN (3 different). Or one path is only SIREN as direct image-to-image. 
+
+
+
+Example Code:
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+# SIREN Encoder for wave propagation (using Sine activation functions)
+class CNNEncoder(nn.Module):
+    def __init__(self):
+        super(CNNEncoder, self).__init__()
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=2, padding=1)    # [B, 3, 256, 256] -> [B, 64, 128, 128]
+        self.conv2 = nn.Conv2d(64, 128, kernel_size=3, stride=2, padding=1)  # [B, 64, 128, 128] -> [B, 128, 64, 64]
+        self.conv3 = nn.Conv2d(128, 256, kernel_size=3, stride=2, padding=1) # [B, 128, 64, 64] -> [B, 256, 32, 32]
+        self.conv4 = nn.Conv2d(256, 512, kernel_size=3, stride=2, padding=1) # [B, 256, 32, 32] -> [B, 512, 16, 16]
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = F.relu(self.conv2(x))
+        x = F.relu(self.conv3(x))
+        x = F.relu(self.conv4(x))
+        return x  # Shape: [B, 512, 16, 16]
+
+# FNO Encoder for diffraction/reflection
+class FNOEncoder(nn.Module):
+    def __init__(self):
+        super(FNOEncoder, self).__init__()
+        # Define FNO layers or use a custom implementation for Fourier neural operator
+        self.fno_layers = nn.ModuleList([
+            nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1),
+            nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1),
+            nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1),
+        ])
+
+    def forward(self, x):
+        for layer in self.fno_layers:
+            x = F.relu(layer(x))
+        return x
+
+# Decoder (same structure for each effect path)
+class SIRENDecoder(nn.Module):
+    def __init__(self):
+        super(SIRENDecoder, self).__init__()
+        self.fc1 = nn.Linear(256 * 64 * 64, 4096)  # Match input size (flattened from CNN)
+        self.fc2 = nn.Linear(4096, 16384)
+        self.fc3 = nn.Linear(16384, 3 * 256 * 256)  # Output image size (3 channels, 256x256)
+
+    def forward(self, x):
+        x = x.view(x.size(0), -1)  # Flatten CNN feature map
+        x = torch.sin(self.fc1(x))
+        x = torch.sin(self.fc2(x))
+        x = torch.sin(self.fc3(x))
+        x = x.view(x.size(0), 3, 256, 256)  # Reshape back to image
+        return x
+
+class Decoder(nn.Module):
+    def __init__(self):
+        super(Decoder, self).__init__()
+        self.upconv1 = nn.ConvTranspose2d(256, 128, kernel_size=2, stride=2)
+        self.upconv2 = nn.ConvTranspose2d(128, 64, kernel_size=2, stride=2)
+        self.conv_out = nn.Conv2d(64, 3, kernel_size=3, stride=1, padding=1)
+
+    def forward(self, x):
+        x = self.upconv1(F.relu(x))
+        x = self.upconv2(F.relu(x))
+        x = self.conv_out(F.relu(x))
+        return x
+
+# Fusion Layer for combining outputs of different paths
+class FusionLayer(nn.Module):
+    def __init__(self):
+        super(FusionLayer, self).__init__()
+
+    def forward(self, wave_out, diff_out, refl_out):
+        # Fusion using a simple weighted sum (could be replaced by attention or learned fusion)
+        return (wave_out + diff_out + refl_out) / 3
+
+# Hybrid SIREN + FNO Model for sound propagation
+class HybridSIRENFNOModel(nn.Module):
+    def __init__(self):
+        super(HybridSIRENFNOModel, self).__init__()
+        
+        # Encoders for each effect: SIREN for wave, FNO for diffraction and reflection
+        self.wave_encoder = CNNEncoder()
+        self.diff_encoder = FNOEncoder()
+        self.refl_encoder = FNOEncoder()
+        
+        # Decoders for each effect
+        self.wave_decoder = SIRENDecoder()
+        self.diff_decoder = Decoder()
+        self.refl_decoder = Decoder()
+        
+        # Fusion Layer
+        self.fusion_layer = FusionLayer()
+
+    def forward(self, x):
+        # Encoding paths for each effect
+        wave_features = self.wave_encoder(x)
+        diff_features = self.diff_encoder(x)
+        refl_features = self.refl_encoder(x)
+        
+        # Decoding paths for each effect
+        wave_out = self.wave_decoder(wave_features)
+        diff_out = self.diff_decoder(diff_features)
+        refl_out = self.refl_decoder(refl_features)
+        
+        # Fusion of all decoder outputs
+        final_output = self.fusion_layer(wave_out, diff_out, refl_out)
+        return final_output
+
+# Instantiate the model
+model = HybridSIRENFNOModel()
+
+# Print the model architecture
+print(model)
+```
+
+
+
+Or maybe with skip connections:
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+# CNN Encoder with skip connections
+class CNNEncoder(nn.Module):
+    def __init__(self):
+        super(CNNEncoder, self).__init__()
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=2, padding=1)    # [B, 3, 256, 256] -> [B, 64, 128, 128]
+        self.conv2 = nn.Conv2d(64, 128, kernel_size=3, stride=2, padding=1)  # [B, 64, 128, 128] -> [B, 128, 64, 64]
+        self.conv3 = nn.Conv2d(128, 256, kernel_size=3, stride=2, padding=1) # [B, 128, 64, 64] -> [B, 256, 32, 32]
+        self.conv4 = nn.Conv2d(256, 512, kernel_size=3, stride=2, padding=1) # [B, 256, 32, 32] -> [B, 512, 16, 16]
+
+    def forward(self, x):
+        skip1 = F.relu(self.conv1(x))
+        skip2 = F.relu(self.conv2(skip1))
+        skip3 = F.relu(self.conv3(skip2))
+        x = F.relu(self.conv4(skip3))
+        return x, skip1, skip2, skip3  # Return encoder output and skip connections
+
+# Decoder with skip connections
+class SIRENDecoder(nn.Module):
+    def __init__(self):
+        super(SIRENDecoder, self).__init__()
+        self.upconv1 = nn.ConvTranspose2d(512, 256, kernel_size=2, stride=2)
+        self.upconv2 = nn.ConvTranspose2d(256, 128, kernel_size=2, stride=2)
+        self.upconv3 = nn.ConvTranspose2d(128, 64, kernel_size=2, stride=2)
+        self.conv_out = nn.Conv2d(64, 3, kernel_size=3, stride=1, padding=1)
+
+    def forward(self, x, skip3, skip2, skip1):
+        x = self.upconv1(F.relu(x))
+        x = torch.cat([x, skip3], dim=1)  # Skip connection from conv3
+        x = self.upconv2(F.relu(x))
+        x = torch.cat([x, skip2], dim=1)  # Skip connection from conv2
+        x = self.upconv3(F.relu(x))
+        x = torch.cat([x, skip1], dim=1)  # Skip connection from conv1
+        x = self.conv_out(F.relu(x))
+        return x
+
+# Decoder (same structure for other paths like diffraction and reflection)
+class Decoder(nn.Module):
+    def __init__(self):
+        super(Decoder, self).__init__()
+        self.upconv1 = nn.ConvTranspose2d(256, 128, kernel_size=2, stride=2)
+        self.upconv2 = nn.ConvTranspose2d(128, 64, kernel_size=2, stride=2)
+        self.conv_out = nn.Conv2d(64, 3, kernel_size=3, stride=1, padding=1)
+
+    def forward(self, x):
+        x = self.upconv1(F.relu(x))
+        x = self.upconv2(F.relu(x))
+        x = self.conv_out(F.relu(x))
+        return x
+
+# Fusion Layer for combining outputs of different paths
+class FusionLayer(nn.Module):
+    def __init__(self):
+        super(FusionLayer, self).__init__()
+
+    def forward(self, wave_out, diff_out, refl_out):
+        # Fusion using a simple weighted sum (could be replaced by attention or learned fusion)
+        return (wave_out + diff_out + refl_out) / 3
+
+# Hybrid SIREN + FNO Model for sound propagation
+class HybridSIRENFNOModel(nn.Module):
+    def __init__(self):
+        super(HybridSIRENFNOModel, self).__init__()
+        
+        # Encoders for each effect: CNNEncoder for wave, FNOEncoder for diffraction and reflection
+        self.wave_encoder = CNNEncoder()
+        self.diff_encoder = FNOEncoder()
+        self.refl_encoder = FNOEncoder()
+        
+        # Decoders for each effect
+        self.wave_decoder = SIRENDecoder()
+        self.diff_decoder = Decoder()
+        self.refl_decoder = Decoder()
+        
+        # Fusion Layer
+        self.fusion_layer = FusionLayer()
+
+    def forward(self, x):
+        # Encoding paths for each effect
+        wave_features, skip1, skip2, skip3 = self.wave_encoder(x)
+        diff_features = self.diff_encoder(x)
+        refl_features = self.refl_encoder(x)
+        
+        # Decoding paths for each effect (skip connections passed)
+        wave_out = self.wave_decoder(wave_features, skip3, skip2, skip1)
+        diff_out = self.diff_decoder(diff_features)
+        refl_out = self.refl_decoder(refl_features)
+        
+        # Fusion of all decoder outputs
+        final_output = self.fusion_layer(wave_out, diff_out, refl_out)
+        return final_output
+
+# Instantiate the model
+model = HybridSIRENFNOModel()
+
+# Print the model architecture
+print(model)
+```
+
 
 
 

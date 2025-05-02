@@ -1804,7 +1804,7 @@ nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 
 
 
-**02.05.2025 Weekly Meeting**<br>
+**09.05.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>
 Location: Zoom<br>
@@ -1813,6 +1813,23 @@ Time: 13:00 O'Clock
 - ...
 
 
+
+**02.05.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- Focus first on the "Complex Focus Only"-Experiment and not on the paper research, because the research is only needed if this approach does have any successfull results
+
+- Next Friday results of the experiments
+
+  - Create a test dataset (1000 Images)
+  - Train all Modelcombinations with Hyperparameter from PhysGen Paper (BatchSize 18, Epochs 50, Learnrate 0.001)
+  - Create all predictions on test dataset
+  - Evaluate (use eval script fro PhysGen)
+
+  
 
 **25.04.2025 Weekly Meeting**<br>
 

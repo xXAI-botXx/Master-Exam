@@ -173,57 +173,70 @@ Papers to process (add to Zotero + little summary -> take aways):
 - [x] https://arxiv.org/abs/2007.08579 ❌ -> off topic
 - [x] https://arxiv.org/abs/2006.09661 ✅ -> Sinus-Activation Function with simple NN layers, could be good used as Decoder (mapping from latent space to image)
 - [x] https://arxiv.org/abs/2010.08895 ✅ -> Fourier Neural Operators (FNOs) are deep learning models that leverage Fourier transforms to efficiently solve partial differential equations by learning the mapping between input and output functions in the frequency domain
-- [ ] https://arxiv.org/abs/2111.05826
-- [ ] https://epubs.siam.org/doi/abs/10.1137/18M1225409
-- [ ] https://ieeexplore.ieee.org/abstract/document/8945120
-- [ ] https://arxiv.org/abs/2010.08103
-- [ ] https://www.nature.com/articles/s42254-021-00314-5
-- [ ] https://research.ebsco.com/c/gizthx/search/details/4nx6hvvm6v?db=asx
-- [ ] https://hal.science/hal-02405722/
-- [ ] https://link.springer.com/article/10.1007/s10668-024-05504-6
-- [ ] https://arxiv.org/abs/2101.11986
-- [ ] https://arxiv.org/abs/2105.15203
-- [ ] https://www.sciencedirect.com/science/article/pii/S1746809423011400
-- [ ] https://ieeexplore.ieee.org/abstract/document/10062649
-- [ ] https://arxiv.org/html/2408.06000v1
+- [x] https://arxiv.org/abs/2111.05826 ✅ -> Diffusion Models Architecture but not really interesting for determinstic image-to-image translation
+- [x] https://epubs.siam.org/doi/abs/10.1137/18M1225409 ✅ -> Physics Informed GAN -> not Image to Image
+- [x] https://ieeexplore.ieee.org/abstract/document/8945120 ✅ -> Physics Informed GANs -> not Image to Image
+- [x] https://arxiv.org/abs/2010.08103 ✅ -> Image to Image Physic Informed GAN -> Application to replace expensive simulation with generative models
+- [x] https://www.nature.com/articles/s42254-021-00314-5 ❌ -> Not available (General Physics in Machine Learning)
+- [x] https://research.ebsco.com/c/gizthx/search/details/4nx6hvvm6v?db=asx ❌ -> No access
+- [x] https://hal.science/hal-02405722/ ❌ -> A physics based approach but too far away
+- [x] https://link.springer.com/article/10.1007/s10668-024-05504-6 ❌ -> Off-topic
+- [x] https://arxiv.org/abs/2101.11986 ❌ -> Vision Transformer
+- [x] https://arxiv.org/abs/2105.15203 ❌ -> Segmentation with transformer
+- [x] https://www.sciencedirect.com/science/article/pii/S1746809423011400 ❌ -> segmentation
+- [x] https://ieeexplore.ieee.org/abstract/document/10062649 ✅ -> ConvUNeXt, a potential better generator
+- [x] https://onlinelibrary.wiley.com/doi/full/10.1002/ima.70013 ✅ -> Transformer CNN U-Net for Image to Image Generation/Translation
+- [x] https://link.springer.com/article/10.1007/s11222-023-10282-8 ✅ -> Another Transformer CNN U-Net Image to Image Generation/Translation
+- [x] https://arxiv.org/html/2408.06000v1 ✅ -> General Overview Image-to-Image Translation / Style Transfer
 
 
-- [ ] https://proceedings.mlr.press/v119/sanchez-gonzalez20a
-- [ ] https://www.nature.com/articles/s41598-021-01045-4
-- [ ] https://pubs.aip.org/asa/jasa/article-abstract/157/4/3017/3344527/Sounds-of-the-deep-How-input-representation-model?redirectedFrom=fulltext
+- [x] https://proceedings.mlr.press/v119/sanchez-gonzalez20a ❌ -> Have potential and also could use in this project but a bit off topic right now (more 3D Phsic Simulation with GraphNeurons)
+- [x] https://www.nature.com/articles/s41598-021-01045-4 ❌ -> Sound Classification = Offtopic
+- [x] https://pubs.aip.org/asa/jasa/article-abstract/157/4/3017/3344527/Sounds-of-the-deep-How-input-representation-model?redirectedFrom=fulltext ❌ -> No access (input representation in CNN Underwater Classification relevant)
 
 
-- [ ] https://arxiv.org/abs/1912.11474
-- [ ] https://arxiv.org/abs/2002.09405
-- [ ] https://arxiv.org/abs/2211.08570
-- [ ] https://arxiv.org/abs/1804.09298
-- [ ] https://ieeexplore.ieee.org/abstract/document/5704567
-- [ ] https://arxiv.org/abs/1706.08224
-- [ ] https://arxiv.org/html/2403.17639v1
-- [ ] https://arxiv.org/abs/1611.07004
-- [ ] https://arxiv.org/abs/2105.13067
-- [ ] https://ieeexplore.ieee.org/abstract/document/9528943
-- [ ] https://link.springer.com/article/10.1007/s12194-019-00520-y
-- [ ] https://cs230.stanford.edu/projects_spring_2018/reports/8289943.pdf
-- [ ] https://arxiv.org/abs/1704.00028 (https://jonathan-hui.medium.com/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490)
-- [ ] https://weininghu1012.github.io/file/cpsc532L_report.pdf
+- [x] https://arxiv.org/abs/1912.11474 ❌ -> Off-topic (3D Sound Propagation Roboter Search/Navigation)
+- [x] https://arxiv.org/abs/2211.08570 ❌ -> Offtopic
+- [x] https://arxiv.org/abs/1804.09298 ❌ -> Offtopic
+- [x] https://ieeexplore.ieee.org/abstract/document/5704567 ❌ -> Off-Topic
+- [x] https://arxiv.org/abs/1706.08224 ✅ -> GANs learn only partwise the true distribution (General Fact, also interesting for more complex scenarios)
+- [x] https://arxiv.org/html/2403.17639v1 ❌ -> Offtopic (is about high resolution and channel transformation)
+- [x] https://arxiv.org/abs/1611.07004 ✅ -> Pix2Pix GAN (basic paper)
+- [x] https://arxiv.org/abs/2105.13067 ❌ -> Just High Resolution Pix2Pix
+- [x] https://ieeexplore.ieee.org/abstract/document/9528943 ✅ -> General Image-to-Image Translation Overview
+- [x] https://link.springer.com/article/10.1007/s12194-019-00520-y ❌ -> Just shows that generative models can handle image-to-image translation
+- [x] https://cs230.stanford.edu/projects_spring_2018/reports/8289943.pdf ✅ -> WGAN is not clearly better
+- [x] https://arxiv.org/abs/1704.00028 (https://jonathan-hui.medium.com/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490) ✅ -> Improves WGAN
+- [x] https://weininghu1012.github.io/file/cpsc532L_report.pdf ❌ -> For unpaired image to image translation
 
 
-- [ ] https://scholar.google.de/scholar?hl=de&as_sdt=0%2C5&as_vis=1&q=graph+neural+networks+physical+simulation&btnG=
-- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=image+to+image+translation&btnG=
-- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=input+abstraction+deep+learning&btnG=
-- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=input+modality+ablation+GAN&btnG=
-- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=sound+propagation+neural+networks&btnG=
-- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=survey+paired+image+to+image+translation&btnG=
-- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=region-focused+loss+GAN&btnG=
-- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=physics-informed+sampling&btnG=
-- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=importance+sampling+deep+learning&btnG=
-- [ ] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=transformer+for+paired+image+to+image+translation&btnG=
-- [ ] Add Core Papers (see below)
+- [x] https://scholar.google.de/scholar?hl=de&as_sdt=0%2C5&as_vis=1&q=graph+neural+networks+physical+simulation&btnG=
+- [x] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=image+to+image+translation&btnG=
+- [x] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=input+abstraction+deep+learning&btnG=
+- [x] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=input+modality+ablation+GAN&btnG=
+- [x] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=sound+propagation+neural+networks&btnG=
+
+  - [x] https://link.springer.com/chapter/10.1007/978-3-030-60334-2_9 ✅ -> Image to Image in Ultrasound Images
+
+- [x] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=survey+paired+image+to+image+translation&btnG=
+
+  - [x] https://arxiv.org/abs/1806.06397 ✅ -> Multiple U-Net Blocks as Generator for more details
+  - [x] https://ieeexplore.ieee.org/abstract/document/9004254?casa_token=4yBLIPftU0AAAAAA:m7eTubb_CtqEp_ZcJG09SeL4XGEcybUVwAHF249pUahuCJ4Q290IfzCm3w2J4dFOjPxGFzHcEw ❌ (general survey image-to-image translation)
+
+- [x] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=region-focused+loss+GAN&btnG=
+- [x] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=physics-informed+sampling&btnG=
+- [x] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=importance+sampling+deep+learning&btnG=
+- [x] https://scholar.google.de/scholar?hl=en&as_sdt=0%2C5&q=transformer+for+paired+image+to+image+translation&btnG=
+- [x] Add Core Papers (see below)
+- [x] Check references of core papers
+- [x] Check the papers in https://github.com/ShenZheng2000/Awesome-Image-to-Image-Translation
+  - As overview ok, but most likely for unpaired image-to-image translation and only up to 2023
+- [x] Check papers: https://github.com/weihaox/awesome-image-translation/
+
+  - [x] https://arxiv.org/abs/2302.05872 -> Diffusion for Image-to-Image Translation
 
 
 => Check the papers which are already here -> adding to zotero + summary
-
 
 **AI-Guided Noise Reduction for Urban Geothermal Drilling**
 
@@ -1804,13 +1817,36 @@ nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 
 
 
-**09.05.2025 Weekly Meeting**<br>
+**16.05.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>
 Location: Zoom<br>
 Time: 13:00 O'Clock
 
 - ...
+
+
+
+**08.05.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: C108<br>
+Time: 13:00 O'Clock
+
+- Improve plots:
+  - Add Ground Truth to the Result / Example Plots
+  - Log Scale the plots (to see the details better)
+  - Plot the difference of ground truth and the prediction (so you get the problem zones)
+
+- Test Line of Sight / Out of Sight Error -> With Base Simulation as Input a very small line of sight error expected
+  - Need OSM image (Satalite image) as additional input
+
+- Test which error the base simulation as input has -> does the model even improven it?
+- Try Wasserstein GAN GP
+  - Implement WGAN-GP as optional parameter in Pix2pix GAN
+  - One Training with and one without
+  - Check the result + was the training more balanced?
+
 
 
 

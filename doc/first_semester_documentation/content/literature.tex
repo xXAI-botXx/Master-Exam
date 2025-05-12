@@ -1,6 +1,290 @@
 \chapter{Literature}
 \label{cha:literature}
+	This chapter includes the research and summarization for my work. All literature includes the most important take-aways for this work and potential usage in this work. 
 
-FIXME
+
+	\section{Core}
+	\label{sec:lit-core}
+		The core literature includes all literature on which this research is directly based and founded on and with which a comparison will be applied.
+		
+		\subsection{\citetitle{ladwig_ai-guided_2024-1}}
+			This is the foundation paper for the underlying project. It uses a Reinforcement Agent to control a drill to reduce the noise for nearby residents. And this agents needs also a prediction for the sound propagation which I want to improve in my work.\\
+			Drilling in urban areas is important to be able to use geothermal energy. But the drilling process for installing geothermal technology creates much noise pollution and can takes much time also over night. Configure the parameters is a difficult task and predicting the noise pollution is hard especially for a human operator.\\
+			This work concentrates on the improvement of the sound propagation prediction. Here the paper from \citeauthor{ladwig_ai-guided_2024-1} uses 3 different image-to-image generative models to be able to use make the prediction live. There is also a simulation software called "NoiseModelling" and it is very precise but takes too much time. For a complex sound propagation it can take to 10 minutes.\\
+			The used generative model architectures are:
+			\begin{itemize}
+			\item Pix2Pix GAN
+			\item UNet
+			\item DDPM Diffusion
+			\end{itemize}
+			All are using a U-Net architecture for generation but the training process varies.
+			
+			\newpage
+			
+			For traindata they used 15.000 labeled data using the NoiseModelling simulation and all samples have enough houses in the environment to make sure it is urban scenario. The data got normalized and satellite images from OpenStreetMap (OSM) are used as gray-scaled Input, where the black pixels are buildings and white pixels clarify a empty space (everything which is not a building). Following Hyperparameters are choosen for the training:
+			\begin{itemize}
+				\item Epochs: 50
+				\item Train-Test-Split: 80\% to 20\%
+				\item GAN Loss: combination of Binary Cross Entropy Loss (Discriminator Loss) \& L1 Loss
+				\item U-Net \& Diffusion Loss: Mean Squared Error
+			\end{itemize}
+			
+			For evaluation the MAE (Mean Absolute Error) and the MAPE (Mean Absolute Percentage Error) are used. Result is an inference speedup by 50{,}000 times and a mean absolute error of 0.55dB. The Pix2Pix GAN performed at best.
+		
+		\subsection{\citetitle{spitznagel_urban_2024-1}}
+			This paper from \citeauthor{spitznagel_urban_2024-1} builds the data foundation for this work. It presents the sound propagation data used to benchmark image-to-image generative models for predicting urban sound behavior.\\
+			The authors created a dataset with 100{,}000 512x512 image pairs representing 2D building maps taken from OpenStreetMap (OSM) and corresponding simulated sound propagation maps generated using the NoiseModelling v4 software. These simulations serve as ground truth for supervised learning tasks.\\
+			The dataset is annotated and divided into four different parts:
+			\begin{itemize}
+				\item \textbf{Baseline Dataset (25{,}000 pairs)}: Includes only basic geometric propagation and air absorption effects.
+				\item \textbf{Diffraction Dataset (25{,}000 pairs)}: Extends baseline data with diffraction effects at building edges.
+				\item \textbf{Reflection Dataset (25{,}000 pairs)}: Adds multiple reflections from building façades (up to 3 orders).
+				\item \textbf{Combined Dataset (25{,}000 pairs)}: Integrates all phenomena including air absorption, edge diffraction, and façade reflections, simulated across varying temperatures (-20°C to +40°C) and sound power levels (60 dB to 99 dB).
+			\end{itemize}
+			The propagation of sound over time is physically grounded and modeled using partial differential wave equations.\\
+			To accelerate the slow physical simulations (which can take several minutes per map), the paper evaluates several generative image-to-image models that can approximate the output within milliseconds. The generative architectures include:
+			\begin{itemize}
+				\item Pix2Pix-based GAN
+				\item Standard U-Net
+				\item Denoising Diffusion Probabilistic Model (DDPM)
+			\end{itemize}
+			Each model shares a common U-Net backbone, with channel scaling from 64 up to 1028 and then back down to 64. The models were trained with the following setup:
+			\begin{itemize}
+				\item Batch size: 18
+				\item Epochs: 50
+				\item Early stopping: patience of 3 epochs, based on validation loss
+			\end{itemize}
+			For evaluation, the Mean Absolute Error (MAE) and Weighted Mean Absolute Percentage Error (WMAPE) were reported. In addition to overall performance, the models were assessed specifically in Non-Line-of-Sight (NLoS) regions—areas where the sound signal cannot directly reach due to occlusions by buildings. This evaluation was performed by using ray tracing to determine Line-of-Sight (LoS) and NLoS areas and measuring how well the models handled reflection and diffraction-based propagation.\\
+			While all models performed reasonably in simple propagation scenarios, the results degraded in more complex scenes. Nonetheless, the generative approach showed an inference speedup of up to 20{,}000 times compared to conventional simulation, making it a practical solution for real-time or interactive applications such as noise-aware urban planning.
+			
+			
+		\subsection{\citetitle{martin_spitznagel_physicsgen_2025}}
+			This central paper from \citeauthor{martin_spitznagel_physicsgen_2025} provides the foundation for comparing generative models in physically grounded tasks and also will be the key comparison results of this work. It investigates how well modern generative image-to-image models can learn detailed, complex, and physically correct mappings across various simulation problems.\\
+			The authors introduce the \textit{PhysicsGen} Benchmark, a large-scale dataset consisting of 300{,}000 paired images across three physically motivated tasks:
+			\begin{itemize}
+				\item Wave propagation
+				\item Closed-form lens distortion
+				\item Time-series prediction of motion dynamics
+			\end{itemize}
+			Unlike earlier works that focus primarily on speedup, this benchmark emphasizes the need for physical correctness in generative approximations. It highlights that, although the acceleration compared to traditional differential equation-based simulations is substantial, capturing the true physical dynamics remains an unsolved challenge.\\
+			For this work only the wave propagation is relevant. The baseline evaluations of the wave propagation include a wide range of generative architectures:
+			\begin{itemize}
+				\item Pix2Pix
+				\item Standard U-Net
+				\item Convolutional Autoencoder
+				\item Variational Autoencoder (VAE)
+				\item Denoising Diffusion Probabilistic Models (DDPM)
+				\item Stable Diffusion
+				\item Denoising Diffusion Bridge Models (DDBM)
+			\end{itemize}
+			All models showed a high inference speedup and reasonable accuracy for first-order physical approximations. However, the results reveal fundamental issues in learning higher-order physical relations, such as second-order wave reflections, complex multi-body interactions, or continuous spatial dynamics.\\
+			The authors conclude that while current generative models are a promising tool for fast surrogate modeling, their ability to generalize physically beyond the training distribution is limited. Therefore, this paper strongly motivates further research into physics-aware architectures and training regimes that embed physical constraints into the generative process.\\
+			\\
+			This work directly continues where this paper ends at wave propagation and tries to improve the more complex scenarios and therefore will compare itself with the results of this paper.
+			
+		\subsection{\citetitle{achim_eckerle_evaluierung_2025}}
+			This paper by \citeauthor{achim_eckerle_evaluierung_2025} investigates the physical accuracy of Normalizing Flow models for image-to-image transformations in the domain of urban sound propagation and directly refers to \citetitle{spitznagel_urban_2024-1}. The core goal of their study is to evaluate whether these probabilistic models can generate physically consistent sound maps from 2D building layouts with the focus on the normalizing flow architecture as not tested approach in \citetitle{spitznagel_urban_2024-1} and \citetitle{martin_spitznagel_physicsgen_2025}.
+			\newpage
+			The author use the "Full Glow" architecture and focus on different physical sound propagation phenomena, including line-of-sight (LoS) and non-line-of-sight (NLoS) scenarios as well as cases involving diffraction and reflections. For the evaluation, they employ three key metrics:
+			\begin{itemize}
+				\item Mean Absolute Error (MAE)
+				\item Weighted Mean Absolute Percentage Error (wMAPE)
+				\item Structural Similarity Index Measure (SSIM)
+			\end{itemize}
+			This combination allows both local deviations and global structural sound propagation patterns to be assessed.\\
+			In their baseline scenario, the Full Glow model achieved a NLoS MAE of 0.65 and a LoS MAE of 1.84. In more complex diffraction scenarios, the LoS MAE improved to 0.79, but the NLoS MAE increased to 2.63—demonstrating the ongoing challenge of accurately capturing physically complex effects such as diffraction and reflections, especially when these intersect.\\
+			The dataset is split into:
+			\begin{itemize}
+				\item Training set: 19{,}908 scenarios (80.0\%)
+				\item Validation set: 3{,}732 scenarios (15.0\%)
+				\item Test set: 1{,}245 scenarios (5.0\%)
+			\end{itemize}
+			Training was performed on an NVIDIA GeForce RTX 4090 with 24GB VRAM over a period of 108 hours. The use of gradient check-pointing was evaluated but found to be counterproductive due to slower convergence times.\\
+			The authors outline several areas for improvement:
+			\begin{itemize}
+				\item Expanding the dataset (especially with more geographic diversity) beyond German urban layouts
+				\item Introducing physical loss functions to guide the Normalizing Flow training
+				\item Embedding physical priors at all levels of the model architecture to better capture structural properties
+			\end{itemize}
+			This paper serves as another comparison point for my work and achieves top results on the urban dataset from \cite{spitznagel_urban_2024-1}.
+		
+	
+	
+	\newpage
+	\section{Architecture}
+	\label{sec:lit-architecture}
+		Research for the architecture for deterministic paired image-to-image translation.
+		
+		\subsection{\citetitle{isola_image--image_2016}}
+			The Pix2pix GAN proposed in this paper is the base architecture on which most of the experiments will be executed. This architecture achieved high results on the urban dataset \cite{spitznagel_urban_2024-1}.\\
+			\\
+			The Pix2pix GAN is a Conditional Generative Adversarial Network for paired image-to-image translation. Internally the Pix2pix uses standard-wise the U-Net \cite{ronneberger_u-net_2015} and combines the learning of extracting the image features and generating the new image from the original image and the features extracted on different levels with the training procedure of a GAN, with a discriminator neuronal network which tries to detect a generated image and lead to realistic looking outcomes. The loss is also combined with a standard L1 loss. Additionally the discriminator does not decides for the whole image but for every patch of the image.
+			
+		\subsection{\citetitle{su_convunext_2022}}
+			While U-Net \cite{ronneberger_u-net_2015} is still a very well performing standard generator there are newer architectures which might achieve better results in the paired image-to-image scenario.\\
+			This paper proposes a so called ConvUNeXt model. As the name already says, the architecture combines the modern ConvNeXt and the U-Net architecture.
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.8\textwidth]{img/convunext_architecture.png}
+				\caption[ConvUNeXt Architecture]{ConvUNeXt architecture. The detail of each convolutional block used in ConvUNeXt is listed below, where Conv(k,s,p) means convolution layer with kernel size k, stride s and padding p, Resize(sc) means nearest neighbor image resize with scale factor sc.}
+				\label{fig:convunext}
+			\end{figure}
+			\FloatBarrier
+			In the Paper itself the ConvUNeXt model is used to transform a common image into a watercolor-stylized image with much success.\\
+			This could be a more precise generator as the vanilla U-Net and might be able to also learn the more complex and harder to learn samples and areas.
+			
+		\subsection{\citetitle{li_trans-cgan_2023}}
+			\citeauthor{li_trans-cgan_2023} created a generator architecture which is very similar to the U-Net architecture but includes some transformer blocks as figure \ref{fig:transcgan} shows.
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=\textwidth]{img/transunet_architecture_li.png}
+				\caption[Trans-cGAN Architecture]{Overview of Trans-cGAN. a Overall structure of Trans-cGAN. b The generator of Trans-cGAN. c The discriminator of Trans-cGAN. d Blocks of the generator and discriminator}
+				\label{fig:transcgan}
+			\end{figure}
+			\FloatBarrier
+			The proposed model design should improve the global context and long-range dependencies.\\
+			For the loss the adversarial loss and a pixel-wise loss were used to achieve realistic and precise results.\\
+			The model achieved visually and quantitative best results and showed a robust and high ability for generalization.
+			
+		\subsection{\citetitle{li_fourier_2020}}
+			Fourier Neural Operator learns to solve PDEs by learning operators and sound propagation can be described as a differential equation, so there is a potential to include FNOs into the generation process.\\
+			The FNO does not just approximate a function from data but learns to transform from one function to another. To achieve that one operator in a FNO model transforms the given input (the input image for the first operator) into the frequency domain via Fast Fourier Transform (FFT). On the lowest frequency components learnable weights are applied in the frequency domain and the inverse of the fourier transformation is applied to change the domain back. At the same time in the spatial domain the input is transfomred by normal linear weights and  this result and the result from the frequency domain are added and guided through a activation function. This process is visualized in figure \ref{fig:fno}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=\textwidth]{img/fno.png}
+				\caption[FNO Architecture]{top: The architecture of the neural operators; bottom: Fourier layer.}
+				\label{fig:fno}
+			\end{figure}
+			FNO could potentially solve the prediction of the sound propagation, which can be described with PDEs. But it is unsure if a FNO could directly apply as a image-to-image generator or if there have to be changes to the design to successfully predicting the wave propagation.
+			
+%		\subsection{\citetitle{yang_highly-scalable_2019}}
+%			The authors \citeauthor{yang_highly-scalable_2019} combine physics/differential equations and GANs in a model called PI-GAN or said different: the authors of the paper propose a PINN GAN.\\
+%			This model changed to image-to-image translation have maybe the chance to solve the prediction of sound propagation more precise by including the physics inside the model and so use the stochastic approximation with physical constraints.\\
+%			One key element is that the loss does not uses the target but the physical correctness using PDE (physics-informed loss functions).\\
+%			THe model takes coordinates and random noise and predicts a function value. Therefore this model is as \citetitle{li_fourier_2020} not directly apply-able to image-to-image translation and might need som redesignes to really works for this task.	
+		
+	
+	\newpage
+	\section{Loss}
+	\label{sec:lit-loss}
+		Literature of losses for deterministic paired image-to-image translation.
+		
+		\subsection{\citetitle{noah_makow_wasserstein_2018}}
+			\citeauthor{noah_makow_wasserstein_2018} investigated in GANs with a different loss, the Wasserstein loss. Which already is famous and known for its robust training process.\\
+			This investigation found that there is no significance in the quality compared to a standard adversarial loss and even had worse results with less details (see fig \ref{fig:wgan_vs_gan}).\\
+			This work also presents a new metric to compare two images, the VGG cosine similarity, which could be interesting to test.\\
+			\\
+			This less precision could be reasoned from the weight clipping which WGANs apply as already discovered \cite{gulrajani_improved_2017}, so it is questionable why this paper did not used WGAN-GP \cite{gulrajani_improved_2017}. This work shows that WGAN is not an option for my project but it still is questionable if WGAN-GP might be an option for improvement.
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.7\textwidth]{img/wgan_results.png}
+				\caption[Results of using WGAN]{An Illustration of how warped images in our dataset result lead to poor quality samples. The grey background region is noise that is undesirable in generated samples.}
+				\label{fig:wgan_vs_gan}
+			\end{figure}
+			\FloatBarrier
+			
+		\newpage
+			
+		\subsection{\citetitle{wang_experts_2023}}
+			This paper provides a compact and practical introduction to Physics-informed Neural Networks (PINNs) \cite{raissi_physics_2017}, which integrate physical laws such as partial differential equations (PDEs) into the loss function of neural networks.
+			
+			\begin{itemize}
+				\item \textbf{Key concept:} PINNs combine a traditional data loss with a physics-based loss to ensure that outputs not only fit the data but also obey governing equations (e.g., wave equations, heat equations).
+				\item \textbf{Advantages:} Enable simulation of physical systems with sparse data, incorporation of prior knowledge, and acceleration of numerical solvers.
+				\item \textbf{Challenges:} Training is difficult due to the non-smoothness of physics constraints and the high computational cost of large-scale PDEs. Strategies like adaptive sampling and multi-scale modeling are proposed.
+				\item \textbf{Applications:} Used in fluid dynamics, electromagnetics, structural mechanics, and other engineering domains.
+				\item \textbf{Relevance for this project:} While PINNs are not generative models per se, they could be used to regularize or guide generative models for image-to-image tasks like sound propagation, where physical plausibility is crucial.
+			\end{itemize}
+			
+			Such a physic informed/guided loss could maybe help during the wave propagation prediction to lead the model to more precise results.
+			
+	
+	
+	\newpage
+	\section{Complex Focus Only}
+	\label{sec:lit-complex-focus-only}
+		Founded research for intermediate input.
+	
+		\subsection{\citetitle{glasmachers_limits_2017}}
+			This paper critically examines the scalability and limitations of end-to-end (E2E) learning, particularly in the context of complex or modular systems.
+			
+			\begin{itemize}
+				\item \textbf{Key concept:} E2E learning trains all components of a system jointly via gradient descent, assuming full differentiability from input to output.
+				\item \textbf{Main critique:} As systems increase in complexity, E2E learning struggles with training instabilities, poor exploitation of modular structure, and reduced interpretability.
+				\item \textbf{Empirical evidence:} Simple experiments demonstrate failure cases of E2E training in modular tasks, where convergence is poor or the resulting performance is suboptimal.
+				\item \textbf{Important insight:} While E2E learning can be powerful, it is not universally ideal. Structured training approaches may be more effective for complex architectures.
+			\end{itemize}
+			
+			The different types of sound propagation (base propagation, reflection and diffraction) are all different system and are separately calculated from the simulation software. A complete end-to-end approach could be here not the right approach. Maybe a modular architecture or even a separate training could help.
+			
+		\subsection{\citetitle{suri_grit_2024}}
+			The paper introduces GRIT, a novel approach to paired image-to-image translation that addresses the limitations of traditional methods in capturing fine-grained, realistic details. By decoupling the optimization of adversarial and reconstruction losses, GRIT allows the model to generate more realistic images by focusing on local spatial variations that are often penalized in conventional frameworks.\\
+			GRIT demonstrates superior performance over traditional image-to-image models in generating realistic images with rich textures and details. Quantitative and qualitative evaluations show that GRIT effectively captures local spatial variations, leading to outputs that are both structurally accurate and visually compelling.\\
+			\\
+			Interesting for my project is that the GAN predicts not directly the result but two results, the most likely blurry face image and the hard part (the fine details, textures, local variations in the faces). So the tasks got split and also every task can then get another fitting loss (which could be an individual physical guided loss). Such a modular design could also help by predicting sound propagation.\\
+			The architecture of GRIT is designed for another task therefore a novel/different architecture have to get designed.
+%			\begin{figure}[H]
+%				\centering
+%				\includegraphics[width=\textwidth]{img/grit.png}
+%				\caption[GRIT]{We decouple the optimization of reconstruction and adversarial losses by synthesizing an image as a combination of its reconstruction (low-frequency) and GAN residual (high-frequency) components. The GAN residual adds realistic fine details while avoiding the pixel-wise penalty imposed by reconstruction losses.}
+%				\label{fig:grit}
+%			\end{figure}
+			
+		\subsection{\citetitle{armanious_medgan_2020}}
+			The work from \citeauthor{armanious_medgan_2020} introduces a new architecture, the CasNet. The design is a multi-step approach to keep precision, which is important in medical images. Figure \ref{fig:casnet} shows the architecture which consists of multiple U-Nets stacked onto each other.\\
+			This could be also effective when having multiple tasks like in my case (base propagation, reflection, diffraction) to solve one PDE after another. This could probably also be a good combination with a physic informed approach (PDE solver approach). But still it is an older approach.
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=\textwidth]{img/casnet.png}
+				\caption[CasNet]{The proposed CasNet generator architecture. CasNet concatenates several encoder-decoder pairs (U-blocks) to progressively refine the desired output image.}
+				\label{fig:casnet}
+			\end{figure}
+			\FloatBarrier
+			The paper also uses 3 different losses:
+			\begin{itemize}
+				\item \textbf{Adversarial Loss:} Ensures generated images are indistinguishable from real ones.
+				\item \textbf{Perceptual Loss:} Measures differences in feature space to capture high-level semantic differences.
+				\item \textbf{Style-Content Loss:} Matches textures and fine structures between source and target images.
+			\end{itemize}
+			
+			
+			
+	
+	\newpage
+	\section{Physics Based Sampling}
+	\label{sec:lit-physics-based-sampling}
+		Research about masking physics based the image during training.
+		
+		\subsection{\citetitle{huang_masked_2022}}
+			This work proposes the MaskedGAN. It randomly masks the input image of a GAN to learn local details, improve generalization and increase the training speed. \\
+			\citeauthor{huang_masked_2022} proposes 2 different masking strategies which are randomly used together:
+			\begin{enumerate}
+				\item Shifted Spatial Masking: Random squares with random positions are distributed over the image.
+				\item Balanced Spectral Masking: Random bandwidths of the spectral dimension of the image are masked.
+			\end{enumerate}
+			The MaskedGAN achieve better results in multiple different generation tasks and with different architectures. Also the convergence is quicker and more robust.\\
+			\\
+			The physics based sampling idea from my project is similar but the random masking would be extended to a physic based masking, so that the model can focus on learning the difficult parts. 
+			
+		\subsection{\citetitle{esser_taming_2020}}
+			This paper does not present a direct masking approach yet an indirect masking through a saliency map with a transform in the latent space.\\
+			The so called VQGAN (Vector Quantizied) is a classical CNN-encoder-decoder GAN architecture but with a transformer in the latent space of the generator (as figure \ref{fig:vqgan} shows) for applying weights/attention so that the model maybe can concentrate on the important parts of the image.\\
+			\\
+			The model achieves high-resolution synthesis with strong fidelity and diversity, matching or surpassing CNN-based approaches on datasets like ImageNet. Qualitative results show sharp, coherent images, with better structure and global consistency thanks to the transformer’s long-range modeling capability.\\
+			\\
+			This weighting/indirect masking process could increase the precision in image-to-image translation but it goes a bit away from the physic based sampling because it is not physics based and it is not restricted on the training, it will always apply attention to the parts of the image.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.9\textwidth]{img/vqgan.png}
+				\caption[VQGAN]{Our approach uses a convolutional VQGAN to learn a codebook of context-rich visual parts, whose composition is subsequently modeled with an autoregressive transformer architecture. A discrete codebook provides the interface between these architectures and a patch-based discriminator enables strong compression while retaining high perceptual quality. This method introduces the efficiency of convolutional approaches to transformer based high resolution image synthesis.}
+				\label{fig:vqgan}
+			\end{figure}
+
+		
+		
+
+
+
 
 

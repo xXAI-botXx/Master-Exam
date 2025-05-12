@@ -22,12 +22,27 @@
 \begin{document}
 
 % First pages
+\pagenumbering{roman}
 \maketitle
 \tableofcontents
+
+\cleardoublepage
+\pagenumbering{arabic}
+% \cleardoublepage
+% \newcounter{frontmatterpage}
+% \setcounter{frontmatterpage}{\value{page}}
 
 % Add Content
 \include{content/literature}
 % FIXME ...
+
+% Literature
+\pagenumbering{roman}
+\phantomsection  % Ensures correct hyperlinking
+% \addcontentsline{toc}{chapter}{Bibliography}  % Add to TOC as chapter
+\begin{flushleft}
+	\printbibliography[heading=bibintoc]
+\end{flushleft}
 
 % \appendix
 % \include{}

@@ -40,6 +40,24 @@
 \usepackage{setspace}
 \onehalfspacing
 
+% Add Literature
+\usepackage[style=ieee, 
+		    backend=biber, 
+		    isbn=true,
+		    sortlocale=en_US]{biblatex}                  % Hyperlinks für Ziate]{biblatex}
+\addbibresource{research.bib}
+\setlength{\bibitemsep}{1em}     % Distance between the bib entries
+\setlength{\bibhang}{2em}        % Distance after a new bib page
+% Splitting URLs ib bib
+\defcounter{biburlnumpenalty}{10} % Penalty for splitting a number
+\defcounter{biburlucpenalty}{500}  % Penalty for capital letters
+\defcounter{biburllcpenalty}{500}  % Penalty for lower letters
+
+% For Images
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{placeins}
+
 
 % === === ===
 % General Book Information

@@ -1817,13 +1817,49 @@ nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 
 
 
-**16.05.2025 Weekly Meeting**<br>
+**23.05.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>
 Location: Zoom<br>
 Time: 13:00 O'Clock
 
 - ...
+
+
+
+**16.05.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- Implementing Depth Anything and try out training + evaluation (self assigned)
+  - Maybe try to implement into the forked pix2pix repo -> https://github.com/xXAI-botXx/paired_image-to-image_translation/ from https://github.com/DepthAnything/Depth-Anything-V2
+  - Without Conditioning -> Sound Source is fix
+  - The Pipeline of them
+  - The Pipeline of Pix2Pix
+
+- Make a test training with the parameters from the Physgen paper (self assigned)
+  - Batchsize: 18
+  - Learnrate: 1e-4 (Generator: 2e-4)
+  - Epochs: 50
+  - Lambda L1: 100
+  - Lambda GP: 10
+  - Optimizer: Adam
+  - Adam betas:  (0.5, 0.999)
+  - Results to reach:
+    - LoS MAE = 0.91
+    - NLoS MAE = 3.36
+    - LoS wMAPE = 3.51
+    - NLoS wMAPE = 18.06 
+
+- Base Simulation vs Reflection Simulation -> warum quantisierter? Search/Fix Quantisier Fehler
+  - Auch ring artefakte damit vlt erklärebar
+  - Evtl exportier speicher fehler
+  - Bildformat -> histogramm anschauen
+  - Mit Physgen evaluieren
+
+- WGAN-GP + Input Image Training Evaluation 
 
 
 

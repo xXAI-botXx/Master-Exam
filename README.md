@@ -1817,13 +1817,97 @@ nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 
 
 
-**23.05.2025 Weekly Meeting**<br>
+**30.05.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>
 Location: Zoom<br>
 Time: 13:00 O'Clock
 
 - ...
+
+
+
+**23.05.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- Fixing plotting -> other cmap with log-scale (and scale back to 255) OPTIONAL
+
+  - Try Log (before and after invert -> not at the same time!):
+
+    ```python
+    img = np.log1p(img.astype(np.float32))
+    img = img / img.max() * 255
+    img = img.astype(np.uint8)
+    ```
+
+     
+
+  - Try out gamma correction:
+
+    ````python
+    gamma = 0.4  # <1 enhances shadows, >1 compresses shadows
+    img = img.astype(np.float32) / 255.0
+    img = np.power(img, gamma)
+    img = (img * 255).astype(np.uint8)
+    ````
+
+  - Histogramm equalization
+
+    ````python
+    img = cv2.equalizeHist(img)
+    ````
+
+    or:
+
+    ````python
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+    img = clahe.apply(img)
+    ````
+
+- Solo eval -> split MAE and MAPE visualization
+
+- Add log scaled MAE to the losses? -> or other loss for more detail
+
+  ````python
+  class LogL1Loss(nn.Module):
+      def __init__(self, eps=1e-8):
+          super().__init__()
+          self.eps = eps  # Prevent log(0)
+  
+      def forward(self, y_pred, y_true):
+          log_pred = torch.log(y_pred + self.eps)
+          log_true = torch.log(y_true + self.eps)
+          return torch.mean(torch.abs(log_pred - log_true))
+  ````
+
+  ````python
+  class MAPELoss(nn.Module):
+      def __init__(self, eps=1e-8):
+          super().__init__()
+          self.eps = eps  # Avoid division by zero
+  
+      def forward(self, y_pred, y_true):
+          return torch.mean(torch.abs((y_true - y_pred) / (y_true + self.eps))) * 100
+  ````
+
+  
+
+- Finding and Fixing Quantization Error:
+
+  - 1d profile -> error in location -> input + => with artifacts + without artifacts
+    - View a row/column from an image array -> identy
+
+  - Display a concrete chain -> input, prediction, ground truth, difference
+  - Test with base simulation (wgan-gp) -> such errors must not be in there
+  - Metric correct, but visualization wrong? -> any errors due to inversion?
+    - Possibly clarified if CMAP works
+
+  - Only at created dataset or also in physgen dataset?
+
+- After fixing the bug, we can think about how to do/apply the mask/sample maps
 
 
 

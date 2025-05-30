@@ -1817,13 +1817,32 @@ nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 
 
 
-**30.05.2025 Weekly Meeting**<br>
+**06.06.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>
 Location: Zoom<br>
 Time: 13:00 O'Clock
 
 - ...
+
+
+
+**30.05.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- Quantization Error found: cv2 imreads as singed int and minus values overflows -> so convert type to unsigned float
+- New Modelarchitecture tried out (implemented data for it)
+  - One Model (DepthAnything/Pix2Pix), input: osm, target: baseline propagation
+  - One Model (DepthAnything/Pix2Pix), input: osm, target: reflection - baseline propagation (= only reflections)
+  - One fusion model to fusion the two outputs from the models
+  - Added Loss for small errors
+  - Changed output of depth anything to sigmoid (0 - 1)
+  - And other small adjustments...
+
+- Test Pix2Pix GAN + Depth Anything with ComplexOnly / Split Tasks architecture 
 
 
 

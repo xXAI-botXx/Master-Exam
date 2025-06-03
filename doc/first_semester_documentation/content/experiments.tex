@@ -1,0 +1,29 @@
+\chapter{Experiments}
+\label{cha:experiments}
+
+	% TO DO: 
+	%     - Fill the gaps
+
+
+	\section{Residual Learning / Complex Focus Only}
+	\label{sec:experiments-cfo}
+		- test basesimulation as input
+			- improve pipeline (unite and clean arg handling -> pydantic, 2 pipelines runable with same scripts, using the same self-generated satelite maps with multiple simulations settings, handling multi/parallel generation docker containers inclduing crashes with a script starting/finishing handler)
+		- test WGAN-GP -> more stable GAN/Adversarial loss
+		- test both improvements together
+		- test new Architecture: Depth Anything (describe Architecture)
+		- test new Architecture: HexaWaveNet -> best of 6 papers model
+			- describe Architecture
+			- needed more engineering to make it better
+			- share some results and architecture versions
+		- test new residual model design with Pix2Pix and DepthAnything and special loss
+			- describe architecture (+ where you have this idea: a paper)
+			- learning the complex only was a big challenge: extract complex only + special loss + depth anything adjustments
+			- describe loss in detail -> weighted combined loss: weights are calculated with inverted histogram -> because a big imbalance + variance loss + range loss (min-max)
+	
+	\section{Mask Sampling}
+	\label{sec:experiments-masking}
+		FIXME -> what experiments did you...will you done?
+	
+	
+

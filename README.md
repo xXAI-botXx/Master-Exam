@@ -1817,7 +1817,7 @@ nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 
 
 
-**06.06.2025 Weekly Meeting**<br>
+**13.06.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>
 Location: Zoom<br>
@@ -1827,9 +1827,38 @@ Time: 13:00 O'Clock
 
 
 
-**30.05.2025 Weekly Meeting**<br>
+**06.06.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- Showed Depth Anything Results
+  - Seems like too much variance to learn
+
+- Sample Masking (Random? Only weighted? Maybe after x epochs?) -> Just thoughts about which we talked
+  - Using the non line of sight as mask -> Look how the eval.py calcs the non line of sight error and use nlos as mask
+  - Maybe using the Complex - Base as Mask
+
+- The idea is to reduce the complexity of the task until it is learnabe
+  - Which variance is learnable
+  - Maybe even splitting into only angle values
+  - Only Predicting Reflection (seperated) > only predicting reflections masked on the parts where reflections are > Only on a few simple buildings > ...
+
+- Task for the week
+  - With few Buildings dataset:
+    - Predict only seperated reflection
+    - Predict only seperated reflection with mask onto reflections (threshold at 0.2 or something)
+
+- Check out Pix2Pix Residual result
+- Write/send results directly (Martin + Keuper on conference in nashville)
+- Mit wenig Gebäuden -> Direkt nur Komplexes Vorhersagen oder mit Maske
+
+
+
+**30.05.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Ich<br>
 Location: Zoom<br>
 Time: 13:00 O'Clock
 

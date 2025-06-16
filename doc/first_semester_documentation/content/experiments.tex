@@ -3,27 +3,295 @@
 
 	% TO DO: 
 	%     - Fill the gaps
+	% test basesimulation as input
+	% improve pipeline (unite and clean arg handling -> pydantic, 2 pipelines runable with same scripts, using the same self-generated satelite maps with multiple simulations settings, handling multi/parallel generation docker containers inclduing crashes with a script starting/finishing handler)
+	% test WGAN-GP -> more stable GAN/Adversarial loss
+	% test both improvements together
+	% test new Architecture: Depth Anything (describe Architecture)
+	% test new Architecture: HexaWaveNet -> best of 6 papers model
+	% describe Architecture
+	% needed more engineering to make it better
+	% share some results and architecture versions
+	% test new residual model design with Pix2Pix and DepthAnything and special loss
+	% describe architecture (+ where you have this idea: a paper)
+	% learning the complex only was a big challenge: extract complex only + special loss + depth anything adjustments
+	% describe loss in detail -> weighted combined loss: weights are calculated with inverted histogram -> because a big imbalance + variance loss + range loss (min-max)
 
 
-	\section{Residual Learning / Complex Focus Only}
-	\label{sec:experiments-cfo}
-		- test basesimulation as input
-			- improve pipeline (unite and clean arg handling -> pydantic, 2 pipelines runable with same scripts, using the same self-generated satelite maps with multiple simulations settings, handling multi/parallel generation docker containers inclduing crashes with a script starting/finishing handler)
-		- test WGAN-GP -> more stable GAN/Adversarial loss
-		- test both improvements together
-		- test new Architecture: Depth Anything (describe Architecture)
-		- test new Architecture: HexaWaveNet -> best of 6 papers model
-			- describe Architecture
-			- needed more engineering to make it better
-			- share some results and architecture versions
-		- test new residual model design with Pix2Pix and DepthAnything and special loss
-			- describe architecture (+ where you have this idea: a paper)
-			- learning the complex only was a big challenge: extract complex only + special loss + depth anything adjustments
-			- describe loss in detail -> weighted combined loss: weights are calculated with inverted histogram -> because a big imbalance + variance loss + range loss (min-max)
+	\section{Input Abstraction}
+	\label{sec:experiments-input-abstraction}
+		% Description
+		The Input Abstraction experiment investigates the impact of changing the input to the base propagation. The idea is that the translation is less complex if the input distribution already covers much of the output distribution. This is shown in figure \ref{fig:experiment_input}.
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.65\textwidth]{img/experiment_input.png}
+			\caption[Experiment Idea for Input Abstraction]{Experiment Idea for Input Abstraction}
+			\label{fig:experiment_input}
+		\end{figure}
+		\FloatBarrier
+		There are 3 variations in which 2 pix2pix models are trained but one with the standard satelite image as input and the other with the base simulation as input. One variation where both models got trained 50 epochs, one with 100 epochs, and another where the output is changed from reflection to reflection and diffraction.
+		
+		% Implementation & Challenges
+		In order to be able to conduct this experiment new datasets with the same building positions and in multiple variations (base and reflection) are needed. \\For that 4 datasets with 10k observations and random building positions and fewer amount of buildings were created.\\
+		In that process, the pipeline of the Physgen (works with GPS locations) and the random buildings dataset creation got united by 2 running scripts which also allow guided parallel execution (handles crashes consistently) and the arguments (which came originally from different sources -> a file and python call) got also standardized and validated with a new Pydantic \cite{pydantic} argument handling which allows now partwise multiple settings for multiple dataset generation.\\
+		% Results
+		Table \ref{tab:performance_input_50} and \ref{tab:performance_input_100} show the mean average LoS and NLoS error and mean absolute percentage LoS and NLoS error with 50 and 100 epochs. And table \ref{tab:performance_input_ref_diff} shows the error comparison with reflection and diffraction as targets.
+		
+		\begin{table}[h!]
+			\centering
+			\begin{tabular}{|l|c|c|c|c|}
+				\hline
+				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
+				\hline
+				Pix2Pix Standard Input & 5.55 & 9.20 & 26.71 & 20.85 \\
+				Pix2Pix Base Input & \textbf{0.56} & \textbf{0.81} & \textbf{5.17} & \textbf{1.85} \\
+				\hline
+			\end{tabular}
+			\caption{Performance comparison of Input Abstraction with 50 Epochs on 10k random generated buildings dataset.}
+			\label{tab:performance_input_50}
+		\end{table}
+		
+		\begin{table}[h!]
+			\centering
+			\begin{tabular}{|l|c|c|c|c|}
+				\hline
+				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
+				\hline
+				Pix2Pix Standard Input & 2.16 & 2.03 & 10.62 & 4.75 \\
+				Pix2Pix Base Input & \textbf{0.38} & \textbf{0.15} & \textbf{3.28} & \textbf{0.35} \\
+				\hline
+			\end{tabular}
+			\caption{Performance comparison of Input Abstraction with 100 Epochs on 10k random generated buildings dataset.}
+			\label{tab:performance_input_100}
+		\end{table}
+		
+		\begin{table}[h!]
+			\centering
+			\begin{tabular}{|l|c|c|c|c|}
+				\hline
+				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
+				\hline
+				Pix2Pix Standard Input & 2.44 & 3.33 & 12.96 & 7.46 \\
+				Pix2Pix Base Input & \textbf{0.55} & \textbf{0.30} & \textbf{3.91} & \textbf{0.70} \\
+				\hline
+			\end{tabular}
+			\caption{Performance comparison of Input Abstraction with reflection and diffraction as target on 10k random generated buildings dataset.}
+			\label{tab:performance_input_ref_diff}
+		\end{table}
+		
+		%\begin{figure}[H]
+		%	\centering
+		%	\includegraphics[width=0.8\textwidth]{img/experiment_input_res_50_epochs.png}
+		%	\caption[Experiment Results Input Abstraction with 50 Epochs.]{Experiment Results Input Abstraction with 50 Epochs.}
+		%	\label{fig:experiment_input_res_50}
+		%\end{figure}
+		%\FloatBarrier
+		
+		%\begin{figure}[H]
+		%	\centering
+		%	\includegraphics[width=0.8\textwidth]{img/experiment_input_res_100_epochs.png}
+		%	\caption[Experiment Results Input Abstraction with 100 Epochs.]{Experiment Results Input Abstraction with 100 Epochs.}
+		%	\label{fig:experiment_input_res_100}
+		%\end{figure}
+		%\FloatBarrier
+		
+		%\begin{figure}[H]
+		%	\centering
+		%	\includegraphics[width=0.8\textwidth]{img/experiment_input_res_50_epochs_ref_&_diffraction.png}
+		%	\caption[Experiment Results Input Abstraction with reflection and diffraction as output.]{Experiment Results Input Abstraction with reflection and diffraction as output.}
+		%	\label{fig:experiment_input_res_ref_dif}
+		%\end{figure}
+		%\FloatBarrier
+		
+		In all 3 experiments, the model with the base propagation as input is superior to the model with the standard input and is on average 3,6 times more precise.\\
+		As an additional experiment, the 2 pix2pix models with base propagation as input (50 and 100 epochs) were compared to just the base propagation itself as output. It is expected that the base propagation is very close to a perfect loss in LoS but not precise in NLoS. Table \ref{tab:performance_input_base} shows that the model was indeed more precise in the NLoS area but not in the LoS. The expectations are met.
+		\begin{table}[h!]
+			\centering
+			\begin{tabular}{|l|c|c|c|c|}
+				\hline
+				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
+				\hline
+				Pix2Pix Base Input 50 & 0.56 & 0.81 & 5.17 & 1.85 \\
+				Pix2Pix Base Input 100 & 0.38 & \textbf{0.15} & 3.28 & \textbf{0.35} \\
+				Base Propagation & \textbf{0.32} & 2.88 & \textbf{0.70} & 7.70 \\
+				\hline
+			\end{tabular}
+			\caption{Performance comparison of Input Abstraction with base propagation output on 10k reflection random generated buildings dataset.}
+			\label{tab:performance_input_base}
+		\end{table}
+		\\
+		%Hint: The results of this experiment can't be compared to the benchmark from \ref{tab:performance_base} due to the fact that this experiment uses another simpler dataset.
+		
 	
-	\section{Mask Sampling}
-	\label{sec:experiments-masking}
-		FIXME -> what experiments did you...will you done?
+	\section{Stabilized Adversarial Loss}
+	\label{sec:experiments-stabilized_adversarial_loss}
+		% Description
+		The impact of more stabilized training between discriminator and generator towards learning a complex distribution is researched in this experiment.\\
+		\citetitle{noah_makow_wasserstein_2018} already tried out WGAN in an image-to-image translation task, but especially in an image generation task could suffer from gradient clipping which let this project led to experiment with the WGAN-GP \cite{gulrajani_improved_2017}.
+		
+		% Implementation & Challenges
+		The original GAN loss uses binary cross entropy and looks like this:
+		\begin{equation}
+			Loss_G = -log( D( G(z) ) ) 
+		\end{equation}
+		
+		\noindent where:
+		\begin{itemize}
+			\item $D$ is the discriminator/critic function
+			\item $G$ is the generator function
+			\item $z$ is the input image
+		\end{itemize}
+		
+		\begin{equation}
+			Loss_D = -log(D(x)) - log(1 - D(\tilde{x}))
+		\end{equation}
+		
+		\noindent where:
+		\begin{itemize}
+			\item $x$ is a ground truth image
+			\item $\tilde{x} = G(z)$ is a generated (fake) image
+		\end{itemize}
+		
+		In comparison to that, the WGAN-GP uses the Wasserstein distance with an additional gradient penalty. The gradient penalty is needed to make sure the Lipschitz continuity condition is achieved. In other words, the gradient penalty makes sure that the gradients are not too low and not too high so that the generator can learn efficiently and stable from the discriminator's loss. To calculate this the gradients of an in-between representation of fake and real is calculated (the region where the generator and the discriminator interact at most with each other) and the length of the gradients is calculated. 
+		
+		\begin{equation}
+			Loss_G = -D( G(y) )
+		\end{equation}
+		
+		\noindent where:
+		\begin{itemize}
+			\item $D$ is the discriminator/critic function
+			\item $G$ is the generator function
+			\item $y$ is the input image
+		\end{itemize}
+		
+		\begin{equation}
+			Loss_D = D(\tilde{x}) - D(x) + \lambda \cdot \left( \| \nabla_{\hat{x}} D(\hat{x}) \|_2 - 1 \right)^2
+		\end{equation}
+		
+		\noindent where:
+		\begin{itemize}
+			\item $x$ is a ground truth image
+			\item $\tilde{x} = G(z)$ is a generated (fake) image
+			\item $\hat{x} = \epsilon x + (1 - \epsilon) \tilde{x}$ is an interpolation between real and fake, with $\epsilon \sim \mathcal{U}(0,1)$
+			\item $\lambda$ is a weight for the gradient penalty (usually $\lambda = 10$)
+			\item $\nabla_{\hat{x}} D(\hat{x})$ is the gradient of $D$ with respect to $\hat{x}$
+		\end{itemize}
+		
+		% Results
+		The training loss got much smoother and convergence was achieved quicker with Wassterstein loss and Gradient Penalty compared to the binary cross entropy loss as figure \ref{fig:experiment_wgangp_process} shows.
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\textwidth]{img/experiment_wgangp_ L1_Loss.png}
+			\caption[Training loss between a GAN pix2pix model and a WGAN-GP pi2pix model.]{Training loss between a GAN pix2pix model and a WGAN-GP pi2pix model.}
+			\label{fig:experiment_wgangp_process}
+		\end{figure}
+		\FloatBarrier
+		
+		In terms of accuracy, the WGAN-GP model outperformed the GAN model in LoS and NLoS and is about 2 times more precise, as table \ref{tab:performance_wgangp} shows.
+		
+		\begin{table}[h!]
+			\centering
+			\begin{tabular}{|l|c|c|c|c|}
+				\hline
+				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
+				\hline
+				Pix2Pix GAN & 4.10 & 7.52 & 28.92 & 17.59 \\
+				Pix2Pix WGAN-GP & \textbf{1.42} & \textbf{4.22} & \textbf{17.27} & \textbf{10.97} \\
+				\hline
+			\end{tabular}
+			\caption{Performance comparison of WAN and WGAN-GP model on 10k random generated buildings dataset.}
+			\label{tab:performance_wgangp}
+		\end{table}
+		
+	\section{Generator Architecture Exploration}
+	\label{sec:experiments-generator_architecture_exploration}
+		% Description
+		As the paper from \citeauthor{achim_eckerle_evaluierung_2025} showed there are still architectures that are worth trying for paired image-to-image translation. This experiment tests 2 different models. One is the DepthAnything model \cite{yang2024depthv2} which normally is used for depth estimation but also just does image-to-image translation with a pre-trained DINOv2 Encoder \cite{oquab2024dinov2learningrobustvisual} and an adjusted DPT Decoder \cite{ranftl2021visiontransformersdenseprediction}.\\
+		The other model is a self-invented model called Hexa-Wave-Net which combines 6 advances from research.
+		
+		% Implementation & Challenges
+		For the DepthAnything model, a new Physgen dataset implementation was needed, a new adjusted loss, and the output activation function had to be adjusted. The loss was specialized for depth and so it got changed to a combined loss from l1 and sharp aware losses (which uses the deviation of the image). The ReLU activation functions were replaced by the LeakyReLU and the last activation was changed to a 0.0 to 1.0 clamping. These changes made the architecture able to predict sound propagation.\\
+		5 variations were implemented for the Hexa-Wave-Net. The standard network with the architecture is shown in figure \ref{fig:experiment_architecture_hexa_wave_net}. So the 6 advances are:
+		\begin{enumerate}[itemsep=1mm, parsep=0pt]
+			\item CNN Encoder for local features (ConvNeXt \cite{liu2022convnet2020s})
+			\item FNO (Fourier Neural Operator) Layer for global frequency feature extraction
+			\item Latent Transformer Block as a kind of saliency filter
+			\item SIREN Decoder for physical correct decoding
+			\item Skip Connection for residual learning
+			\item Half WGAN-GP - half sharp aware loss
+		\end{enumerate}
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1.0\textwidth]{img/experiment_architectures_hexa_wave_net.png}
+			\caption[Hexa-Wave-Net architecture variation 1.]{Hexa-Wave-Net architecture variation 1.}
+			\label{fig:experiment_architecture_hexa_wave_net}
+		\end{figure}
+		\FloatBarrier
+		
+		% add variations
+		\clearpage
+		Variation 2 removes the latent space transformer and changes the SIREN-Decoder to CNN and SIREN Decoder with a skip connection to the input image.\\
+		Variation 3 is similar to variation 2 but combines the different decoder and the original image with an MLP Head (multilayer perceptron / fully connected layer).\\
+		Variation 7 changes the Encoder-CNN from ConvNeXt to a simple CNN with skip connections, adds the Transformer Latent Space again, and uses also a simple CNN decoder (without SIREN-Decoder) and with the original image. At the end is again an MLP-Head.
+		
+		% Results
+		The results from DepthAnything show that his absolute errors are a bit higher than the current SOTA while the relative errors are more than 3 times higher than the SOTA. It also seems like that DepthAnything made many errors in small value areas and so the relative values are much higher than the absolute errors. Table \ref{tab:experiment_architecture_results} contains all results.\\
+		\\
+		The results from the Hexa-Wave-Net variations differ much from each other. While variations 1 and 2 have massive errors, variations 3, 7, and 8 are much closer to the SOTA. Variation 7 interestingly has a higher LoS wMAPE compared to the NLoS wMAPE while the LoS MAE is lower than the NLoS MAE. This means that the model makes larger absolute errors in non-line-of-sight conditions, but in line-of-sight, even small absolute errors result in a higher relative error. This suggests that many of the errors in LoS occur at locations with small true values — a visual analysis showed that the errors happen at the front of buildings which is very atypically and questionable why this happens. Still, the 7th variation achieves SOTA in both NLoS errors. \\
+		The 3rd variation achieves SOTA in LoS MAE but has a very high LoS wMAPE. The visual samples show that the error is made in the area by the source. The source is not clearly predicted.
+		%which means that the errors in Line-of-Sight occur in regions with small ground truth values, where even small absolute errors lead to large relative errors. 
+		
+		\begin{table}[h!]
+			\centering
+			\begin{tabular}{|l|c|c|c|c|}
+				\hline
+				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
+				\hline
+				DepthAnything & 11.33 & 5.08 & 61.27 & 118.79 \\
+				HexaWaveNet 1 & 37.01 & 11.84 & 180.70 & 31.07 \\
+				HexaWaveNet 2 & 37.58 & 16.41 & 183.58 & 42.98 \\
+				HexaWaveNet 3 & \textbf{1.84} & 6.03 & 44.01 & 15.70 \\
+				HexaWaveNet 7 & 2.60 & \textbf{3.25} & 18.06 & \textbf{8.53} \\
+				HexaWaveNet 8 & 2.90 & 16.69 & 41.16 & 43.58 \\
+				Pix2Pix & 2.14 & 4.79 & 11.30 & 30.67 \\
+				DDBM & 1.93 & 6.38 & 18.34 & 79.13 \\
+				Full Glow & 2.06 & 3.64 & \textbf{8.98} & 22.69 \\
+				\hline
+			\end{tabular}
+			\caption{Performance comparison of the new explored models.}
+			\label{tab:experiment_architecture_results}
+		\end{table}
+		\FloatBarrier
+		
+	\clearpage
+		
+	\section{Residual Design/Architecture}
+	\label{sec:experiments-residual_architecture}
+		% Description
+		
+		
+		% Implementation & Challenges
+		
+		
+		% Results
+		
+		
+	\section{Only Reflection with few Buildings}
+	\label{sec:experiments-only_reflections_with_few_buildings}
+		% Description
+		
+		
+		% Implementation & Challenges
+		
+		
+		% Results
+		
+	
+	%\section{Mask Sampling}
+	%\label{sec:experiments-masking}
+	%	FIXME -> what experiments did you...will you done?
 	
 	
 

@@ -37,18 +37,21 @@
 \include{content/literature}
 \include{content/experiments}
 \include{content/summary}
-% FIXME ...
+
+% Appendix
+%\appendix
+%\cleardoublepage
+%\section{Additional Tables}  % Or \chapter{} if using book class
+%\input{content/additional_tables}  % Optional: keep appendix tables in a separate file
 
 % Literature
+% \cleardoublepage
 \pagenumbering{roman}
 \phantomsection  % Ensures correct hyperlinking
 % \addcontentsline{toc}{chapter}{Bibliography}  % Add to TOC as chapter
 \begin{flushleft}
 	\printbibliography[heading=bibintoc]
 \end{flushleft}
-
-% \appendix
-% \include{}
 
 \end{document}
 

@@ -8,9 +8,9 @@ import numpy as np
 import cv2
 
 # Change these lines:
-base_folder = "D:/Cache/nms10000_0_0_2500_2500"
-complex_folder = "D:/Cache/nms10000_1_0_2500_2500"
-new_output_folder = "D:/Cache/nms1000_residual_reflection"    # the name will be advanced adjusted
+base_folder = "D:/Cache/nms1000_test_0_0_2500_2500"
+complex_folder = "D:/Cache/nms1000_test_1_0_2500_2500"
+new_output_folder = "D:/Cache/nms1000_test_residual_reflection"    # the name will be advanced adjusted
 
 # Get all used idx
 used_idx = []

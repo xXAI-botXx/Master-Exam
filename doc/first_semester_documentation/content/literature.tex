@@ -6,7 +6,9 @@
 	%     - Correct Grammar
 	%     - Rewriting partwise?
 
-	This chapter includes the research and summarization for my work. All literature includes the most important take-aways for this work and potential usage in this work. 
+	This chapter includes the research and foundation for my work. All literature includes the most important take-aways for this work and potential usage in this work.\\
+	This project is based on the work and papers covered in section \ref{sec:lit-core} which therefore builds the most important path of the related work.
+	It continues with a section about architectures in section \ref{sec:lit-architecture}. Section \ref{sec:lit-loss} is about related work for loss functions in the area of  paired image-to-image translation. Finally, there is a bigger section about related work which covers the topic of improving learning complex distributions, by splitting the distribution or masking the distribution (see section \ref{sec:lit-complex-focus-only}).
 
 
 	\section{Core}
@@ -14,48 +16,48 @@
 		The core literature includes all literature on which this research is directly based and founded on and with which a comparison will be applied.
 		
 		\subsection{\citetitle{ladwig_ai-guided_2024-1}}
-			This is the foundation paper for the underlying project. It uses a Reinforcement Agent to control a drill to reduce the noise for nearby residents. And this agents needs also a prediction for the sound propagation which I want to improve in my work.\\
-			Drilling in urban areas is important to be able to use geothermal energy. But the drilling process for installing geothermal technology creates much noise pollution and can takes much time also over night. Configure the parameters is a difficult task and predicting the noise pollution is hard especially for a human operator.\\
-			This work concentrates on the improvement of the sound propagation prediction. Here the paper from \citeauthor{ladwig_ai-guided_2024-1} uses 3 different image-to-image generative models to be able to use make the prediction live. There is also a simulation software called "NoiseModelling" and it is very precise but takes too much time. For a complex sound propagation it can take to 10 minutes.\\
-			The used generative model architectures are:
-			\begin{itemize}
-			\item Pix2Pix GAN
-			\item UNet
-			\item DDPM Diffusion
+			This is the foundation paper for the underlying project. It uses a Reinforcement Agent to control a drill to reduce the noise for nearby residents. This agent needs also a prediction for the sound propagation which I want to improve in my work.\\
+			Drilling in urban areas is important to be able to use geothermal energy. However, the drilling process for installing geothermal technology creates much noise pollution and can take time also overnight. Configuring the parameters is a difficult task and predicting the noise pollution is hard, especially for a human operator.\\
+			This work concentrates on the improvement of the sound propagation prediction. Here the paper from \citeauthor{ladwig_ai-guided_2024-1} uses 3 different image-to-image generative models to be able to make the prediction live. There is also a simulation software called "NoiseModelling" and it is very precise but takes too much time. For complex sound propagation, it can take up to 10 minutes.\\
+			The generative model architectures are (All using the U-Net architecture but vary in the process of the training):
+			\begin{itemize}[itemsep=1mm, parsep=0pt]
+				\item Pix2Pix GAN
+				\item UNet
+				\item DDPM Diffusion
 			\end{itemize}
-			All are using a U-Net architecture for generation but the training process varies.
+			
 			
 			\newpage
 			
-			For traindata they used 15.000 labeled data using the NoiseModelling simulation and all samples have enough houses in the environment to make sure it is urban scenario. The data got normalized and satellite images from OpenStreetMap (OSM) are used as gray-scaled Input, where the black pixels are buildings and white pixels clarify a empty space (everything which is not a building). Following Hyperparameters are choosen for the training:
-			\begin{itemize}
+			For train data, they used 15.000 labeled data using the NoiseModelling simulation and all samples have enough houses in the environment to make sure it is an urban scenario. The data got normalized and satellite images from OpenStreetMap (OSM) were used as gray-scaled Input, where the black pixels are buildings and white pixels clarify an empty space (everything which is not a building). The following Hyperparameters are chosen for the training:
+			\begin{itemize}[itemsep=1mm, parsep=0pt]
 				\item Epochs: 50
 				\item Train-Test-Split: 80\% to 20\%
-				\item GAN Loss: combination of Binary Cross Entropy Loss (Discriminator Loss) \& L1 Loss
+				\item GAN Loss: a combination of Binary Cross Entropy Loss (Discriminator Loss) \& L1 Loss
 				\item U-Net \& Diffusion Loss: Mean Squared Error
 			\end{itemize}
 			
-			For evaluation the MAE (Mean Absolute Error) and the MAPE (Mean Absolute Percentage Error) are used. Result is an inference speedup by 50{,}000 times and a mean absolute error of 0.55dB. The Pix2Pix GAN performed at best.
+			For evaluation, the MAE (Mean Absolute Error) and the MAPE (Mean Absolute Percentage Error) are used. The result is an inference speedup by 50{,}000 times and a mean absolute error of 0.55dB. The Pix2Pix GAN performed at best.
 		
 		\subsection{\citetitle{spitznagel_urban_2024-1}}
 			This paper from \citeauthor{spitznagel_urban_2024-1} builds the data foundation for this work. It presents the sound propagation data used to benchmark image-to-image generative models for predicting urban sound behavior.\\
-			The authors created a dataset with 100{,}000 512x512 image pairs representing 2D building maps taken from OpenStreetMap (OSM) and corresponding simulated sound propagation maps generated using the NoiseModelling v4 software. These simulations serve as ground truth for supervised learning tasks.\\
+			The authors created a dataset with 100k 512x512 image pairs representing 2D building maps taken from OpenStreetMap (OSM) and corresponding simulated sound propagation maps generated using the NoiseModelling v4 software. These simulations serve as ground truth for supervised learning tasks.\\
 			The dataset is annotated and divided into four different parts:
-			\begin{itemize}
-				\item \textbf{Baseline Dataset (25{,}000 pairs)}: Includes only basic geometric propagation and air absorption effects.
-				\item \textbf{Diffraction Dataset (25{,}000 pairs)}: Extends baseline data with diffraction effects at building edges.
-				\item \textbf{Reflection Dataset (25{,}000 pairs)}: Adds multiple reflections from building façades (up to 3 orders).
-				\item \textbf{Combined Dataset (25{,}000 pairs)}: Integrates all phenomena including air absorption, edge diffraction, and façade reflections, simulated across varying temperatures (-20°C to +40°C) and sound power levels (60 dB to 99 dB).
+			\begin{itemize}[itemsep=1mm, parsep=0pt]
+				\item \textbf{Baseline Dataset (25k pairs)}: Includes only basic geometric propagation and air absorption effects.
+				\item \textbf{Diffraction Dataset (25k pairs)}: Extends baseline data with diffraction effects at building edges.
+				\item \textbf{Reflection Dataset (25k pairs)}: Adds multiple reflections from building façades (up to 3 orders).
+				\item \textbf{Combined Dataset (25k pairs)}: Integrates all phenomena including air absorption, edge diffraction, and façade reflections, simulated across varying temperatures (-20°C to +40°C) and sound power levels (60 dB to 99 dB).
 			\end{itemize}
 			The propagation of sound over time is physically grounded and modeled using partial differential wave equations.\\
 			To accelerate the slow physical simulations (which can take several minutes per map), the paper evaluates several generative image-to-image models that can approximate the output within milliseconds. The generative architectures include:
-			\begin{itemize}
+			\begin{itemize}[itemsep=1mm, parsep=0pt]
 				\item Pix2Pix-based GAN
 				\item Standard U-Net
 				\item Denoising Diffusion Probabilistic Model (DDPM)
 			\end{itemize}
 			Each model shares a common U-Net backbone, with channel scaling from 64 up to 1028 and then back down to 64. The models were trained with the following setup:
-			\begin{itemize}
+			\begin{itemize}[itemsep=1mm, parsep=0pt]
 				\item Batch size: 18
 				\item Epochs: 50
 				\item Early stopping: patience of 3 epochs, based on validation loss
@@ -65,16 +67,16 @@
 			
 			
 		\subsection{\citetitle{martin_spitznagel_physicsgen_2025}}
-			This central paper from \citeauthor{martin_spitznagel_physicsgen_2025} provides the foundation for comparing generative models in physically grounded tasks and also will be the key comparison results of this work. It investigates how well modern generative image-to-image models can learn detailed, complex, and physically correct mappings across various simulation problems.\\
-			The authors introduce the \textit{PhysicsGen} Benchmark, a large-scale dataset consisting of 300{,}000 paired images across three physically motivated tasks:
-			\begin{itemize}
+			This is the central paper for this work, comes from \citeauthor{martin_spitznagel_physicsgen_2025} and provides the foundation for comparing generative models in physically grounded tasks and also will be the key comparison results of this work. It investigates how well modern generative image-to-image models can learn detailed, complex, and physically correct mappings across various simulation problems.\\
+			The authors introduce the \textit{PhysicsGen} Benchmark, a large-scale dataset consisting of 300k paired images across three physically motivated tasks:
+			\begin{itemize}[itemsep=1mm, parsep=0pt]
 				\item Wave propagation
 				\item Closed-form lens distortion
 				\item Time-series prediction of motion dynamics
 			\end{itemize}
 			Unlike earlier works that focus primarily on speedup, this benchmark emphasizes the need for physical correctness in generative approximations. It highlights that, although the acceleration compared to traditional differential equation-based simulations is substantial, capturing the true physical dynamics remains an unsolved challenge.\\
 			For this work only the wave propagation is relevant. The baseline evaluations of the wave propagation include a wide range of generative architectures:
-			\begin{itemize}
+			\begin{itemize}[itemsep=1mm, parsep=0pt]
 				\item Pix2Pix
 				\item Standard U-Net
 				\item Convolutional Autoencoder
@@ -92,7 +94,7 @@
 			This paper by \citeauthor{achim_eckerle_evaluierung_2025} investigates the physical accuracy of Normalizing Flow models for image-to-image transformations in the domain of urban sound propagation and directly refers to \citetitle{spitznagel_urban_2024-1}. The core goal of their study is to evaluate whether these probabilistic models can generate physically consistent sound maps from 2D building layouts with the focus on the normalizing flow architecture as not tested approach in \citetitle{spitznagel_urban_2024-1} and \citetitle{martin_spitznagel_physicsgen_2025}.
 			\newpage
 			The author use the "Full Glow" architecture and focus on different physical sound propagation phenomena, including line-of-sight (LoS) and non-line-of-sight (NLoS) scenarios as well as cases involving diffraction and reflections. For the evaluation, they employ three key metrics:
-			\begin{itemize}
+			\begin{itemize}[itemsep=1mm, parsep=0pt]
 				\item Mean Absolute Error (MAE)
 				\item Weighted Mean Absolute Percentage Error (wMAPE)
 				\item Structural Similarity Index Measure (SSIM)
@@ -100,14 +102,14 @@
 			This combination allows both local deviations and global structural sound propagation patterns to be assessed.\\
 			In their baseline scenario, the Full Glow model achieved a NLoS MAE of 0.65 and a LoS MAE of 1.84. In more complex diffraction scenarios, the LoS MAE improved to 0.79, but the NLoS MAE increased to 2.63—demonstrating the ongoing challenge of accurately capturing physically complex effects such as diffraction and reflections, especially when these intersect.\\
 			The dataset is split into:
-			\begin{itemize}
+			\begin{itemize}[itemsep=1mm, parsep=0pt]
 				\item Training set: 19{,}908 scenarios (80.0\%)
 				\item Validation set: 3{,}732 scenarios (15.0\%)
 				\item Test set: 1{,}245 scenarios (5.0\%)
 			\end{itemize}
 			Training was performed on an NVIDIA GeForce RTX 4090 with 24GB VRAM over a period of 108 hours. The use of gradient check-pointing was evaluated but found to be counterproductive due to slower convergence times.\\
 			The authors outline several areas for improvement:
-			\begin{itemize}
+			\begin{itemize}[itemsep=1mm, parsep=0pt]
 				\item Expanding the dataset (especially with more geographic diversity) beyond German urban layouts
 				\item Introducing physical loss functions to guide the Normalizing Flow training
 				\item Embedding physical priors at all levels of the model architecture to better capture structural properties
@@ -194,7 +196,7 @@
 		\subsection{\citetitle{wang_experts_2023}}
 			This paper provides a compact and practical introduction to Physics-informed Neural Networks (PINNs) \cite{raissi_physics_2017}, which integrate physical laws such as partial differential equations (PDEs) into the loss function of neural networks.
 			
-			\begin{itemize}
+			\begin{itemize}[itemsep=1mm, parsep=0pt]
 				\item \textbf{Key concept:} PINNs combine a traditional data loss with a physics-based loss to ensure that outputs not only fit the data but also obey governing equations (e.g., wave equations, heat equations).
 				\item \textbf{Advantages:} Enable simulation of physical systems with sparse data, incorporation of prior knowledge, and acceleration of numerical solvers.
 				\item \textbf{Challenges:} Training is difficult due to the non-smoothness of physics constraints and the high computational cost of large-scale PDEs. Strategies like adaptive sampling and multi-scale modeling are proposed.
@@ -207,14 +209,14 @@
 	
 	
 	\newpage
-	\section{Complex Focus Only}
+	\section{Residual Learning}  % Complex Focus Only
 	\label{sec:lit-complex-focus-only}
-		Founded research for intermediate input.
+		Founded research for lowering the complexity of the target distribution by splitting the task into sub-tasks or with intermediate input. Here are also papers for masking the input/target so that the model can focus on learning only some specific parts as the reflections which is also a kind of residual learning.
 	
 		\subsection{\citetitle{glasmachers_limits_2017}}
 			This paper critically examines the scalability and limitations of end-to-end (E2E) learning, particularly in the context of complex or modular systems.
 			
-			\begin{itemize}
+			\begin{itemize}[itemsep=1mm, parsep=0pt]
 				\item \textbf{Key concept:} E2E learning trains all components of a system jointly via gradient descent, assuming full differentiability from input to output.
 				\item \textbf{Main critique:} As systems increase in complexity, E2E learning struggles with training instabilities, poor exploitation of modular structure, and reduced interpretability.
 				\item \textbf{Empirical evidence:} Simple experiments demonstrate failure cases of E2E training in modular tasks, where convergence is poor or the resulting performance is suboptimal.
@@ -225,8 +227,8 @@
 			
 		\subsection{\citetitle{suri_grit_2024}}
 			The paper introduces GRIT, a novel approach to paired image-to-image translation that addresses the limitations of traditional methods in capturing fine-grained, realistic details. By decoupling the optimization of adversarial and reconstruction losses, GRIT allows the model to generate more realistic images by focusing on local spatial variations that are often penalized in conventional frameworks.\\
-			GRIT demonstrates superior performance over traditional image-to-image models in generating realistic images with rich textures and details. Quantitative and qualitative evaluations show that GRIT effectively captures local spatial variations, leading to outputs that are both structurally accurate and visually compelling.\\
-			\\
+			GRIT demonstrates superior performance over traditional image-to-image models in generating realistic images with rich textures and details. Quantitative and qualitative evaluations show that GRIT effectively captures local spatial variations, leading to outputs that are both structurally accurate and visually compelling.
+			\clearpage
 			Interesting for my project is that the GAN predicts not directly the result but two results, the most likely blurry face image and the hard part (the fine details, textures, local variations in the faces). So the tasks got split and also every task can then get another fitting loss (which could be an individual physical guided loss). Such a modular design could also help by predicting sound propagation.\\
 			The architecture of GRIT is designed for another task therefore a novel/different architecture have to get designed.
 %			\begin{figure}[H]
@@ -253,13 +255,6 @@
 				\item \textbf{Style-Content Loss:} Matches textures and fine structures between source and target images.
 			\end{itemize}
 			
-			
-			
-	
-	\newpage
-	\section{Physics Based Sampling}
-	\label{sec:lit-physics-based-sampling}
-		Research about masking physics based the image during training.
 		
 		\subsection{\citetitle{huang_masked_2022}}
 			This work proposes the MaskedGAN. It randomly masks the input image of a GAN to learn local details, improve generalization and increase the training speed. \\

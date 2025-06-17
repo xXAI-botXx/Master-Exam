@@ -7,11 +7,17 @@
 	
 	\section{Achievements}
 	\label{sec:sum-reached}
-		It is still questionable why generative models are challenged by learning complex distributions as such from complex physical tasks. The results from the here applied experiments hint that the problem comes from the complexity of the distribution and that separating the distribution in smaller distributions (residual learning) can help learning the complex distribution but this comes also with a more complex loss.
+	Most of the here proposed experiments yield improvement yet with much space for more improvement.\\
+	The experiment about input abstraction showed that an intermediate input can help focus on the complex area. The Wasserstein loss with gradient penalty stabilizes the training and speeds up convergence.\\
+	While DepthAnything achieved only medium results in different scenarios, the HexaWaveNet variation 7 achieved promising results which still have manifestly potential for optimization.\\
+	The residual design models showed strong performance but with unwanted predictions. With more engineering, this architecture could have much potential.\\
+	This idea is carried out in the experiment \ref{sec:experiments-only_reflections_with_few_buildings}, where *FIXME* is shown.
 	
 	\section{Future}
 	\label{sec:sum-future}
-		...
+	There is still much to test which could improve the performance, new residual techniques, new architectures such as an improved U-Net or stacked U-Nets, and new losses for example physics based.\\
+	Also, existing approaches can be improved by optimizing the parameters and settings as well as combining the different approaches. \\
+	It is also possible to lower the distribution complexity even further but the question is how exactly. The reflection could be abstracted into an angle number or something like that.
 	
 	
 	

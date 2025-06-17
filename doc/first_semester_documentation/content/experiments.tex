@@ -260,7 +260,7 @@
 				Full Glow & 2.06 & 3.64 & \textbf{8.98} & 22.69 \\
 				\hline
 			\end{tabular}
-			\caption{Performance comparison of the new explored models.}
+			\caption{Performance comparison of the new explored models on reflection Physgen dataset.}
 			\label{tab:experiment_architecture_results}
 		\end{table}
 		\FloatBarrier
@@ -270,23 +270,95 @@
 	\section{Residual Design/Architecture}
 	\label{sec:experiments-residual_architecture}
 		% Description
-		
-		
+		While changing the input distribution did work, yet it did not show the wanted improvements, this experiment tries a residual approach and attempts to make the output distribution less complicated by extracting the reflection and splitting the task into two subtasks. One is to predict the base propagation and the other is the prediction of only the reflection or more explicitly the difference between the reflection propagation (which includes the base propagation) and the base propagation. \\This design is shown in figure \ref{fig:experiment_residual_design}. 
+		The prediction model is not further specified and could be any model. In this experiment, DepthAnything and pix2pix model were used.
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1.0\textwidth]{img/experiment_residual_design.png}
+			\caption[On the left is the residual design, where the task is split into 2 sub-tasks. The merging is optionally a CNN head or just a formula. On the right is the input and output of the only reflection part shown.]{On the left is the residual design, where the task is split into 2 sub-tasks. The merging is optionally a CNN head or just a formula. On the right is the input and output of the only reflection part shown.}
+			\label{fig:experiment_residual_design}
+		\end{figure}
+		\FloatBarrier
 		% Implementation & Challenges
+		The creation of the reflection-only image was pretty straight. Subtract the base propagation from the reflection propagation. The value range then was about -1.0 and 0.0, so the images were transformed to a range of 0.0 to 1.0. With that creation process the reverse step with a reflection-only prediction is simple as the following formula shows:
+		\begin{align}  % equation % \Rightarrow 
+			\label{reflection-only-formula}
+			y = (x - z) \cdot -1 \\
+			\frac{y}{-1} = x - z \\
+			\left(-y \right) + z = x
+		\end{align}
+		\noindent where:
+		\begin{itemize}[itemsep=1mm, parsep=0pt]
+			\item $y$ is a reflection-only propagation image
+			\item $x$ is a reflection propagation image
+			\item $z$ is a base propagation image
+		\end{itemize}
+		
+		So with this reverse calculation, we could combine the base propagation with the reflection-only propagation and receive the reflection propagation.\\
+		Alternatively, a simple CNN head was trained for the combination. The CNN takes an image with 2 channels (one for the base and one for the reflection-only propagation), extends the feature maps to 64 with a 3x3 kernel, and then in a second 1x1 kernel CNN layer projects the 64 channels to 1 channel. Only a 1x1 projection without the extraction of features could be also a good or better alternative.\\
+		\\
+		A big challenge is the reflection-only images which have a difficult distribution, as shown in figure \ref{fig:experiment_residual_hist}. The first results already show that models tend strongly to just learn the biggest part of the distribution (a complete gray/black image) and quickly reach a local minimum. Through the small loss that comes from the reflection, it is hard for the models to pass the local minima. The loss was extended with a loss for the variance and a loss for the min-max value range of the images. This already helped pass the local minima. Another technique was a weighting of the loss with the inverted histogram (only works with losses like l1 where the loss is calculated pixel-wise).
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1.0\textwidth]{img/experiment_residual_hist.png}
+			\caption[Pixel-Value distribution of reflection only image.]{Pixel-Value distribution of reflection only image.}
+			\label{fig:experiment_residual_hist}
+		\end{figure}
+		\FloatBarrier
+		
+		It was also not easy to implement the residual model design inside the Pix2pix pipeline. The pipeline takes much control over how to handle the model and the dataset and the pipeline is not designed for a multi-model with multiple datasets.\\
+		A possible approach was to train 3 single models and combine them later, but the loading of such a multi-model later also was not supported by the pipeline.\\
+		So a multi-model with its data handling was implemented which trains 3 models in one training with the Physgen dataset. The model is therefore not optimal for the pipeline and can not use all benefits from the pipeline but still work. Currently, this comes with a limitation of a batch size of 1 but this could be fixed in the future.
 		
 		
 		% Results
+		The first obvious result is that the CNN head did not work for both of the models. While the formula \ref{reflection-only-formula} did worked.\\
+		The DepthAnything successfully learned an approximation of the target distribution but still was away from SOTA. Visually the output from the pix2pix models was far away from the target and this also is represented by the LoS MAW and LoS wMAPE. However, the Pix2pix model with WGAN-GP achieved SOTA results in the NLoS errors. The output images exhibit high-frequency noise with drastic per-pixel changes which seems a successful technique to achieve good errors in these low-value NLoS areas. The models would need more engineering to get more precise and result with fewer fluctuations. The combination should be adjusted as well as the loss and the weights of the loss.\\
+		Table \ref{tab:experiment_residual_design_results} shows the results with the other base model results.
+		\begin{table}[h!]
+			\centering
+			\begin{tabular}{|l|c|c|c|c|}
+				\hline
+				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
+				\hline
+				DepthAnything & 11.33 & 5.08 & 61.27 & 118.79 \\
+				Residual DepthAnything & 7.70 & 11.96 & 54.39 & 142.19 \\
+				Residual Pix2Pix GAN & 37.41 & 12.38 & 183.20 & 32.48 \\
+				Residual Pix2Pix WGAN-GP & 33.48 & \underline{3.83} & 166.41 & \underline{10.03} \\
+				HexaWaveNet 7 & 2.60 & \textbf{3.25} & 18.06 & \textbf{8.53} \\
+				Pix2Pix & 2.14 & 4.79 & 11.30 & 30.67 \\
+				DDBM & \textbf{1.93} & 6.38 & 18.34 & 79.13 \\
+				Full Glow & 2.06 & 3.64 & \textbf{8.98} & 22.69 \\
+				\hline
+			\end{tabular}
+			\caption{Performance comparison of the models with residual design on reflection Physgen dataset.}
+			\label{tab:experiment_residual_design_results}
+		\end{table}
+		\FloatBarrier
 		
-		
+	\clearpage
+	
 	\section{Only Reflection with few Buildings}
 	\label{sec:experiments-only_reflections_with_few_buildings}
 		% Description
-		
+		As the results of the experiment with a residual design in section \ref{sec:experiments-residual_architecture} shown, the models still struggle to learn a precise representation of the reflections although good error values are achieved. This experiment connects to these results and tries to focus only on the prediction of the reflection-only propagation which is described in section \ref{sec:experiments-residual_architecture} and shown in figure \ref{fig:experiment_residual_design}. Also, the dataset is changed to the dataset with fewer random buildings described in section \ref{sec:experiments-input-abstraction} to make the distributions simpler.\\
+		The used weighting technique is extended to a mask built from the target to focus the loss only towards the reflections and not the background, so that the distribution to learn gets even simpler and more balanced.\\
+		Also, much engineering was done to find fitting loss weights, a new loss against blur, and improved train hyper-parameter. \\
+		This leads to 5 different models:
+		\begin{itemize}[itemsep=1mm, parsep=0pt]
+			\item Pix2pix with standard L1 Loss and Wasserstein Gradient Penalty Loss
+			\item Pix2pix with masked L1 Loss and Wasserstein Gradient Penalty Loss
+			\item Pix2pix with a masked combined loss (L1, Shape-Aware, Variance, Min-Max-Range, Blur)
+			\item Hexa-Wave-Net 7 with a combined loss (L1, Shape-Aware, Variance, Min-Max-Range, Blur)
+			\item Hexa-Wave-Net 7 with a masked combined loss (L1, Shape-Aware, Variance, Min-Max-Range, Blur)
+		\end{itemize}
 		
 		% Implementation & Challenges
 		
 		
 		% Results
+		FIXME -> Add Results and the meaning from them
 		
 	
 	%\section{Mask Sampling}

@@ -1817,13 +1817,34 @@ nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 
 
 
-**13.06.2025 Weekly Meeting**<br>
+**27.06.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>
 Location: Zoom<br>
 Time: 13:00 O'Clock
 
 - ...
+
+
+
+**27.06.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- (Physical loss -> law of conservation of energy, ... -> ? Possibly applyable)
+- Check losses again in more detail -> from good results (only reflection) -> why such a big jump
+  - Which losses/weighting is the reason?
+  - Send result/weighting
+- Read paper for Accukstik propagation in more detail + send
+  - https://acoustique.ec-lyon.fr/publi/alguacil_aiaaj22.pdf
+  - https://www.sciencedirect.com/science/article/pii/S0022460X21003527
+- https://github.com/ArshKA/PhysiX
+  - Try out + read in
+- https://github.com/nvidia-cosmos/cosmos-predict1
+
+Translated with DeepL.com (free version)
 
 
 

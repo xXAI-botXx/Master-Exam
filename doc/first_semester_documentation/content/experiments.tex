@@ -136,7 +136,7 @@
 		\end{equation}
 		
 		\noindent where:
-		\begin{itemize}
+		\begin{itemize}[itemsep=1mm, parsep=0pt]
 			\item $D$ is the discriminator/critic function
 			\item $G$ is the generator function
 			\item $z$ is the input image
@@ -147,7 +147,7 @@
 		\end{equation}
 		
 		\noindent where:
-		\begin{itemize}
+		\begin{itemize}[itemsep=1mm, parsep=0pt]
 			\item $x$ is a ground truth image
 			\item $\tilde{x} = G(z)$ is a generated (fake) image
 		\end{itemize}
@@ -155,14 +155,14 @@
 		In comparison to that, the WGAN-GP uses the Wasserstein distance with an additional gradient penalty. The gradient penalty is needed to make sure the Lipschitz continuity condition is achieved. In other words, the gradient penalty makes sure that the gradients are not too low and not too high so that the generator can learn efficiently and stable from the discriminator's loss. To calculate this the gradients of an in-between representation of fake and real is calculated (the region where the generator and the discriminator interact at most with each other) and the length of the gradients is calculated. 
 		
 		\begin{equation}
-			Loss_G = -D( G(y) )
+			Loss_G = -D( G(z) )
 		\end{equation}
 		
 		\noindent where:
-		\begin{itemize}
+		\begin{itemize}[itemsep=1mm, parsep=0pt]
 			\item $D$ is the discriminator/critic function
 			\item $G$ is the generator function
-			\item $y$ is the input image
+			\item $z$ is the input image
 		\end{itemize}
 		
 		\begin{equation}
@@ -170,7 +170,7 @@
 		\end{equation}
 		
 		\noindent where:
-		\begin{itemize}
+		\begin{itemize}[itemsep=1mm, parsep=0pt]
 			\item $x$ is a ground truth image
 			\item $\tilde{x} = G(z)$ is a generated (fake) image
 			\item $\hat{x} = \epsilon x + (1 - \epsilon) \tilde{x}$ is an interpolation between real and fake, with $\epsilon \sim \mathcal{U}(0,1)$

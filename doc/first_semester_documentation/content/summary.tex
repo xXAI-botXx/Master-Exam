@@ -1,24 +1,28 @@
 \chapter{Summary}
 \label{cha:summary}
-
-	% TO DO: 
-	%     - Fill the gaps
 	
 	
 	\section{Achievements}
 	\label{sec:sum-reached}
-	Most of the here proposed experiments yield improvement yet with much space for more improvement.\\
-	The experiment about input abstraction showed that an intermediate input can help focus on the complex area. The Wasserstein loss with gradient penalty stabilizes the training and speeds up convergence.\\
-	While DepthAnything achieved only medium results in different scenarios, the HexaWaveNet variation 7 achieved promising results which still have manifestly potential for optimization.\\
-	The residual design models showed strong performance but with unwanted predictions. With more engineering, this architecture could have much potential.\\
-	This idea is carried out in the experiment \ref{sec:experiments-only_reflections_with_few_buildings}, where *FIXME* is shown.\\
-	Overall this project did not reach the end of improvements. However, this project showed that there are multiple ways to improve the performance.
+		This work proposes many experiments towards improvement on the Physgen benchmark and most likely focuses on the reflection variation.\\
+		This work shows that the base-simulation as input helps to achieve higher accuracies, but it is not enough to learn the complex propagation of reflections. Another outcome is that the models quickly (about 50 epochs) find a local minimum which can't be escaped easily.\\
+		Furthermore, stabilizing the adversarial loss through Wasserstein loss and gradient penalty does not provide improvements, but rather leads to worse predictions, and so should not be used in future experiments.\\
+		Other architectures failed to achieve SOTA results, but that does not mean that there could not be another better fitting architecture, and it is possible that a data scaling or an architectural scaling could improve these other architectures. \\
+		The proposed residual design with the prediction of only the reflection did not lead to SOTA results yet, but after the part-wise successful engineering of the reflection-only prediction, this approach could lead to new SOTA results.\\
+		Overall, this project did not reach the end of improvements, but it has already collected valuable insights about which work and where are still challenges.
 	
 	\section{Future}
 	\label{sec:sum-future}
-	In the future, the experiments can be continued because there is still much to test that could improve performance, including new residual techniques, new architectures such as an improved U-Net or stacked U-Nets, and new losses, for example, physics-based ones.\\
-	Additionally, existing approaches can be enhanced by optimizing their parameters and settings, as well as by combining different approaches. \\
-	It is also possible to lower the distribution complexity even further but the question is how exactly. The reflection could be abstracted into an angle number or something like that. Or maybe the end-to-end learning with masking the complex part could also be promising yet questionable if the models struggle even with learning solely the reflection.
+		In the future, there are multiple potential experiments with promising outcomes.\\
+		First, the testing of the improved reflection-only predictions in the residual design should have high priority, though this experiment has already been conducted; this time, the loss weights are improved.\\
+		Another similar experiment would be to test the residual design by changing the input of the reflection-only from satellite image to the output of the other model, the prediction of the base-sound propagation, in the residual design. As experiment \ref{sec:experiments-input-abstraction} already showed improvement when not predicting end-to-end.\\
+		There are also other architectures to test. For example, the foundation model for physics if the checkpoints are available, or maybe the base-model: Cosmos \cite{nvidia2025cosmosworldfoundationmodel}.
+		\clearpage
+		Many architectures have already been investigated, but transformer-based models have not been well covered yet. Therefore, an investigation into transformer-based architectures could also be promising.\\
+		Continuing with the current experiments would also mean trying to break down the complexity even further, for example, into angles of the reflections. \\
+		The experiments also hint that another loss could lead to massive improvements. It could make sense to integrate a physics-based loss to validate the physical correctness and find a local minimum closer to the global minimum.\\
+		Lastly, two scaling experiments could also be interesting. One where data scaling and one where the scaling of architecture is investigated.\\
+		To summarize, there are many experiments for improvement left.
 	
 	
 	

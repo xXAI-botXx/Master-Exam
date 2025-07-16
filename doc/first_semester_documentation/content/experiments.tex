@@ -43,8 +43,8 @@
 				\hline
 				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
 				\hline
-				Pix2Pix Standard Input & 5.55 & 9.20 & 26.71 & 20.85 \\
-				Pix2Pix Base Input & \textbf{0.56} & \textbf{0.81} & \textbf{5.17} & \textbf{1.85} \\
+				Pix2Pix Standard Input & 4.30 & 4.32 & 9.93 & 16.14 \\
+				Pix2Pix Base Input & \textbf{1.03} & \textbf{1.71} & \textbf{9.50} & \textbf{1.94} \\
 				\hline
 			\end{tabular}
 			\caption{Performance comparison of Input Abstraction with 50 Epochs on 10k random generated buildings dataset.}
@@ -57,8 +57,8 @@
 				\hline
 				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
 				\hline
-				Pix2Pix Standard Input & 2.16 & 2.03 & 10.62 & 4.75 \\
-				Pix2Pix Base Input & \textbf{0.38} & \textbf{0.15} & \textbf{3.28} & \textbf{0.35} \\
+				Pix2Pix Standard Input & 4.17 & 5.01 & 10.15 & 17.02 \\
+				Pix2Pix Base Input & \textbf{1.31} & \textbf{4.52} & \textbf{3.77} & \textbf{5.19} \\
 				\hline
 			\end{tabular}
 			\caption{Performance comparison of Input Abstraction with 100 Epochs on 10k random generated buildings dataset.}
@@ -71,48 +71,26 @@
 				\hline
 				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
 				\hline
-				Pix2Pix Standard Input & 2.44 & 3.33 & 12.96 & 7.46 \\
-				Pix2Pix Base Input & \textbf{0.55} & \textbf{0.30} & \textbf{3.91} & \textbf{0.70} \\
+				Pix2Pix Standard Input & 4.81 & 5.27 & 11.75 & 34.29 \\
+				Pix2Pix Base Input & \textbf{1.10} & \textbf{0.60} & \textbf{3.98} & \textbf{0.70} \\
 				\hline
 			\end{tabular}
 			\caption{Performance comparison of Input Abstraction with reflection and diffraction as target on 10k random generated buildings dataset.}
 			\label{tab:performance_input_ref_diff}
 		\end{table}
 		
-		%\begin{figure}[H]
-		%	\centering
-		%	\includegraphics[width=0.8\textwidth]{img/experiment_input_res_50_epochs.png}
-		%	\caption[Experiment Results Input Abstraction with 50 Epochs.]{Experiment Results Input Abstraction with 50 Epochs.}
-		%	\label{fig:experiment_input_res_50}
-		%\end{figure}
-		%\FloatBarrier
-		
-		%\begin{figure}[H]
-		%	\centering
-		%	\includegraphics[width=0.8\textwidth]{img/experiment_input_res_100_epochs.png}
-		%	\caption[Experiment Results Input Abstraction with 100 Epochs.]{Experiment Results Input Abstraction with 100 Epochs.}
-		%	\label{fig:experiment_input_res_100}
-		%\end{figure}
-		%\FloatBarrier
-		
-		%\begin{figure}[H]
-		%	\centering
-		%	\includegraphics[width=0.8\textwidth]{img/experiment_input_res_50_epochs_ref_&_diffraction.png}
-		%	\caption[Experiment Results Input Abstraction with reflection and diffraction as output.]{Experiment Results Input Abstraction with reflection and diffraction as output.}
-		%	\label{fig:experiment_input_res_ref_dif}
-		%\end{figure}
-		%\FloatBarrier
-		
-		In all 3 experiments, the model with the base propagation as input is superior to the model with the standard input and is on average 3,6 times more precise.\\
-		As an additional experiment, the 2 pix2pix models with base propagation as input (50 and 100 epochs) were compared to just the base propagation itself as output. It is expected that the base propagation is very close to a perfect loss in LoS but not precise in NLoS. Table \ref{tab:performance_input_base} shows that the model was indeed more precise in the NLoS area but not in the LoS. The expectations are met.
+		In all three experiments, the model with the base propagation as input is superior to the model with the standard input and is on average 3.6 times more precise.\\
+		The experiments also reveal that a greater epoch amount is not always better. This is demonstrated by the standard Pix2Pix and also by the Pix2Pix models with base simulation as input. This already hints that the models seem to have reached a local minimum without exact physical understanding and where it is hard to get better from.\\ 
+		\\
+		As an additional experiment, the 2 pix2pix models with base propagation as input (50 and 100 epochs) were compared to just the base propagation itself as output. It is expected that the base propagation is very close to a perfect loss in LoS but not precise in NLoS. Table \ref{tab:performance_input_base} shows that the model with 50 epochs was indeed more precise in the NLoS area but not in the LoS. The expectations are met. Surprisingly the model with 100 epochs has a higher NLoS MAE than the base propagation.\\\\ So during the learning procedure to find the global minimum the 100 epoch model found a solution which is worse than just predicting one single number (as the base propagation does) which is a bad result but there is the argument that the global minimum is still far away and the model tries but fails to find/learn the more complex physical correct prediction and ends up with a bad prediction.
 		\begin{table}[h!]
 			\centering
 			\begin{tabular}{|l|c|c|c|c|}
 				\hline
 				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
 				\hline
-				Pix2Pix Base Input 50 & 0.56 & 0.81 & 5.17 & 1.85 \\
-				Pix2Pix Base Input 100 & 0.38 & \textbf{0.15} & 3.28 & \textbf{0.35} \\
+				Pix2Pix Base Input 50 & 1.03 & \textbf{1.71} & 9.50 & \textbf{1.94} \\
+				Pix2Pix Base Input 100 & 1.31 & 4.52 & 3.77 & 5.19 \\
 				Base Propagation & \textbf{0.32} & 2.88 & \textbf{0.70} & 7.70 \\
 				\hline
 			\end{tabular}
@@ -120,6 +98,32 @@
 			\label{tab:performance_input_base}
 		\end{table}
 		\\
+		Figure \ref{fig:experiment_input_res_50}, \ref{fig:experiment_input_res_50_base_input} and \ref{fig:experiment_input_res_100_base_input} show example results from Pix2Pix 50 epochs, Pix2Pix 50 epochs with basesimulation as input, and Pix2Pix 100 epochs with basesimulation as input.
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1.1\textwidth]{img/samples/final_app_samples_pix2pix_1_0_random_50epochs.png}
+			\caption[Example Inferences from Pix2Pix 50 Epochs.]{Example Inferences from Pix2Pix 50 Epochs.}
+			\label{fig:experiment_input_res_50}
+		\end{figure}
+		\FloatBarrier
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\textwidth]{img/samples/final_app_samples_pix2pix_1_0_random_input_base_50epochs.png}
+			\caption[Example Inferences from Pix2Pix 50 Epochs and with basesimulation as input.]{Example Inferences from Pix2Pix 50 Epochs and with basesimulation as input.}
+			\label{fig:experiment_input_res_50_base_input}
+		\end{figure}
+		\FloatBarrier
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\textwidth]{img/samples/final_app_samples_pix2pix_1_0_random_input_base_100epochs.png}
+			\caption[Example Inferences from Pix2Pix 50 Epochs and with basesimulation as input.]{Example Inferences from Pix2Pix 50 Epochs and with basesimulation as input.}
+			\label{fig:experiment_input_res_100_base_input}
+		\end{figure}
+		\FloatBarrier
+		
 		%Hint: The results of this experiment can't be compared to the benchmark from \ref{tab:performance_base} due to the fact that this experiment uses another simpler dataset.
 		
 	
@@ -127,7 +131,7 @@
 	\label{sec:experiments-stabilized_adversarial_loss}
 		% Description
 		The impact of more stabilized training between discriminator and generator towards learning a complex distribution is researched in this experiment.\\
-		\citetitle{noah_makow_wasserstein_2018} already tried out WGAN in an image-to-image translation task, but especially in an image generation task could suffer from gradient clipping which let this project led to experiment with the WGAN-GP \cite{gulrajani_improved_2017}.
+		The paper \citetitle{noah_makow_wasserstein_2018} already tried out WGAN in an image-to-image translation task, but especially in an image generation task could suffer from gradient clipping which let this project led to experiment with the WGAN-GP \cite{gulrajani_improved_2017}.
 		
 		% Implementation & Challenges
 		The original GAN loss uses binary cross entropy and looks like this:
@@ -179,16 +183,7 @@
 		\end{itemize}
 		
 		% Results
-		The training loss got much smoother and convergence was achieved quicker with Wassterstein loss and Gradient Penalty compared to the binary cross entropy loss as figure \ref{fig:experiment_wgangp_process} shows.
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=0.9\textwidth]{img/experiment_wgangp_ L1_Loss.png}
-			\caption[Training loss between a GAN pix2pix model and a WGAN-GP pi2pix model.]{Training loss between a GAN pix2pix model and a WGAN-GP pi2pix model.}
-			\label{fig:experiment_wgangp_process}
-		\end{figure}
-		\FloatBarrier
-		
-		In terms of accuracy, the WGAN-GP model outperformed the GAN model in LoS and NLoS and is about 2 times more precise, as table \ref{tab:performance_wgangp} shows.
+		In terms of accuracy, the GAN model outperformed the WGAN-GP model in LoS and NLoS and is about 2 times more precise, as table \ref{tab:performance_wgangp} shows. So the experiments reinforce the findings from \citetitle{noah_makow_wasserstein_2018} which used the similar WGAN for standard image generation.
 		
 		\begin{table}[h!]
 			\centering
@@ -196,19 +191,31 @@
 				\hline
 				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
 				\hline
-				Pix2Pix GAN & 4.10 & 7.52 & 28.92 & 17.59 \\
-				Pix2Pix WGAN-GP & \textbf{1.42} & \textbf{4.22} & \textbf{17.27} & \textbf{10.97} \\
+				Pix2Pix GAN & \textbf{4.30} & \textbf{4.32} & \textbf{9.93} & \textbf{16.14} \\
+				Pix2Pix WGAN-GP & 12.02 & 6.71 & 25.71 & 53.19 \\
 				\hline
 			\end{tabular}
-			\caption{Performance comparison of WAN and WGAN-GP model on 10k random generated buildings dataset.}
+			\caption{Performance comparison of GAN and WGAN-GP model on 10k random generated buildings dataset.}
 			\label{tab:performance_wgangp}
 		\end{table}
+		
+		Example inferences can be seen in figure \ref{fig:example_wgangp}. It seems like generator learned much artifacts.
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.8\textwidth]{img/samples/final_app_samples_pix2pix_wgangp_1_0_random_50epochs.png}
+			\caption[Example Inferences from Pix2Pix 50 Epochs with Wassterstein Loss and Gradient Penalty.]{Example Inferences from Pix2Pix 50 Epochs with Wassterstein Loss and Gradient Penalty.}
+			\label{fig:example_wgangp}
+		\end{figure}
+		\FloatBarrier
+		
+	\clearpage
 		
 	\section{Generator Architecture Exploration}
 	\label{sec:experiments-generator_architecture_exploration}
 		% Description
-		As the paper from \citeauthor{achim_eckerle_evaluierung_2025} showed there are still architectures that are worth trying for paired image-to-image translation. This experiment tests 2 different models. One is the DepthAnything model \cite{yang2024depthv2} which normally is used for depth estimation but also just does image-to-image translation with a pre-trained DINOv2 Encoder \cite{oquab2024dinov2learningrobustvisual} and an adjusted DPT Decoder \cite{ranftl2021visiontransformersdenseprediction}.\\
-		The other model is a self-invented model called Hexa-Wave-Net which combines 6 advances from research.
+		As the paper from \citeauthor{achim_eckerle_evaluierung_2025} showed there are still architectures that are worth trying for paired image-to-image translation. This experiment tests 3 different models. One is the DepthAnything model \cite{yang2024depthv2} which normally is used for depth estimation but also just does image-to-image translation with a pre-trained DINOv2 Encoder \cite{oquab2024dinov2learningrobustvisual} and an adjusted DPT Decoder \cite{ranftl2021visiontransformersdenseprediction}.\\
+		The second model is a self-invented model called Hexa-Wave-Net which combines 6 advances from research.\\
+		The third is a foundation model for physics simulation called PhysiX \cite{nguyen2025physixfoundationmodelphysics}.
 		
 		% Implementation & Challenges
 		For the DepthAnything model, a new Physgen dataset implementation was needed, a new adjusted loss, and the output activation function had to be adjusted. The loss was specialized for depth and so it got changed to a combined loss from l1 and sharp aware losses (which uses the deviation of the image). The ReLU activation functions were replaced by the LeakyReLU and the last activation was changed to a 0.0 to 1.0 clamping. These changes made the architecture able to predict sound propagation.\\
@@ -234,13 +241,14 @@
 		\clearpage
 		Variation 2 removes the latent space transformer and changes the SIREN-Decoder to CNN and SIREN Decoder with a skip connection to the input image.\\
 		Variation 3 is similar to variation 2 but combines the different decoder and the original image with an MLP Head (multilayer perceptron / fully connected layer).\\
-		Variation 7 changes the Encoder-CNN from ConvNeXt to a simple CNN with skip connections, adds the Transformer Latent Space again, and uses also a simple CNN decoder (without SIREN-Decoder) and with the original image. At the end is again an MLP-Head.
+		Variation 7 changes the Encoder-CNN from ConvNeXt to a simple CNN with skip connections, adds the Transformer Latent Space again, and uses also a simple CNN decoder (without SIREN-Decoder) and with the original image. At the end is again an MLP-Head.\\
+		At last, the PhysiX foundation model consists of 3 main parts. The tokenizer, the core transformer network, and a CNN-based refinement network. The tokenizer and the transformer are taken from the \citetitle{nvidia2025cosmosworldfoundationmodel} paper \cite{nguyen2025physixfoundationmodelphysics}\cite{nvidia2025cosmosworldfoundationmodel}.
 		
 		% Results
-		The results from DepthAnything show that his absolute errors are a bit higher than the current SOTA while the relative errors are more than 3 times higher than the SOTA. It also seems like that DepthAnything made many errors in small value areas and so the relative values are much higher than the absolute errors. Table \ref{tab:experiment_architecture_results} contains all results.\\
-		\\
-		The results from the Hexa-Wave-Net variations differ much from each other. While variations 1 and 2 have massive errors, variations 3, 7, and 8 are much closer to the SOTA. Variation 7 interestingly has a higher LoS wMAPE compared to the NLoS wMAPE while the LoS MAE is lower than the NLoS MAE. This means that the model makes larger absolute errors in non-line-of-sight conditions, but in line-of-sight, even small absolute errors result in a higher relative error. This suggests that many of the errors in LoS occur at locations with small true values — a visual analysis showed that the errors happen at the front of buildings which is very atypically and questionable why this happens. Still, the 7th variation achieves SOTA in both NLoS errors. \\
-		The 3rd variation achieves SOTA in LoS MAE but has a very high LoS wMAPE. The visual samples show that the error is made in the area by the source. The source is not clearly predicted.
+		The results from DepthAnything show that this model is still far away from SOTA. Interestingly the relative errors are similar in Los and NLos scenario. Additional the Los MAE is higher than the NLos MAE, which is in most other results not the case. THis point out that the predictions are not even close to the goal performance and precision.\\
+		The results from the Hexa-Wave-Net variations differ much from each other. While variations 1 and 2 have massive errors, variations 3, 7, and 8 are much closer to the SOTA. Still all variations can not achieve SOTA and this new architecture seem to need more engineering and architectural changes in order to work SOTA.\\
+		Table \ref{tab:experiment_architecture_results} contains all results. Example inferences from the 2 best models (variation 3 \& 7) are provided in figure \ref{fig:experiment_architecture_hexa_3_examples} and \ref{fig:experiment_architecture_hexa_7_examples}.
+		
 		%which means that the errors in Line-of-Sight occur in regions with small ground truth values, where even small absolute errors lead to large relative errors. 
 		
 		\begin{table}[h!]
@@ -249,20 +257,37 @@
 				\hline
 				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
 				\hline
-				DepthAnything & 11.33 & 5.08 & 61.27 & 118.79 \\
-				HexaWaveNet 1 & 37.01 & 11.84 & 180.70 & 31.07 \\
-				HexaWaveNet 2 & 37.58 & 16.41 & 183.58 & 42.98 \\
-				HexaWaveNet 3 & \textbf{1.84} & 6.03 & 44.01 & 15.70 \\
-				HexaWaveNet 7 & 2.60 & \textbf{3.25} & 18.06 & \textbf{8.53} \\
-				HexaWaveNet 8 & 2.90 & 16.69 & 41.16 & 43.58 \\
+				DepthAnything & 26.01 & 9.48 & 84.29 & 85.79 \\
+				HexaWaveNet 1 & 41.99 & 50.97 & 114.70 & 161.61 \\
+				HexaWaveNet 2 & 30.96 & 48.05 & 86.91 & 154.68 \\
+				HexaWaveNet 3 & 3.10 & 4.96 & 22.65 & 102.90 \\
+				HexaWaveNet 7 & 3.61 & 7.45 & 13.32 & 35.48 \\
+				HexaWaveNet 8 & 4.18 & 10.71 & 21.25 & 106.79 \\
 				Pix2Pix & 2.14 & 4.79 & 11.30 & 30.67 \\
-				DDBM & 1.93 & 6.38 & 18.34 & 79.13 \\
-				Full Glow & 2.06 & 3.64 & \textbf{8.98} & 22.69 \\
+				DDBM & \textbf{1.93} & 6.38 & 18.34 & 79.13 \\
+				Full Glow & 2.06 & \textbf{3.64} & \textbf{8.98} & \textbf{22.69} \\
 				\hline
 			\end{tabular}
 			\caption{Performance comparison of the new explored models on reflection Physgen dataset.}
 			\label{tab:experiment_architecture_results}
 		\end{table}
+		\FloatBarrier
+		Unfortunately, the PhysiX model could not be tested. The tokenization and normalization steps for the Physgen dataset have already been implemented, but the checkpoints for the foundation model itself are not available yet (as of 16.07.2025), but are expected to be made public soon. Moreover, the PhysiX model and the Cosmos model require a Linux system which also creates a challenge that could be solved by using a virtual environment, for example, with Docker containers.
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\textwidth]{img/samples/final_app_samples_hexawavenet3_1_0_physgen_50epochs.png}
+			\caption[Example Inferences from HexaWaveNet Variation 3 50 Epochs on Physgen dataset.]{Example Inferences from HexaWaveNet Variation 3 50 Epochs on Physgen dataset.}
+			\label{fig:experiment_architecture_hexa_3_examples}
+		\end{figure}
+		\FloatBarrier
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\textwidth]{img/samples/final_app_samples_hexawavenet7_1_0_physgen_50epochs.png}
+			\caption[Example Inferences from HexaWaveNet Variation 7 50 Epochs on Physgen dataset.]{Example Inferences from HexaWaveNet Variation 7 50 Epochs on Physgen dataset.}
+			\label{fig:experiment_architecture_hexa_7_examples}
+		\end{figure}
 		\FloatBarrier
 		
 	\clearpage
@@ -270,7 +295,7 @@
 	\section{Residual Design/Architecture}
 	\label{sec:experiments-residual_architecture}
 		% Description
-		While changing the input distribution did work, yet it did not show the wanted improvements, this experiment tries a residual approach and attempts to make the output distribution less complicated by extracting the reflection and splitting the task into two subtasks. One is to predict the base propagation and the other is the prediction of only the reflection or more explicitly the difference between the reflection propagation (which includes the base propagation) and the base propagation. \\This design is shown in figure \ref{fig:experiment_residual_design}. 
+		While changing the input distribution did work, yet it did not show the wanted improvements and did not learned the physical behavior of the sound propagation, this experiment tries a residual approach and attempts to make the output distribution less complicated by extracting the reflection and splitting the task into two sub-tasks. One is to predict the base propagation and the other is the prediction of only the reflection or more explicitly the difference between the reflection propagation (which includes the base propagation) and the base propagation. \\This design is shown in figure \ref{fig:experiment_residual_design}. 
 		The prediction model is not further specified and could be any model. In this experiment, DepthAnything and pix2pix model were used.
 		\begin{figure}[H]
 			\centering
@@ -280,7 +305,8 @@
 		\end{figure}
 		\FloatBarrier
 		% Implementation & Challenges
-		The creation of the reflection-only image was pretty straight. Subtract the base propagation from the reflection propagation. The value range then was about -1.0 and 0.0, so the images were transformed to a range of 0.0 to 1.0. With that creation process the reverse step with a reflection-only prediction is simple as the following formula shows:
+		The creation of the reflection-only image was pretty straight but still a novel idea. Subtract the base propagation from the reflection propagation. The value range then was about -1.0 and 0.0, so the images were transformed to a range of 0.0 to 1.0. With that creation process the reverse step with a reflection-only prediction is simple as the following formula \ref{reflection-only-formula} shows.
+		\clearpage
 		\begin{align}  % equation % \Rightarrow 
 			\label{reflection-only-formula}
 			y = (x - z) \cdot -1 \\
@@ -293,11 +319,11 @@
 			\item $x$ is a reflection propagation image
 			\item $z$ is a base propagation image
 		\end{itemize}
-		
+		\vspace{10mm}
 		So with this reverse calculation, we could combine the base propagation with the reflection-only propagation and receive the reflection propagation.\\
 		Alternatively, a simple CNN head was trained for the combination. The CNN takes an image with 2 channels (one for the base and one for the reflection-only propagation), extends the feature maps to 64 with a 3x3 kernel, and then in a second 1x1 kernel CNN layer projects the 64 channels to 1 channel. Only a 1x1 projection without the extraction of features could be also a good or better alternative.\\
 		\\
-		A big challenge is the reflection-only images which have a difficult distribution, as shown in figure \ref{fig:experiment_residual_hist}. The first results already show that models tend strongly to just learn the biggest part of the distribution (a complete gray/black image) and quickly reach a local minimum. Through the small loss that comes from the reflection, it is hard for the models to pass the local minima. The loss was extended with a loss for the variance and a loss for the min-max value range of the images. This already helped pass the local minima. Another technique was a weighting of the loss with the inverted histogram (only works with losses like l1 where the loss is calculated pixel-wise).
+		A big challenge is the reflection-only images which have the physical difficult part and an overall difficult distribution to learn, as shown in figure \ref{fig:experiment_residual_hist}. 
 		
 		\begin{figure}[H]
 			\centering
@@ -306,15 +332,17 @@
 			\label{fig:experiment_residual_hist}
 		\end{figure}
 		\FloatBarrier
-		
-		It was also not easy to implement the residual model design inside the Pix2pix pipeline. The pipeline takes much control over how to handle the model and the dataset and the pipeline is not designed for a multi-model with multiple datasets.\\
-		A possible approach was to train 3 single models and combine them later, but the loading of such a multi-model later also was not supported by the pipeline.\\
-		So a multi-model with its data handling was implemented which trains 3 models in one training with the Physgen dataset. The model is therefore not optimal for the pipeline and can not use all benefits from the pipeline but still work. Currently, this comes with a limitation of a batch size of 1 but this could be fixed in the future.
+		\clearpage
+		The first results already show that models tend strongly to just learn the biggest part of the distribution (a complete gray/black image) and quickly reach a local minimum. Through the small loss that comes from the reflection, it is hard for the model to pass the local minimum. The loss was extended with a loss for the variance and a loss for the min-max value range of the images. This already helped pass the local minimum. Another technique was a weighting of the loss with the inverted histogram (only works with losses like L1, where the loss is calculated pixel-wise).\\
+		\\
+		It was also not easy to implement the residual model design inside the Pix2pix pipeline. The pipeline takes much control over how to handle the model and the dataset, and the pipeline is not designed for a multi-model with multiple datasets.\\
+		A possible approach was to train 3 single models and combine them later, but the loading of such a multi-model later was also not supported by the pipeline.\\
+		So a multi-model with its data handling was implemented, which trains 3 models in one training with the Physgen dataset. The model is therefore not optimal for the pipeline and can not use all the benefits from the pipeline, but it still works. Currently, this comes with a limitation of a batch size of 1, but this could be fixed in the future.
 		
 		
 		% Results
-		The first obvious result is that the CNN head did not work for both of the models. While the formula \ref{reflection-only-formula} did worked.\\
-		The DepthAnything successfully learned an approximation of the target distribution but still was away from SOTA. Visually the output from the pix2pix models was far away from the target and this also is represented by the LoS MAW and LoS wMAPE. However, the Pix2pix model with WGAN-GP achieved SOTA results in the NLoS errors. The output images exhibit high-frequency noise with drastic per-pixel changes which seems a successful technique to achieve good errors in these low-value NLoS areas. The models would need more engineering to get more precise and result with fewer fluctuations. The combination should be adjusted as well as the loss and the weights of the loss.\\
+		The first obvious result is that the most challenging part, the reflection-only prediction, does fail more or less in every case. Therefore, the CNN-head could not learn to project the two predictions together to one satisfying result. The formula \ref{reflection-only-formula} worked better and is, in theory, also enough.\\
+		The DepthAnything successfully learned an approximation of the target distribution, but was still away from SOTA. On the other hand, the Pix2Pix models were not able to learn any form of approximation of the target distribution and ended up with a worse score. \\
 		Table \ref{tab:experiment_residual_design_results} shows the results with the other base model results.
 		\begin{table}[h!]
 			\centering
@@ -322,19 +350,37 @@
 				\hline
 				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
 				\hline
-				DepthAnything & 11.33 & 5.08 & 61.27 & 118.79 \\
-				Residual DepthAnything & 7.70 & 11.96 & 54.39 & 142.19 \\
-				Residual Pix2Pix GAN & 37.41 & 12.38 & 183.20 & 32.48 \\
-				Residual Pix2Pix WGAN-GP & 33.48 & \underline{3.83} & 166.41 & \underline{10.03} \\
-				HexaWaveNet 7 & 2.60 & \textbf{3.25} & 18.06 & \textbf{8.53} \\
+				Residual DepthAnything 20 & 7.30 & 4.31 & 42.46 & 100.45 \\
+				Residual Pix2Pix GAN 50 & 49.13 & 62.44 & 134.74 & 181.47 \\
+				Residual Pix2Pix GAN 100 & 50.35 & 66.74 & 137.30 & 187.39 \\
+				Residual Pix2Pix WGAN-GP 50 & 50.35 & 62.49 & 136.20 & 179.82 \\
+				Residual Pix2Pix WGAN-GP 100 & 44.76 & 51.48 & 121.82 & 162.73 \\
 				Pix2Pix & 2.14 & 4.79 & 11.30 & 30.67 \\
 				DDBM & \textbf{1.93} & 6.38 & 18.34 & 79.13 \\
-				Full Glow & 2.06 & 3.64 & \textbf{8.98} & 22.69 \\
+				Full Glow & 2.06 & \textbf{3.64} & \textbf{8.98} & \textbf{22.69} \\
 				\hline
 			\end{tabular}
-			\caption{Performance comparison of the models with residual design on reflection Physgen dataset.}
+			\caption{Performance comparison of the models with residual design on reflection Physgen dataset. DepthAnything got trained for 20 epochs, Pix2Pix with 50 and 100 epochs and Pix2Pix WGAN-GP also with 50 and 100 epochs.}
 			\label{tab:experiment_residual_design_results}
 		\end{table}
+		\FloatBarrier
+		
+		Example inferences from DepthAnything with residual design are shown in figure \ref{fig:experiment_residual_depthanything_examples} and figure \ref{fig:experiment_residual_pix2pix_examples} shows example inferences from Pix2Pix with 50 epochs and residual design.
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\textwidth]{img/samples/final_app_samples_hexawavenet3_1_0_physgen_50epochs.png}
+			\caption[Example Inferences from DepthAnything Residual Design 20 Epochs on Physgen dataset.]{Example Inferences from DepthAnything Residual Design 20 Epochs on Physgen dataset.}
+			\label{fig:experiment_residual_depthanything_examples}
+		\end{figure}
+		\FloatBarrier
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\textwidth]{img/samples/final_app_samples_pix2pix_cfo_1_0_physgen_50epochs.png}
+			\caption[Example Inferences from Pix2Pix Residual Design 50 Epochs on Physgen dataset.]{Example Inferences from Pix2Pix Residual Design 50 Epochs on Physgen dataset.}
+			\label{fig:experiment_residual_pix2pix_examples}
+		\end{figure}
 		\FloatBarrier
 		
 	\clearpage
@@ -342,23 +388,82 @@
 	\section{Only Reflection with few Buildings}
 	\label{sec:experiments-only_reflections_with_few_buildings}
 		% Description
-		As the results of the experiment with a residual design in section \ref{sec:experiments-residual_architecture} shown, the models still struggle to learn a precise representation of the reflections although good error values are achieved. This experiment connects to these results and tries to focus only on the prediction of the reflection-only propagation which is described in section \ref{sec:experiments-residual_architecture} and shown in figure \ref{fig:experiment_residual_design}. Also, the dataset is changed to the dataset with fewer random buildings described in section \ref{sec:experiments-input-abstraction} to make the distributions simpler.\\
-		The used weighting technique is extended to a mask built from the target to focus the loss only towards the reflections and not the background, so that the distribution to learn gets even simpler and more balanced.\\
-		Also, much engineering was done to find fitting loss weights, a new loss against blur, and improved train hyper-parameter. \\
+		As the results of the experiment with a residual design in section \ref{sec:experiments-residual_architecture} shown, the models still struggle to learn a precise representation of the reflections although part-wise good error values are achieved. This experiment connects to these results and tries to focus only on the prediction of the reflection-only propagation which is described in section \ref{sec:experiments-residual_architecture} and shown in figure \ref{fig:experiment_residual_design}. Also, the dataset is changed to the dataset with fewer random buildings described in section \ref{sec:experiments-input-abstraction} to make the distributions simpler and therefore make the engineering of better parameter easier.\\
+		The used weighting technique is optionally extended to a mask built from the target to focus the loss only towards the reflections and not the background, so that the distribution to learn gets even simpler and more balanced.\\
+		Also, much engineering was done to find fitting loss weights, introduce a new loss against blur, and improve train hyper-parameters. \\
 		This leads to 5 different models:
 		\begin{itemize}[itemsep=1mm, parsep=0pt]
 			\item Pix2pix with standard L1 Loss and Wasserstein Gradient Penalty Loss
 			\item Pix2pix with masked L1 Loss and Wasserstein Gradient Penalty Loss
-			\item Pix2pix with a masked combined loss (L1, Shape-Aware, Variance, Min-Max-Range, Blur)
-			\item Hexa-Wave-Net 7 with a combined loss (L1, Shape-Aware, Variance, Min-Max-Range, Blur)
-			\item Hexa-Wave-Net 7 with a masked combined loss (L1, Shape-Aware, Variance, Min-Max-Range, Blur)
+			\item 18x Pix2pix with a masked weighted combined loss (L1, Shape-Aware, Variance, Min-Max-Range, Blur)
 		\end{itemize}
 		
 		% Implementation & Challenges
 		
 		
 		% Results
-		FIXME -> Add Results and the meaning from them
+		Table \ref{tab:experiment_reflection_only} shows all results over all 20 experiment runs.\\
+		As the experiment \ref{sec:experiments-residual_architecture} already showed, the results from the standard L1 loss with WGAN-GP does result in bad predictions. The new masking successfull improved the accuracy but still is not able to achieve nearly a physical correct result.\\
+		The many experiments with different weighting for the different combined losses reveal that the Structural Similarity Index Measure (SSIM) seems to be the key part for good predictions. In order to see that, figure \ref{fig:experiment_reflection_only_influence} shows which loss weights have influence on the loss, and figure \ref{fig:experiment_reflection_only_correlation} shows the correlation between the weights of the losses and the final loss value. For the SSIM, for example, the result can be interpreted as: "The higher the SSIM loss weight is, the lower the loss will decrease by a factor of 0.54". This visual analysis also exposes that the variance and the min-max range increase as the loss increases.\\
+		\\
+		Figure \ref{fig:experiment_reflection_only_pix2pix_examples} provides example inferences from the best results (Pix2Pix Combined Loss 15).
+		
+		\begin{table}[h!]
+			\centering
+			\begin{tabular}{|l|c|c|c|c|}
+				\hline
+				\textbf{Model} & \textbf{LoS MAE} & \textbf{NLoS MAE} & \textbf{LoS wMAPE} & \textbf{NLoS wMAPE} \\
+				\hline
+				Pix2Pix L1 & 29.71 & 26.75 & 29.81 & 28.76 \\
+				Pix2Pix Masked L1 & 3.48 & 10.14 & 3.51 & 11.81 \\
+				Pix2Pix Combined Loss 1 & 13.61 & 34.40 & 13.64 & 34.63 \\
+				Pix2Pix Combined Loss 2 & 1.40 & 29.18 & 1.41 & 29.57 \\
+				Pix2Pix Combined Loss 3 & 0.90 & 7.59 & 0.92 & 8.99 \\
+				Pix2Pix Combined Loss 4 & 0.53 & 13.31 & 0.55 & 14.34 \\
+				Pix2Pix Combined Loss 5 & 0.64 & 11.04 & 0.66 & 12.26 \\
+				Pix2Pix Combined Loss 6 & 1.54 & 5.39 & 1.56 & 6.94 \\
+				Pix2Pix Combined Loss 7 & \underline{0.29} & \underline{2.82} & \underline{0.31} & \underline{4.61} \\
+				Pix2Pix Combined Loss 8 & 1.40 & 11.89 & 1.42 & 13.04 \\
+				Pix2Pix Combined Loss 9 & \underline{0.31} & \underline{2.80} & \underline{0.33} & \underline{4.60} \\
+				Pix2Pix Combined Loss 10 & 0.80 & 3.49 & 0.82 & 5.24 \\
+				Pix2Pix Combined Loss 11 & 1.03 & 3.69 & 1.05 & 5.43 \\
+				Pix2Pix Combined Loss 12 & \underline{0.29} & \underline{2.85} & \underline{0.32} & \underline{4.65} \\
+				Pix2Pix Combined Loss 13 & 0.63 & 6.57 & 0.65 & 8.23 \\
+				Pix2Pix Combined Loss 14 & \underline{0.28} & \underline{2.83} & \underline{0.30} & \underline{4.62} \\
+				Pix2Pix Combined Loss 15 & \textbf{0.26} & \textbf{2.81} & \textbf{0.28} & \textbf{4.60} \\
+				Pix2Pix Combined Loss 16 & \underline{0.32} & \underline{2.83} & \underline{0.34} & \underline{4.62} \\
+				Pix2Pix Combined Loss 17 & 0.64 & 7.51 & 0.66 & 8.97 \\
+				Pix2Pix Combined Loss 18 & 0.39 & 5.50 & 0.41 & 7.03 \\
+				\hline
+			\end{tabular}
+			\caption{Performance comparison of the models with only reflection.}
+			\label{tab:experiment_reflection_only}
+		\end{table}
+		\FloatBarrier
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1.0\textwidth]{img/reflection_only_influence_from_loss_weights_towards_the_loss.png}
+			\caption[]{}
+			\label{fig:experiment_reflection_only_influence}
+		\end{figure}
+		\FloatBarrier
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1.0\textwidth]{img/reflection_only_correlation_of_the_weights_with_the_loss.png}
+			\caption[]{}
+			\label{fig:experiment_reflection_only_correlation}
+		\end{figure}
+		\FloatBarrier
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\textwidth]{img/samples/final_app_samples_pix2pix_masked_weight_loss_16_1_0_random_only_reflection_50epochs_gnu.png}
+			\caption[Example Inferences from Pix2Pix Masked Weight Loss 15 with 50 Epochs.]{Example Inferences from Pix2Pix Masked Weight Loss 15 with 50 Epochs.}
+			\label{fig:experiment_reflection_only_pix2pix_examples}
+		\end{figure}
+		\FloatBarrier
 		
 	
 	%\section{Mask Sampling}

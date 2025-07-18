@@ -1817,13 +1817,24 @@ nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 
 
 
-**27.06.2025 Weekly Meeting**<br>
+**18.07.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>
 Location: Zoom<br>
 Time: 13:00 O'Clock
 
 - ...
+
+
+
+**18.07.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- cosmos auf server ausprobieren -> server linux -> fine-tuning
+- Bei pius nächste woche abstimmen -> hiwi
 
 
 

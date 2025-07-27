@@ -6,14 +6,14 @@
 	%     - Correct Grammar
 	%     - Rewriting partwise?
 
-	This chapter includes the research and foundation for my work. All literature includes the most important take-aways for this work and potential usage in this work.\\
-	This project is based on the work and papers covered in section \ref{sec:lit-core} which therefore builds the most important path of the related work.
-	It continues with a section about architectures in section \ref{sec:lit-architecture}. Section \ref{sec:lit-loss} is about related work for loss functions in the area of  paired image-to-image translation. Finally, there is a bigger section about related work which covers the topic of improving learning complex distributions, by splitting the distribution or masking the distribution (see section \ref{sec:lit-complex-focus-only}).
+	This chapter includes the research and foundation for the work. All literature includes the most important take-aways for this work and potential usage in this work.\\
+	%This project is based on the work and papers covered in section \ref{sec:lit-core} which therefore builds the most important path of the related work.
+	%It continues with a section about architectures in section \ref{sec:lit-architecture}. Section \ref{sec:lit-loss} is about related work for loss functions in the area of  paired image-to-image translation. Finally, there is a bigger section about related work which covers the topic of improving learning complex distributions, by splitting the distribution or masking the distribution (see section \ref{sec:lit-complex-focus-only}).
 
 
-	\section{Core}
+	\section{Comparative Work}
 	\label{sec:lit-core}
-		The core literature includes all literature on which this research is directly based and founded on and with which a comparison will be applied.
+		%The comparative literature includes all literature on which this research is directly based and founded on and with which a comparison will be applied.
 		
 		\subsection{\citetitle{ladwig_ai-guided_2024-1}}
 			This is the foundation paper for the underlying project. It uses a Reinforcement Agent to control a drill to reduce the noise for nearby residents. This agent needs also a prediction for the sound propagation which I want to improve in my work.\\
@@ -49,8 +49,10 @@
 				\item \textbf{Reflection Dataset (25k pairs)}: Adds multiple reflections from building façades (up to 3 orders).
 				\item \textbf{Combined Dataset (25k pairs)}: Integrates all phenomena including air absorption, edge diffraction, and façade reflections, simulated across varying temperatures (-20°C to +40°C) and sound power levels (60 dB to 99 dB).
 			\end{itemize}
-			The propagation of sound over time is physically grounded and modeled using partial differential wave equations.\\
-			To accelerate the slow physical simulations (which can take several minutes per map), the paper evaluates several generative image-to-image models that can approximate the output within milliseconds. The generative architectures include:
+			The propagation of sound over time is physically grounded and modeled using partial differential wave equations.
+			\clearpage
+			To accelerate the slow physical simulations (which can take several minutes per map), the paper evaluates several generative image-to-image models that can approximate the output within milliseconds. 
+			The generative architectures include:
 			\begin{itemize}[itemsep=1mm, parsep=0pt]
 				\item Pix2Pix-based GAN
 				\item Standard U-Net
@@ -74,6 +76,7 @@
 				\item Closed-form lens distortion
 				\item Time-series prediction of motion dynamics
 			\end{itemize}
+			\clearpage
 			Unlike earlier works that focus primarily on speedup, this benchmark emphasizes the need for physical correctness in generative approximations. It highlights that, although the acceleration compared to traditional differential equation-based simulations is substantial, capturing the true physical dynamics remains an unsolved challenge.\\
 			For this work only the wave propagation is relevant. The baseline evaluations of the wave propagation include a wide range of generative architectures:
 			\begin{itemize}[itemsep=1mm, parsep=0pt]
@@ -118,9 +121,9 @@
 		
 		
 	\newpage
-	\section{Similar Task}
+	\section{Similar Tasks}
 	\label{sec:lit-similar}
-		There is the work (2 papers) from a french team and a new foundation model. Both challenging similar tasks where the estimation of physic simulation is the goal.
+		% There is the work (2 papers) from a french team and a new foundation model. Both challenging similar tasks where the estimation of physic simulation is the goal.
 		
 		\subsection{\citetitle{alguacil_predicting_2021}}
 			This work develops a novel method for simulating 2D acoustic wave propagation in quiescent (still) media using a deep learning model. The goal is to create an accurate and fast data-driven surrogate that can replace traditional numerical simulations, with a focus on overcoming the limitations of standard explicit numerical methods like the Courant number.\\
@@ -143,7 +146,7 @@
 			PhysiX consists of 3 main components. An universal discrete tokenizer, to transform text and images into the same token space, an autoregressive transformer with 4.5B prameters, and an additional refinement module.
 			To ensure the ability to generalize pretrained versions from a video-generation model are used  for the training of the tokenizer and the large scale transformer.
 			The process for the image-to-image translation is to first tokenize the satellite image, then inference through the large-scale transformer, then de-tokenize the output and inference through the refinement network.\\
-			This project is heavenly based on the Cosmos model from nvidia.\\
+			This project is heavenly based on the Cosmos model from nvidia \cite{nvidia2025cosmosworldfoundationmodel}.\\
 			\\
 			A foundation model in PhysiX could achieves new more precise results on the Physgen/Urban dataset. A try out as zero-shot and fine-tuned is therefore very promising. See also the zero-shot performance of the physics foundation model in figure \ref{fig:physix}.
 			\begin{figure}[H]
@@ -156,9 +159,9 @@
 	
 	
 	\newpage
-	\section{Architecture}
+	\section{Architectures}
 	\label{sec:lit-architecture}
-		Research for the architecture for deterministic paired image-to-image translation.
+		% Research for the architecture for deterministic paired image-to-image translation.
 		
 		\subsection{\citetitle{isola_image--image_2016}}
 			The Pix2pix GAN proposed in this paper is the base architecture on which most of the experiments will be executed. This architecture achieved high results on the urban dataset \cite{spitznagel_urban_2024-1}.\\
@@ -210,12 +213,12 @@
 		
 	
 	\newpage
-	\section{Loss}
+	\section{Loss functions}
 	\label{sec:lit-loss}
-		Literature of losses for deterministic paired image-to-image translation.
+		% Literature of losses for deterministic paired image-to-image translation.
 		
 		\subsection{\citetitle{noah_makow_wasserstein_2018}}
-			\citeauthor{noah_makow_wasserstein_2018} investigated in GANs with a different loss, the Wasserstein loss. Which already is famous and known for its robust training process.\\
+			\citeauthor{noah_makow_wasserstein_2018} examined GANs with a different loss, the Wasserstein loss. Which already is famous and known for its robust training process.\\
 			This investigation found that there is no significance in the quality compared to a standard adversarial loss and even had worse results with less details (see fig \ref{fig:wgan_vs_gan}).\\
 			This work also presents a new metric to compare two images, the VGG cosine similarity, which could be interesting to test.\\
 			\\
@@ -248,7 +251,9 @@
 	\newpage
 	\section{Residual Learning}  % Complex Focus Only
 	\label{sec:lit-complex-focus-only}
-		Founded research for lowering the complexity of the target distribution by splitting the task into sub-tasks or with intermediate input. Here are also papers for masking the input/target so that the model can focus on learning only some specific parts as the reflections which is also a kind of residual learning.
+		In this context, residual learning refers to the reduction or decomposition of the input or target distribution by splitting the overall task into smaller, more manageable sub-tasks or by introducing intermediate representations. The goal is to isolate the complex components—such as reflections—from the rest of the distribution to facilitate more focused learning. Additionally, masking can be considered a form of residual learning, as it enables the model to concentrate on specific regions of the input or target, thereby reducing the complexity of what must be learned at once.
+		% In this context residual learning mean the reduction or separation of the input or target distribution by splitting the task into sub-tasks or with intermediate input. Additionally masking is also seen as a kind of residual learning through the model can focueses only on a specific part of the input/target distribution.
+		%Founded research for lowering the complexity of the target distribution by splitting the task into sub-tasks or with intermediate input. Here are also papers for masking the input/target so that the model can focus on learning only some specific parts as the reflections which is also a kind of residual learning.
 	
 		\subsection{\citetitle{glasmachers_limits_2017}}
 			This paper critically examines the scalability and limitations of end-to-end (E2E) learning, particularly in the context of complex or modular systems.

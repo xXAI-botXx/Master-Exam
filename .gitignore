@@ -35,4 +35,24 @@
 *.bcf
 *.xml
 
+# Else
+*.mp4
 
+
+
+bib/my_bib_2025_05_06.bib
+bib/my_bib_2025_05_11.bib
+bib/Exportierte Einträge.bib
+bib/my_bib_2025_05_06/my_bib_2025_05_06.bib.bib
+bib/my_bib_2025_05_11/my_bib_2025_05_11.bib
+
+doc/first_semester_documentation_template/*
+other/IMLA_Server.xlsx
+presentations/~$first_semester_final_result_presentation.pptx
+presentations/~$first_semester_pitch.pptx
+.gitignore
+presentations/deep_drilling_image.webp
+*/my_bib_2025_05_11.bib
+presentations/4-3_HO_PPT-Vorlage.pptx
+presentations/first_semester_pitch.pptx
+presentations/Präsentation Henrik Pichler.pptx

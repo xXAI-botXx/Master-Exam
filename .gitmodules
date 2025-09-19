@@ -1,0 +1,12 @@
+[submodule "src/Depth-Anything-V2-Physgen"]
+	path = src/Depth-Anything-V2-Physgen
+	url = https://github.com/xXAI-botXx/Depth-Anything-V2-Physgen.git
+[submodule "src/paired_image-to-image_translation"]
+	path = src/paired_image-to-image_translation
+	url = https://github.com/xXAI-botXx/paired_image-to-image_translation.git
+[submodule "src/PhysiX"]
+	path = src/PhysiX
+	url = https://github.com/xXAI-botXx/PhysiX.git
+[submodule "src/cosmos-predict2"]
+	path = src/cosmos-predict2
+	url = https://github.com/xXAI-botXx/cosmos-predict2.git

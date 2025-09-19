@@ -1,3 +1,9 @@
 Clone this Repo
 
-And additional files are in my cloud, in the 'uploaded' folder
+And additional files are in my cloud, in the 'uploaded' Folder
+
+Additionally:
+> doc > first_semester_literatr_documentation > img (Folder)
+> doc > first_semester_literatur_documentation > *.pdf
+> doc > first_semester_documentation > img (Folder)
+> doc > first_semester_documentation > *.pdf

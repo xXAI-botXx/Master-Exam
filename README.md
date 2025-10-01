@@ -2,24 +2,23 @@
 
 This project contains my Master Exam (planning, writing, ...)
 
-- [Master-Exam](#master-exam)
-    - [Project Details](#project-details)
-    - [Plan](#plan)
-    - [Writing](#writing)
-    - [Source](#source)
-    - [Data](#data)
-    - [Image-to-Image Translation Methods](#image-to-image-translation-methods)
-    - [Own Architecture](#own-architecture)
-    - [Research](#research)
-    - [Commands](#commands)
-    - [Progress](#progress)
-    - [Meetings](#meetings)
-    - [Fragen](#fragen)
-    - [Das sagt die KI](#das-sagt-die-ki)
+- [Project Details](#project-details)
+- [Plan](#plan)
+- [Writing](#writing)
+- [Source](#source)
+- [Data](#data)
+- [Image-to-Image Translation Methods](#image-to-image-translation-methods)
+- [Own Architecture](#own-architecture)
+- [Research](#research)
+- [Commands](#commands)
+- [To Do](#to-do)
+- [Meetings](#meetings)
+- [Fragen](#fragen)
+- [Das sagt die KI](#das-sagt-die-ki)
 
 
 
-
+<br><br>
 
 
 ---
@@ -76,7 +75,7 @@ This project contains my Master Exam (planning, writing, ...)
 
 
 
-
+<br><br>
 
 
 ---
@@ -92,7 +91,7 @@ This project contains my Master Exam (planning, writing, ...)
 8. ...
 
 
-
+<br><br>
 
 ---
 ### Writing
@@ -127,7 +126,7 @@ All other options are listed here:
 
 
 
-
+<br><br>
 
 ---
 ### Source
@@ -534,7 +533,7 @@ Papers to process (add to Zotero + little summary -> take aways):
 
 
 
-
+<br><br>
 
 
 ---
@@ -555,7 +554,7 @@ Welche Datensätze gibt es bereits zum Thema "Schallausbreitung im Freien", "Phs
 
 
 
-
+<br><br>
 
 ---
 
@@ -640,6 +639,8 @@ These methods integrate physical principles to improve modeling.
 
 > In general a higher number epochs could maybe help, many generative models need much training time
 
+
+<br><br>
 
 
 ---
@@ -1710,8 +1711,8 @@ fi
 nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 ```
 
-
-
+<!--
+<br><br>
 
 ---
 ### Progress
@@ -1807,9 +1808,23 @@ nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 **Juni 2026:**
 - ...
 
+-->
+
+<br><br>
 
 
+---
+### To Do
 
+Next steps:
+- (Cosmos Model evaluation) -> waiting until bianca is finish
+  - Not super good results to expect -> this is a stepwise model
+- Anaylzing "[Spatial Reasoning with Denoising Models](https://arxiv.org/abs/2502.21075)"
+- Making concept for integrating physical constraints/regulations into the training process (loss?)
+- Trying student-teacher training?
+
+
+<br><br>
 
 
 ---
@@ -2300,7 +2315,7 @@ Time: 10:00 O'Clock
 
 
 
-
+<br><br>
 
 
 ---
@@ -2312,7 +2327,7 @@ Time: 10:00 O'Clock
 
 
 
-
+<br><br>
 
 
 ---

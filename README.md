@@ -3,7 +3,9 @@
 This project contains my Master Exam (planning, writing, ...)
 
 - [Project Details](#project-details)
-- [Plan](#plan)
+- [To Do](#to-do)
+- [Quick Overview](#quick-overview)
+- [Meetings](#meetings)
 - [Writing](#writing)
 - [Source](#source)
 - [Data](#data)
@@ -11,10 +13,12 @@ This project contains my Master Exam (planning, writing, ...)
 - [Own Architecture](#own-architecture)
 - [Research](#research)
 - [Commands](#commands)
-- [To Do](#to-do)
-- [Meetings](#meetings)
 - [Fragen](#fragen)
 - [Das sagt die KI](#das-sagt-die-ki)
+
+
+
+[📖 1. Semester Results 📖](https://1drv.ms/b/c/b1e92d54410693a4/ERoaw2rNKx5BvTA2a_Kqqd4BRkn0bgfu4vb2qs-62N-43g?e=EBdNM7)
 
 
 
@@ -74,21 +78,564 @@ This project contains my Master Exam (planning, writing, ...)
 - https://imla.hs-offenburg.de/
 
 
+<br><br>
+
+
+---
+### To Do
+
+Next steps:
+- (Cosmos Model evaluation) -> waiting until bianca is finish
+  - Not super good results to expect -> this is a stepwise model
+- Anaylzing "[Spatial Reasoning with Denoising Models](https://arxiv.org/abs/2502.21075)"
+- Making concept for integrating physical constraints/regulations into the training process (loss?)
+- Trying student-teacher training?
+
+
 
 <br><br>
 
 
 ---
-### Plan
+### Quick Overview
 
-1. Find the exact topic of your master's degree (with research question and subtopics)
-2. Research of this topic
-3. Update topic + define thesis(es)
-4. Set up experiment plan (how measurable?)
-5. Set up experiments (possibly create architectures)
-6. Perform experiment (train + result)
-7. Start writing / writing plan
-8. ...
+
+
+1. **Data Collection** (of random simplified data)
+   1. Data Pipeline repairing, improvement, cleaning and merging
+2. **Base-Simulation as Input** (helps only a little bit)
+3. **WGAN-GP Test** -> not good
+4. **DepthAnything**
+5. **HexaWaveNet** (Own Architecture)
+6. **Residual Design** (eventually promising)
+7. **Only Reflections** (not precise results yet)
+
+
+
+Coming:
+
+- Apply experiment results: Residual Design with adjusted Loss for only reflexion
+  
+- Comos/[PhysiX](./research/new_related_work.docx)
+  - Improvement possible? Train-data seems to be very different
+  - Complex Systems -> Training/Inference need much setup time
+  - Both are in working process -> some bugs exists
+
+- Physical Regulations?
+  - Losses or/and Networks
+  - Not possible for all complex tasks -> so not a pretty solution
+  - Any way to add this in an abstract way?
+  
+- [Spatial Reasoning](./research/spatial_reasoning.md)
+- Data Scaling
+- Architecture Scaling
+- Student-Teacher Learn Method
+
+
+
+
+<br><br>
+
+
+---
+### Meetings
+
+
+
+**18.10.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Google Meeting<br>
+Time: 11:35 O'Clock
+
+- ...
+
+
+
+**10.10.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Google Meeting<br>
+Time: 11:35 O'Clock
+
+- ...
+
+
+
+**18.07.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- cosmos auf server ausprobieren -> server linux -> fine-tuning
+- Bei pius nächste woche abstimmen -> hiwi
+
+
+
+**27.06.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- (Physical loss -> law of conservation of energy, ... -> ? Possibly applyable)
+- Check losses again in more detail -> from good results (only reflection) -> why such a big jump
+  - Which losses/weighting is the reason?
+  - Send result/weighting
+- Read paper for Accukstik propagation in more detail + send
+  - https://acoustique.ec-lyon.fr/publi/alguacil_aiaaj22.pdf
+  - https://www.sciencedirect.com/science/article/pii/S0022460X21003527
+- https://github.com/ArshKA/PhysiX
+  - Try out + read in
+- https://github.com/nvidia-cosmos/cosmos-predict1
+
+Translated with DeepL.com (free version)
+
+
+
+**06.06.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- Showed Depth Anything Results
+  - Seems like too much variance to learn
+- Sample Masking (Random? Only weighted? Maybe after x epochs?) -> Just thoughts about which we talked
+  - Using the non line of sight as mask -> Look how the eval.py calcs the non line of sight error and use nlos as mask
+  - Maybe using the Complex - Base as Mask
+- The idea is to reduce the complexity of the task until it is learnabe
+  - Which variance is learnable
+  - Maybe even splitting into only angle values
+  - Only Predicting Reflection (seperated) > only predicting reflections masked on the parts where reflections are > Only on a few simple buildings > ...
+- Task for the week
+  - With few Buildings dataset:
+    - Predict only seperated reflection
+    - Predict only seperated reflection with mask onto reflections (threshold at 0.2 or something)
+- Check out Pix2Pix Residual result
+- Write/send results directly (Martin + Keuper on conference in nashville)
+- Fusion Head only 1x1 kernel?
+
+
+
+**30.05.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- Quantization Error found: cv2 imreads as singed int and minus values overflows -> so convert type to unsigned float
+- New Modelarchitecture tried out (implemented data for it)
+  - One Model (DepthAnything/Pix2Pix), input: osm, target: baseline propagation
+  - One Model (DepthAnything/Pix2Pix), input: osm, target: reflection - baseline propagation (= only reflections)
+  - One fusion model to fusion the two outputs from the models
+  - Added Loss for small errors
+  - Changed output of depth anything to sigmoid (0 - 1)
+  - And other small adjustments...
+
+- Test Pix2Pix GAN + Depth Anything with ComplexOnly / Split Tasks architecture 
+
+
+
+**23.05.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- Fixing plotting -> other cmap with log-scale (and scale back to 255) OPTIONAL
+
+  - Try Log (before and after invert -> not at the same time!):
+
+    ```python
+    img = np.log1p(img.astype(np.float32))
+    img = img / img.max() * 255
+    img = img.astype(np.uint8)
+    ```
+
+     
+
+  - Try out gamma correction:
+
+    ````python
+    gamma = 0.4  # <1 enhances shadows, >1 compresses shadows
+    img = img.astype(np.float32) / 255.0
+    img = np.power(img, gamma)
+    img = (img * 255).astype(np.uint8)
+    ````
+
+  - Histogramm equalization
+
+    ````python
+    img = cv2.equalizeHist(img)
+    ````
+
+    or:
+
+    ````python
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+    img = clahe.apply(img)
+    ````
+
+- Solo eval -> split MAE and MAPE visualization
+
+- Add log scaled MAE to the losses? -> or other loss for more detail
+
+  ````python
+  class LogL1Loss(nn.Module):
+      def __init__(self, eps=1e-8):
+          super().__init__()
+          self.eps = eps  # Prevent log(0)
+  
+      def forward(self, y_pred, y_true):
+          log_pred = torch.log(y_pred + self.eps)
+          log_true = torch.log(y_true + self.eps)
+          return torch.mean(torch.abs(log_pred - log_true))
+  ````
+
+  ````python
+  class MAPELoss(nn.Module):
+      def __init__(self, eps=1e-8):
+          super().__init__()
+          self.eps = eps  # Avoid division by zero
+  
+      def forward(self, y_pred, y_true):
+          return torch.mean(torch.abs((y_true - y_pred) / (y_true + self.eps))) * 100
+  ````
+
+  
+
+- Finding and Fixing Quantization Error:
+
+  - 1d profile -> error in location -> input + => with artifacts + without artifacts
+    - View a row/column from an image array -> identy
+
+  - Display a concrete chain -> input, prediction, ground truth, difference
+  - Test with base simulation (wgan-gp) -> such errors must not be in there
+  - Metric correct, but visualization wrong? -> any errors due to inversion?
+    - Possibly clarified if CMAP works
+
+  - Only at created dataset or also in physgen dataset?
+
+- After fixing the bug, we can think about how to do/apply the mask/sample maps
+
+
+
+**16.05.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- Implementing Depth Anything and try out training + evaluation (self assigned)
+  - Maybe try to implement into the forked pix2pix repo -> https://github.com/xXAI-botXx/paired_image-to-image_translation/ from https://github.com/DepthAnything/Depth-Anything-V2
+  - Without Conditioning -> Sound Source is fix
+  - The Pipeline of them
+  - The Pipeline of Pix2Pix
+
+- Make a test training with the parameters from the Physgen paper (self assigned)
+  - Batchsize: 18
+  - Learnrate: 1e-4 (Generator: 2e-4)
+  - Epochs: 50
+  - Lambda L1: 100
+  - Lambda GP: 10
+  - Optimizer: Adam
+  - Adam betas:  (0.5, 0.999)
+  - Results to reach:
+    - LoS MAE = 0.91
+    - NLoS MAE = 3.36
+    - LoS wMAPE = 3.51
+    - NLoS wMAPE = 18.06 
+
+- Base Simulation vs Reflection Simulation -> warum quantisierter? Search/Fix Quantisier Fehler
+  - Auch ring artefakte damit vlt erklärebar
+  - Evtl exportier speicher fehler
+  - Bildformat -> histogramm anschauen
+  - Mit Physgen evaluieren
+
+- WGAN-GP + Input Image Training Evaluation 
+
+
+
+**08.05.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: C108<br>
+Time: 13:00 O'Clock
+
+- Improve plots:
+  - Add Ground Truth to the Result / Example Plots
+  - Log Scale the plots (to see the details better)
+  - Plot the difference of ground truth and the prediction (so you get the problem zones)
+
+- Test Line of Sight / Out of Sight Error -> With Base Simulation as Input a very small line of sight error expected
+  - Need OSM image (Satalite image) as additional input
+
+- Test which error the base simulation as input has -> does the model even improven it?
+- Try Wasserstein GAN GP
+  - Implement WGAN-GP as optional parameter in Pix2pix GAN
+  - One Training with and one without
+  - Check the result + was the training more balanced?
+
+
+
+
+**02.05.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- Focus first on the "Complex Focus Only"-Experiment and not on the paper research, because the research is only needed if this approach does have any successfull results
+
+- Next Friday results of the experiments
+
+  - Create a test dataset (1000 Images)
+  - Train all Modelcombinations with Hyperparameter from PhysGen Paper (BatchSize 18, Epochs 50, Learnrate 0.001)
+  - Create all predictions on test dataset
+  - Evaluate (use eval script fro PhysGen)
+
+  
+
+**25.04.2025 Weekly Meeting**<br>
+
+Participants: Martin, Ich<br>
+Location: Zoom<br>
+Time: 13:00 O'Clock
+
+- Use "Weights and Bias" ->[website](https://wandb.ai/site/) , register + give API code over parameter by call => maybe use
+  - for simple experiment tracking and result analysis/comparison
+
+- Make training parameter tests (only on one dataset and later the best option apply for all) -> removing artifacts
+  - Validation Dataset create and use (maybe 500 images -> create with your pipeline)
+  - Hyperparameter tuning
+    - reduce amount of epochs (50, 100)
+    - increase amount of epochs (500)
+    - change learnrate schedular from cosine to linear
+    - change batchsize to 1
+    - try batchsize as in the PhysGen paper
+  - Adding Wasserstein Loss?
+  - Check results at the log file, "Weights and Bias" or/and on test data 
+- Currently conzentrate on literature research (search + summary + importance/relevance -> have to be checked)
+- Martin will check/use the standard pipeline in the new adjusted pipeline -> he will probably merge if everything works + writes you if something is wrong/need help
+- Question to Janis Keuper: What should be included in the literature search / document? Found papers, their take-aways and why they could be/are relevant?
+
+
+
+**22.04.2025 Planning Presentation**<br>
+
+Participants: MAR 1 AI<br>
+Location: Zoom<br>
+Time: 14:00 O'Clock
+
+- in future could try to use normalizing flows
+- Experiment 2 correction:
+	- based on experiment 1
+	- search physical complex areas + mask all other areas, so that the loss is concentrated on the complex areas
+- Liteartur Tool -> Research Paper/Literature => Bibtex + Latex -> finish until: 13 Mai
+- Data Science Project will be clarified (propably something with LLM)
+
+
+
+**03.04.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: C108<br>
+Time: 13:30 O'Clock
+
+- Primary Key Missing Error: Error can be another, often consequential error. Groovy just keeps going, even though nothing comes out right
+- Pull error loop even one higher = reload everything (reset start_index in config)
+    - is propably not useful, there is nothing happening over that
+- Work out a plan for the semester 
+    - Familiarization with framework (adaptation)
+    Carry out experiment 1
+    - Literature for experiment 2 (sampling)
+    - Implement literature or own sampling strategies
+- Title for 2. experiment/paper: Physical Informed Sampling
+    - Samples categorization in "how physical as difficult" -> either calculate or estimate (show that estimation already works very well)
+
+- Generate extra heavy data (possibly later)
+- New meeting slot: Friday 1 pm
+
+
+
+**27.03.2025 MAR KI Meeting**<br>
+
+Participants: Keuper, Dorer, Sven, Louis, Paul, Lukas, Ich<br>
+Location: C108<br>
+Time: 13:30 O'Clock
+
+- Tomorrow presentation of Masters in Campus West (8 Uhr)
+- Data Science Class can be visited but don't have to be visited
+- 50% project => report (progress report, will be discussed in more detail...literature work) + probably 20% pitch (sell topic)
+- 3 dates + today's
+  - Make slides (presentation) for the meetings
+  - upload slides -> a few slides are enough
+- 1st date: Work packages this semester + how to proceed (informal presentation) -> 22.04.2025 2 pm
+- 2nd literature presentation (informal)
+- 3rd final report (how did it go? ...) -> graded
+- grading for everything as a whole (rather exchange, no grade stress)
+- master thesis, focus can shift again
+- goal for the master: submit publication (make paper) or more ...
+  - for example I could publicate a paper about my results of the image to image prediction in geotermal drilling context and then continue with another (maybe similiar) topic
+- My master can also maybe go about other projects -> first geotermal drilling, but then maybe it will change
+- Everbody told about his project. Me:
+  - AI drill project
+  - Drilling in inner cities -> Geothermal energies
+  - AI controlled -> quieter
+  - Subtask: Prediction of sound propagation
+  - Simulation too slow
+  - Generative models faster but less precise
+  - How to optimize/improve generative models
+- Sven: Magma Reinforcment Learning of 3 Robot types with only one model and a one-hot-encoded number => learning together from each other (?)
+- Paul: Uniklinik Freiburg, "Magic Pen" like semantic segmentation with U-net and persons first input (one organ have many picture slides)
+- Lukas: Sick explanaible decision making during classification, to get closer to varyfying machine learning apporaches in critical robotic situations
+- Louis: Baden-IT -> Support Agent System via LLM and with context learning of solutions for problems
+
+
+
+**27.03.2025 General Progression**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: C108<br>
+Time: 13:30 O'Clock
+
+- next steps:
+  - adjust arguments, so that they are consistent: use pydantic and give bash configs over python arguments
+    - Also common pythom arguments over pydantic? -> yes (not 100% sure, ask!)
+    - fix that all arguments come with the same way
+  - adjust random shape generation pipeline to run simulation with same shapes and different settings (reflexion, ...)
+  - generate 10.000 datapoints -> 10.000 with basic physic + 10.000 with reflexion 1
+  - make experiment with [pix2pix GAN](https://github.com/LouisW2202/pytorch-CycleGAN-and-pix2pix) -> experiment checks if noisemap without physics improve performance over normal image as input
+- in future should have a own master repo (this here? or from the university?)
+
+
+
+**21.03.2025 Software Tool Einführung:**<br>
+Participants: Martin, Ich<br>
+Location: Zoom<br>
+Time: 10:00 O'Clock
+
+- the noise simulation works with receivers. on the location of a receiver the sound volume will get calculated. The *delta*-distance says how many receiver should there every x steps (receiver grid) + there come additional receiver on every buildings edges
+
+- the noise simulation software got a bit expanded to allow receiver grid and receiver on the edes of buildings
+
+- a simulation process creates a local database for the data and so only one process at the time is possible. To still be bale to make multiple generation processes the project uses multiple docker containers to be able to run multiple simulations at the time + they got used with computing devices in a kubernetes cluster but now only one note of this cluster is in use with about 250 kernels for computing
+
+  - connect to the note/cluster/server via SSH and VS Code
+
+- the normal simulation process is: GPS data + optionally temperatur, humidity, ... = satelite image + sound propagation image 
+
+- the simplified simulation process is: shapes = satelite image + sound propagation image
+  - Only a few shapes are spawned randomly to keep it more simple (example usecase: testing)
+  - create_custom_dataset....py
+  - Available buildings can be processed by the run command or with a json file -> both have to processed in the --buildings parameter 
+
+- there are 4 cases: basic, reflection, diffraction, combined
+  - basic: simple wave propagation
+  - reflection: basic with bouncing from buildings (order decides how often it bounces) -> similar to ray-tracing
+  - diffraction: how the sound waves are moving behind a building (around it)
+  - combined: basic + reflection + diffraction + other properties (temperature, humidity, ...) -> will be added as additional channel for each property
+
+- run command: 
+  
+  ``````
+  docker build --no-cache -t noisemodellingapi:test .
+  ``````
+  
+  ```cmd
+  docker run noisemodellingapi:test --buildings "[[[0,0], [0,50], [50,50],[0,0]], [[0,0], [0,80], [40, 80], [40,0], [0,0]]]" --linux
+  ```
+  
+- I have to create: the same constellation with basic and reflection -> maybe I can create both in the same simulation run, or I create the exact building location and create the 2 simulations with it, or I run it as basic and then extract and use the exact building spwan and give it to the next simulation with reflection on -> or think about it...there are many possible solutions 
+
+  - but the simulation/wrapper/process must be adjusted so fixed locations are the input
+  - look how the students made that the input is not GPS else the shape
+
+- config.cfg contains standard parameters (delta distance, reflection, ...)
+
+- 256x256 size is standard (I can also only use still)
+
+- standard: lwd500 =  95dB (-> 500 hz)
+
+- LAEQ = is the right output format, ignore LEQ (adjusts the frequences to the human hearing) -> you can turn this off
+
+- look at the project, the scripts and how it works (look at both branches, the GPS and the shape way)
+
+  - look at the changes
+
+- scripts folder: wrapper for controlling the simulation -> if you pass --linux the bash files will be running, else the bat files
+
+- to do:
+
+  - try to sample some datapoints with the simpler generation (1 or 2 samples) via local docker
+  - can the python wrapper be changed to directly control the simulation and not the bash scripts?
+  - could the 2 branches get merged? it would be nice to control the input as parameter
+  - CONF_DIFF_HORIZONTAL -> pass no value = false and pass any value =  true BUT should be 0=false and 1=true  (diffraction = sound propagation moving around buildings)
+
+- Martin do:
+  - add me to github
+  - send noise modelling simulation software (with small adjustment to the grid creation)
+  - in future the convert exe might be needed
+  
+- good start/example: example_usage.ipynb
+
+- simulation controllable over python wrapper
+
+  - python wrapper( batch-files( Gruvy-Files ) )
+
+- program to show shape files: OGIS
+
+- idea could be RGB images as input so that the AI can learn to use more environment features
+
+  - problem: the labled data does not contain such environment data (trees, ground information, ...)
+  - with real world sound propagation data possible, else not -> or a more advanced sound propagation synth dataset with unreal if such is possible
+
+- source definition in source_config.geojson
+
+- when loading the input the projection type of the given coordinates are passed, most likely using the EPSG:3857 projection = it will interpret the coordinates as GPS format
+
+- Pix2Pix GAN is good for the experiments (a image loader is already available in [this repo](https://github.com/LouisW2202/pytorch-CycleGAN-and-pix2pix)
+
+
+
+**20.03.2025 Zweites Meeting:**<br>
+Participants: Keuper, Martin, Ich<br>
+Location: C108<br>
+Time: 13:30 O'Clock
+
+- There is a less complex dataset + describing document for it
+- Introduction to the simulation/dataset creation is important -> stated tomorrow
+- 2 first Approaches
+  - Train 2x models, one which gets simple sound propagation as input and the other gets the plain input -> which perform better on the reflexion (sub)dataset
+  - Adaptive sampling -> train data should contain much more complex examples + add regularizations against overfitting
+- Start with the stepped input experiment on simpler dataset (maybe have to generate new data)
+
+
+
+**10.03.2025 Startgespräch Herr Keuper und ich:**<br>
+Participants: Keuper, Ich<br>
+Location: Zoom<br>
+Time: 10:00 O'Clock
+
+- Input/Output: Bild zu Bild Generierung
+- Paper lesen (4 Stück)
+- 1 Mal pro Woche zusammensetzen
+- Bei Meetings mit dabei (Dienstags und Donnerstags) -> intern, Doktoranten und bei Herrenknecht
+- Fächer: 
+  - Studium Generale (Mi. 9:45-11:15 Uhr A303)
+  - Akt Meth Masch Lernen (Do. 14:00-17:15 Uhr A301) -> Aktuelle Methoden des Maschinellen Lernens und deren Anwendung
+  - Einmalig: Erstsemestereinführung (Di. 18.03 9:30-10:30 Uhr E311/E412/E008)
+  - Nicht Data Science! -> Herr Keuper kümmert sich um die Anrechnung
+
+- Bei Fragen gerne im Google Chat schreiben
+- Unklarheiten: 
+  - Aufgabenstellung/Thema: Was soll nun genau im Master getan werden? -> Weitere Modelle und Experimente unternehmen
+
+
+
+
 
 
 <br><br>
@@ -1810,508 +2357,6 @@ nohup python multiprocessing.py $WORKER_ARG > ./logs/output.log 2>&1 &
 
 -->
 
-<br><br>
-
-
----
-### To Do
-
-Next steps:
-- (Cosmos Model evaluation) -> waiting until bianca is finish
-  - Not super good results to expect -> this is a stepwise model
-- Anaylzing "[Spatial Reasoning with Denoising Models](https://arxiv.org/abs/2502.21075)"
-- Making concept for integrating physical constraints/regulations into the training process (loss?)
-- Trying student-teacher training?
-
-
-<br><br>
-
-
----
-### Meetings
-
-
-
-**18.07.2025 Weekly Meeting**<br>
-
-Participants: Keuper, Martin, Ich<br>
-Location: Zoom<br>
-Time: 13:00 O'Clock
-
-- ...
-
-
-
-**18.07.2025 Weekly Meeting**<br>
-
-Participants: Keuper, Martin, Ich<br>
-Location: Zoom<br>
-Time: 13:00 O'Clock
-
-- cosmos auf server ausprobieren -> server linux -> fine-tuning
-- Bei pius nächste woche abstimmen -> hiwi
-
-
-
-**27.06.2025 Weekly Meeting**<br>
-
-Participants: Keuper, Martin, Ich<br>
-Location: Zoom<br>
-Time: 13:00 O'Clock
-
-- (Physical loss -> law of conservation of energy, ... -> ? Possibly applyable)
-- Check losses again in more detail -> from good results (only reflection) -> why such a big jump
-  - Which losses/weighting is the reason?
-  - Send result/weighting
-- Read paper for Accukstik propagation in more detail + send
-  - https://acoustique.ec-lyon.fr/publi/alguacil_aiaaj22.pdf
-  - https://www.sciencedirect.com/science/article/pii/S0022460X21003527
-- https://github.com/ArshKA/PhysiX
-  - Try out + read in
-- https://github.com/nvidia-cosmos/cosmos-predict1
-
-Translated with DeepL.com (free version)
-
-
-
-**06.06.2025 Weekly Meeting**<br>
-
-Participants: Keuper, Martin, Ich<br>
-Location: Zoom<br>
-Time: 13:00 O'Clock
-
-- Showed Depth Anything Results
-  - Seems like too much variance to learn
-- Sample Masking (Random? Only weighted? Maybe after x epochs?) -> Just thoughts about which we talked
-  - Using the non line of sight as mask -> Look how the eval.py calcs the non line of sight error and use nlos as mask
-  - Maybe using the Complex - Base as Mask
-- The idea is to reduce the complexity of the task until it is learnabe
-  - Which variance is learnable
-  - Maybe even splitting into only angle values
-  - Only Predicting Reflection (seperated) > only predicting reflections masked on the parts where reflections are > Only on a few simple buildings > ...
-- Task for the week
-  - With few Buildings dataset:
-    - Predict only seperated reflection
-    - Predict only seperated reflection with mask onto reflections (threshold at 0.2 or something)
-- Check out Pix2Pix Residual result
-- Write/send results directly (Martin + Keuper on conference in nashville)
-- Fusion Head only 1x1 kernel?
-
-
-
-**30.05.2025 Weekly Meeting**<br>
-
-Participants: Keuper, Ich<br>
-Location: Zoom<br>
-Time: 13:00 O'Clock
-
-- Quantization Error found: cv2 imreads as singed int and minus values overflows -> so convert type to unsigned float
-- New Modelarchitecture tried out (implemented data for it)
-  - One Model (DepthAnything/Pix2Pix), input: osm, target: baseline propagation
-  - One Model (DepthAnything/Pix2Pix), input: osm, target: reflection - baseline propagation (= only reflections)
-  - One fusion model to fusion the two outputs from the models
-  - Added Loss for small errors
-  - Changed output of depth anything to sigmoid (0 - 1)
-  - And other small adjustments...
-
-- Test Pix2Pix GAN + Depth Anything with ComplexOnly / Split Tasks architecture 
-
-
-
-**23.05.2025 Weekly Meeting**<br>
-
-Participants: Keuper, Martin, Ich<br>
-Location: Zoom<br>
-Time: 13:00 O'Clock
-
-- Fixing plotting -> other cmap with log-scale (and scale back to 255) OPTIONAL
-
-  - Try Log (before and after invert -> not at the same time!):
-
-    ```python
-    img = np.log1p(img.astype(np.float32))
-    img = img / img.max() * 255
-    img = img.astype(np.uint8)
-    ```
-
-     
-
-  - Try out gamma correction:
-
-    ````python
-    gamma = 0.4  # <1 enhances shadows, >1 compresses shadows
-    img = img.astype(np.float32) / 255.0
-    img = np.power(img, gamma)
-    img = (img * 255).astype(np.uint8)
-    ````
-
-  - Histogramm equalization
-
-    ````python
-    img = cv2.equalizeHist(img)
-    ````
-
-    or:
-
-    ````python
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-    img = clahe.apply(img)
-    ````
-
-- Solo eval -> split MAE and MAPE visualization
-
-- Add log scaled MAE to the losses? -> or other loss for more detail
-
-  ````python
-  class LogL1Loss(nn.Module):
-      def __init__(self, eps=1e-8):
-          super().__init__()
-          self.eps = eps  # Prevent log(0)
-  
-      def forward(self, y_pred, y_true):
-          log_pred = torch.log(y_pred + self.eps)
-          log_true = torch.log(y_true + self.eps)
-          return torch.mean(torch.abs(log_pred - log_true))
-  ````
-
-  ````python
-  class MAPELoss(nn.Module):
-      def __init__(self, eps=1e-8):
-          super().__init__()
-          self.eps = eps  # Avoid division by zero
-  
-      def forward(self, y_pred, y_true):
-          return torch.mean(torch.abs((y_true - y_pred) / (y_true + self.eps))) * 100
-  ````
-
-  
-
-- Finding and Fixing Quantization Error:
-
-  - 1d profile -> error in location -> input + => with artifacts + without artifacts
-    - View a row/column from an image array -> identy
-
-  - Display a concrete chain -> input, prediction, ground truth, difference
-  - Test with base simulation (wgan-gp) -> such errors must not be in there
-  - Metric correct, but visualization wrong? -> any errors due to inversion?
-    - Possibly clarified if CMAP works
-
-  - Only at created dataset or also in physgen dataset?
-
-- After fixing the bug, we can think about how to do/apply the mask/sample maps
-
-
-
-**16.05.2025 Weekly Meeting**<br>
-
-Participants: Keuper, Martin, Ich<br>
-Location: Zoom<br>
-Time: 13:00 O'Clock
-
-- Implementing Depth Anything and try out training + evaluation (self assigned)
-  - Maybe try to implement into the forked pix2pix repo -> https://github.com/xXAI-botXx/paired_image-to-image_translation/ from https://github.com/DepthAnything/Depth-Anything-V2
-  - Without Conditioning -> Sound Source is fix
-  - The Pipeline of them
-  - The Pipeline of Pix2Pix
-
-- Make a test training with the parameters from the Physgen paper (self assigned)
-  - Batchsize: 18
-  - Learnrate: 1e-4 (Generator: 2e-4)
-  - Epochs: 50
-  - Lambda L1: 100
-  - Lambda GP: 10
-  - Optimizer: Adam
-  - Adam betas:  (0.5, 0.999)
-  - Results to reach:
-    - LoS MAE = 0.91
-    - NLoS MAE = 3.36
-    - LoS wMAPE = 3.51
-    - NLoS wMAPE = 18.06 
-
-- Base Simulation vs Reflection Simulation -> warum quantisierter? Search/Fix Quantisier Fehler
-  - Auch ring artefakte damit vlt erklärebar
-  - Evtl exportier speicher fehler
-  - Bildformat -> histogramm anschauen
-  - Mit Physgen evaluieren
-
-- WGAN-GP + Input Image Training Evaluation 
-
-
-
-**08.05.2025 Weekly Meeting**<br>
-
-Participants: Keuper, Martin, Ich<br>
-Location: C108<br>
-Time: 13:00 O'Clock
-
-- Improve plots:
-  - Add Ground Truth to the Result / Example Plots
-  - Log Scale the plots (to see the details better)
-  - Plot the difference of ground truth and the prediction (so you get the problem zones)
-
-- Test Line of Sight / Out of Sight Error -> With Base Simulation as Input a very small line of sight error expected
-  - Need OSM image (Satalite image) as additional input
-
-- Test which error the base simulation as input has -> does the model even improven it?
-- Try Wasserstein GAN GP
-  - Implement WGAN-GP as optional parameter in Pix2pix GAN
-  - One Training with and one without
-  - Check the result + was the training more balanced?
-
-
-
-
-**02.05.2025 Weekly Meeting**<br>
-
-Participants: Keuper, Ich<br>
-Location: Zoom<br>
-Time: 13:00 O'Clock
-
-- Focus first on the "Complex Focus Only"-Experiment and not on the paper research, because the research is only needed if this approach does have any successfull results
-
-- Next Friday results of the experiments
-
-  - Create a test dataset (1000 Images)
-  - Train all Modelcombinations with Hyperparameter from PhysGen Paper (BatchSize 18, Epochs 50, Learnrate 0.001)
-  - Create all predictions on test dataset
-  - Evaluate (use eval script fro PhysGen)
-
-  
-
-**25.04.2025 Weekly Meeting**<br>
-
-Participants: Martin, Ich<br>
-Location: Zoom<br>
-Time: 13:00 O'Clock
-
-- Use "Weights and Bias" ->[website](https://wandb.ai/site/) , register + give API code over parameter by call => maybe use
-  - for simple experiment tracking and result analysis/comparison
-
-- Make training parameter tests (only on one dataset and later the best option apply for all) -> removing artifacts
-  - Validation Dataset create and use (maybe 500 images -> create with your pipeline)
-  - Hyperparameter tuning
-    - reduce amount of epochs (50, 100)
-    - increase amount of epochs (500)
-    - change learnrate schedular from cosine to linear
-    - change batchsize to 1
-    - try batchsize as in the PhysGen paper
-  - Adding Wasserstein Loss?
-  - Check results at the log file, "Weights and Bias" or/and on test data 
-- Currently conzentrate on literature research (search + summary + importance/relevance -> have to be checked)
-- Martin will check/use the standard pipeline in the new adjusted pipeline -> he will probably merge if everything works + writes you if something is wrong/need help
-- Question to Janis Keuper: What should be included in the literature search / document? Found papers, their take-aways and why they could be/are relevant?
-
-
-
-**22.04.2025 Planning Presentation**<br>
-
-Participants: MAR 1 AI<br>
-Location: Zoom<br>
-Time: 14:00 O'Clock
-
-- in future could try to use normalizing flows
-- Experiment 2 correction:
-	- based on experiment 1
-	- search physical complex areas + mask all other areas, so that the loss is concentrated on the complex areas
-- Liteartur Tool -> Research Paper/Literature => Bibtex + Latex -> finish until: 13 Mai
-- Data Science Project will be clarified (propably something with LLM)
-
-
-
-**03.04.2025 Weekly Meeting**<br>
-
-Participants: Keuper, Martin, Ich<br>
-Location: C108<br>
-Time: 13:30 O'Clock
-
-- Primary Key Missing Error: Error can be another, often consequential error. Groovy just keeps going, even though nothing comes out right
-- Pull error loop even one higher = reload everything (reset start_index in config)
-    - is propably not useful, there is nothing happening over that
-- Work out a plan for the semester 
-    - Familiarization with framework (adaptation)
-    Carry out experiment 1
-    - Literature for experiment 2 (sampling)
-    - Implement literature or own sampling strategies
-- Title for 2. experiment/paper: Physical Informed Sampling
-    - Samples categorization in "how physical as difficult" -> either calculate or estimate (show that estimation already works very well)
-
-- Generate extra heavy data (possibly later)
-- New meeting slot: Friday 1 pm
-
-
-
-**27.03.2025 MAR KI Meeting**<br>
-
-Participants: Keuper, Dorer, Sven, Louis, Paul, Lukas, Ich<br>
-Location: C108<br>
-Time: 13:30 O'Clock
-
-- Tomorrow presentation of Masters in Campus West (8 Uhr)
-- Data Science Class can be visited but don't have to be visited
-- 50% project => report (progress report, will be discussed in more detail...literature work) + probably 20% pitch (sell topic)
-- 3 dates + today's
-  - Make slides (presentation) for the meetings
-  - upload slides -> a few slides are enough
-- 1st date: Work packages this semester + how to proceed (informal presentation) -> 22.04.2025 2 pm
-- 2nd literature presentation (informal)
-- 3rd final report (how did it go? ...) -> graded
-- grading for everything as a whole (rather exchange, no grade stress)
-- master thesis, focus can shift again
-- goal for the master: submit publication (make paper) or more ...
-  - for example I could publicate a paper about my results of the image to image prediction in geotermal drilling context and then continue with another (maybe similiar) topic
-- My master can also maybe go about other projects -> first geotermal drilling, but then maybe it will change
-- Everbody told about his project. Me:
-  - AI drill project
-  - Drilling in inner cities -> Geothermal energies
-  - AI controlled -> quieter
-  - Subtask: Prediction of sound propagation
-  - Simulation too slow
-  - Generative models faster but less precise
-  - How to optimize/improve generative models
-- Sven: Magma Reinforcment Learning of 3 Robot types with only one model and a one-hot-encoded number => learning together from each other (?)
-- Paul: Uniklinik Freiburg, "Magic Pen" like semantic segmentation with U-net and persons first input (one organ have many picture slides)
-- Lukas: Sick explanaible decision making during classification, to get closer to varyfying machine learning apporaches in critical robotic situations
-- Louis: Baden-IT -> Support Agent System via LLM and with context learning of solutions for problems
-
-
-
-**27.03.2025 General Progression**<br>
-
-Participants: Keuper, Martin, Ich<br>
-Location: C108<br>
-Time: 13:30 O'Clock
-
-- next steps:
-  - adjust arguments, so that they are consistent: use pydantic and give bash configs over python arguments
-    - Also common pythom arguments over pydantic? -> yes (not 100% sure, ask!)
-    - fix that all arguments come with the same way
-  - adjust random shape generation pipeline to run simulation with same shapes and different settings (reflexion, ...)
-  - generate 10.000 datapoints -> 10.000 with basic physic + 10.000 with reflexion 1
-  - make experiment with [pix2pix GAN](https://github.com/LouisW2202/pytorch-CycleGAN-and-pix2pix) -> experiment checks if noisemap without physics improve performance over normal image as input
-- in future should have a own master repo (this here? or from the university?)
-
-
-
-**21.03.2025 Software Tool Einführung:**<br>
-Participants: Martin, Ich<br>
-Location: Zoom<br>
-Time: 10:00 O'Clock
-
-- the noise simulation works with receivers. on the location of a receiver the sound volume will get calculated. The *delta*-distance says how many receiver should there every x steps (receiver grid) + there come additional receiver on every buildings edges
-
-- the noise simulation software got a bit expanded to allow receiver grid and receiver on the edes of buildings
-
-- a simulation process creates a local database for the data and so only one process at the time is possible. To still be bale to make multiple generation processes the project uses multiple docker containers to be able to run multiple simulations at the time + they got used with computing devices in a kubernetes cluster but now only one note of this cluster is in use with about 250 kernels for computing
-
-  - connect to the note/cluster/server via SSH and VS Code
-
-- the normal simulation process is: GPS data + optionally temperatur, humidity, ... = satelite image + sound propagation image 
-
-- the simplified simulation process is: shapes = satelite image + sound propagation image
-  - Only a few shapes are spawned randomly to keep it more simple (example usecase: testing)
-  - create_custom_dataset....py
-  - Available buildings can be processed by the run command or with a json file -> both have to processed in the --buildings parameter 
-
-- there are 4 cases: basic, reflection, diffraction, combined
-  - basic: simple wave propagation
-  - reflection: basic with bouncing from buildings (order decides how often it bounces) -> similar to ray-tracing
-  - diffraction: how the sound waves are moving behind a building (around it)
-  - combined: basic + reflection + diffraction + other properties (temperature, humidity, ...) -> will be added as additional channel for each property
-
-- run command: 
-  
-  ``````
-  docker build --no-cache -t noisemodellingapi:test .
-  ``````
-  
-  ```cmd
-  docker run noisemodellingapi:test --buildings "[[[0,0], [0,50], [50,50],[0,0]], [[0,0], [0,80], [40, 80], [40,0], [0,0]]]" --linux
-  ```
-  
-- I have to create: the same constellation with basic and reflection -> maybe I can create both in the same simulation run, or I create the exact building location and create the 2 simulations with it, or I run it as basic and then extract and use the exact building spwan and give it to the next simulation with reflection on -> or think about it...there are many possible solutions 
-
-  - but the simulation/wrapper/process must be adjusted so fixed locations are the input
-  - look how the students made that the input is not GPS else the shape
-
-- config.cfg contains standard parameters (delta distance, reflection, ...)
-
-- 256x256 size is standard (I can also only use still)
-
-- standard: lwd500 =  95dB (-> 500 hz)
-
-- LAEQ = is the right output format, ignore LEQ (adjusts the frequences to the human hearing) -> you can turn this off
-
-- look at the project, the scripts and how it works (look at both branches, the GPS and the shape way)
-
-  - look at the changes
-
-- scripts folder: wrapper for controlling the simulation -> if you pass --linux the bash files will be running, else the bat files
-
-- to do:
-
-  - try to sample some datapoints with the simpler generation (1 or 2 samples) via local docker
-  - can the python wrapper be changed to directly control the simulation and not the bash scripts?
-  - could the 2 branches get merged? it would be nice to control the input as parameter
-  - CONF_DIFF_HORIZONTAL -> pass no value = false and pass any value =  true BUT should be 0=false and 1=true  (diffraction = sound propagation moving around buildings)
-
-- Martin do:
-  - add me to github
-  - send noise modelling simulation software (with small adjustment to the grid creation)
-  - in future the convert exe might be needed
-  
-- good start/example: example_usage.ipynb
-
-- simulation controllable over python wrapper
-
-  - python wrapper( batch-files( Gruvy-Files ) )
-
-- program to show shape files: OGIS
-
-- idea could be RGB images as input so that the AI can learn to use more environment features
-
-  - problem: the labled data does not contain such environment data (trees, ground information, ...)
-  - with real world sound propagation data possible, else not -> or a more advanced sound propagation synth dataset with unreal if such is possible
-
-- source definition in source_config.geojson
-
-- when loading the input the projection type of the given coordinates are passed, most likely using the EPSG:3857 projection = it will interpret the coordinates as GPS format
-
-- Pix2Pix GAN is good for the experiments (a image loader is already available in [this repo](https://github.com/LouisW2202/pytorch-CycleGAN-and-pix2pix)
-
-
-
-**20.03.2025 Zweites Meeting:**<br>
-Participants: Keuper, Martin, Ich<br>
-Location: C108<br>
-Time: 13:30 O'Clock
-
-- There is a less complex dataset + describing document for it
-- Introduction to the simulation/dataset creation is important -> stated tomorrow
-- 2 first Approaches
-  - Train 2x models, one which gets simple sound propagation as input and the other gets the plain input -> which perform better on the reflexion (sub)dataset
-  - Adaptive sampling -> train data should contain much more complex examples + add regularizations against overfitting
-- Start with the stepped input experiment on simpler dataset (maybe have to generate new data)
-
-
-
-**10.03.2025 Startgespräch Herr Keuper und ich:**<br>
-Participants: Keuper, Ich<br>
-Location: Zoom<br>
-Time: 10:00 O'Clock
-
-- Input/Output: Bild zu Bild Generierung
-- Paper lesen (4 Stück)
-- 1 Mal pro Woche zusammensetzen
-- Bei Meetings mit dabei (Dienstags und Donnerstags) -> intern, Doktoranten und bei Herrenknecht
-- Fächer: 
-  - Studium Generale (Mi. 9:45-11:15 Uhr A303)
-  - Akt Meth Masch Lernen (Do. 14:00-17:15 Uhr A301) -> Aktuelle Methoden des Maschinellen Lernens und deren Anwendung
-  - Einmalig: Erstsemestereinführung (Di. 18.03 9:30-10:30 Uhr E311/E412/E008)
-  - Nicht Data Science! -> Herr Keuper kümmert sich um die Anrechnung
-
-- Bei Fragen gerne im Google Chat schreiben
-- Unklarheiten: 
-  - Aufgabenstellung/Thema: Was soll nun genau im Master getan werden? -> Weitere Modelle und Experimente unternehmen
 
 
 

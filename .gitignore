@@ -33,7 +33,6 @@
 # other
 *.zip
 *.bcf
-*.xml
 
 # Else
 *.mp4

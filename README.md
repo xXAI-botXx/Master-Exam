@@ -85,11 +85,14 @@ This project contains my Master Exam (planning, writing, ...)
 ### To Do
 
 Next steps:
-- (Cosmos Model evaluation) -> waiting until bianca is finish
-  - Not super good results to expect -> this is a stepwise model
-- Anaylzing "[Spatial Reasoning with Denoising Models](https://arxiv.org/abs/2502.21075)"
-- Making concept for integrating physical constraints/regulations into the training process (loss?)
-- Trying student-teacher training?
+- Implement a Ray-Tracing (maybe there is a python lib for that?) 
+  - Send every 10 degree a beam and calc 3 bounces (end of image = no bounce)
+  - Every Ray Tracing saved as own Gray Image
+
+- Cosmos Model evaluation -> waiting until bianca is finish
+  - Maybe Checkout PhysiX again, now accessible? -> Is more promising than Cosmos
+
+- Start Pix2Pix Residual with SSIM Loss higher
 
 
 
@@ -158,7 +161,18 @@ Participants: Keuper, Martin, Ich<br>
 Location: Google Meeting<br>
 Time: 11:35 O'Clock
 
-- ...
+- Konzentriere dich auf 3 Dinge:
+    - Physics Foundation Model kann möglich sein
+    - Ray Tracing (linear) wo geht er lang, wo stoßt er an. Winkelabhängig + gibt man dem Netzt vlt. als Channel oder tieferen Layers geben (benchmark anschauen) -> nur Stufenweisen, evtl. 3 Mal bouncen + Ohne überlagerung -> alle 10° schickt man einen raus und für jedes ein einzelnes Bild als Channel -> eventuell tool
+    - Und Residual Design nochmal anschauen
+- Aktuell Fokus auf Ray Tracing
+- Cosmos/PhysiX in Zukunft, wenn Rechner frei
+- Spatial Reasoning tendenziell eher nicht (aber eventuell interessant)
+- Aktuelle Gedanken
+	- Wie gut können Physik-Foundation Modelle bei diesem Problem sein?
+	- Experimente mit geteilter Komplexität (Residual Design) fortsetzen
+		- Eventuell starte mal Training mit angepasstem Loss 
+	- Hinzufügen von Simulations/Physik Informationen via Ray Tracing
 
 
 

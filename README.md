@@ -155,6 +155,21 @@ Time: 11:35 O'Clock
 
 
 
+**17.10.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Google Meeting<br>
+Time: 11:35 O'Clock
+
+- Add Performance Benchmark
+- Send examples with more beams (stepsize=5 or 1 or 0.1)
+- Add raytracing optional to physgen data-pipeline
+- Change training/model, so that it can accept more channels
+- Start Training + Evaluate Training -> which stepsize?
+  - On Standard and only complex (?)
+
+
+
 **10.10.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>

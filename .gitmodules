@@ -10,3 +10,6 @@
 [submodule "src/cosmos-predict2"]
 	path = src/cosmos-predict2
 	url = https://github.com/xXAI-botXx/cosmos-predict2.git
+[submodule "src/Image-Physics-Simulation"]
+	path = src/Image-Physics-Simulation
+	url = https://github.com/xXAI-botXx/Image-Physics-Simulation

@@ -1,0 +1,293 @@
+% -------------------------------------------------------
+% In dieser Datei sollten eigentlich keine Veränderungen mehr
+% notwendig sein.
+% -------------------------------------------------------
+
+\thispagestyle{empty}
+
+% Fakultät
+% -------------------------------------------------------
+\ifthenelse{\equal{\hsmafakultaet}{EI}}%
+  {\newcommand{\hsmafakultaetlangde}{Fakultät Elektrotechnik und Informationstechnik}%
+   \newcommand{\hsmafakultaetlangen}{Department of Electrical Engineering and Computer Science}}{}
+\ifthenelse{\equal{\hsmafakultaet}{EMI}}%
+{\newcommand{\hsmafakultaetlangde}{Fakultät Elektrotechnik, Medizintechnik und Informatik}%
+	\newcommand{\hsmafakultaetlangen}{Department of Electrical Engineering, Medical Engineering and Computer Science}}{}
+
+
+
+\ifthenelse{\equal{\hsmastudiengang}{AI}}%
+{\newcommand{\hsmastudienganglangde}{Angewandte Informatik}%
+	\newcommand{\hsmastudienganglangen}{Applied Computer Science}%
+	\newcommand{\hsmatypde}{BACHELORARBEIT}%
+	\newcommand{\hsmatypen}{BACHELOR THESIS}%
+	\newcommand{\hsmagrad}{\hsmabachelor}}{}
+
+\ifthenelse{\equal{\hsmastudiengang}{EI}}%
+{\newcommand{\hsmastudienganglangde}{Elektrotechnik/Informationstechnik}%
+	\newcommand{\hsmastudienganglangen}{Electrical Engineering/Information Technology}%
+	\newcommand{\hsmatypde}{BACHELORARBEIT}%
+	\newcommand{\hsmatypen}{BACHELOR THESIS}%
+	\newcommand{\hsmagrad}{\hsmabachelor}}{}
+
+\ifthenelse{\equal{\hsmastudiengang}{MK}}%
+{\newcommand{\hsmastudienganglangde}{Mechatronik}%
+	\newcommand{\hsmastudienganglangen}{Mechatronics}%
+	\newcommand{\hsmatypde}{BACHELORARBEIT}%
+	\newcommand{\hsmatypen}{BACHELOR THESIS}%
+	\newcommand{\hsmagrad}{\hsmabachelor}}{}
+
+\ifthenelse{\equal{\hsmastudiengang}{INFM}}%
+  {\newcommand{\hsmastudienganglangde}{Informatik Master}%
+  \newcommand{\hsmastudienganglangen}{Computer Science Master}%
+  \newcommand{\hsmatypde}{MASTERARBEIT}%
+  \newcommand{\hsmatypen}{MASTER THESIS}%
+  \newcommand{\hsmagrad}{\hsmamaster}}{}
+
+\ifthenelse{\equal{\hsmastudiengang}{MAR}}%
+  {\newcommand{\hsmastudienganglangde}{Master Applied Research - Künstliche Intelligenz}%
+  \newcommand{\hsmastudienganglangen}{Master Applied Research - Artificial Intelligence}%
+  \newcommand{\hsmatypde}{MASTERARBEIT}%
+  \newcommand{\hsmatypen}{MASTER THESIS}%
+  \newcommand{\hsmagrad}{\hsmamaster}}{}
+
+\newcommand{\hsmamaster}{Master of Science (M.Sc.)}
+
+\newcommand{\hsmabachelor}{Bachelor of Science (B.Sc.)}
+
+
+\newcommand{\hsmakoerperschaftde}{Hochschule für Technik, Wirtschaft und Medien Offenburg}
+\newcommand{\hsmakoerperschaften}{Offenburg University}
+
+\newcommand{\hsmaautorbib}{\hsmaautornname, \hsmaautorvname} % Autor Nachname, Vorname
+\newcommand{\hsmaautor}{\hsmaautorvname \ \hsmaautornname} % Autor Vorname Nachname
+
+\ifthenelse{\equal{\hsmasprache}{de}}%
+  {\newcommand{\hsmatyp}{\hsmatypde}%
+   \newcommand{\hsmathesistype}{zur Erlangung des akademischen Grades \hsmagrad}%
+   \newcommand{\hsmakoerperschaft}{\hsmakoerperschaftde}%
+   \newcommand{\hsmastudiengangname}{Studiengang \hsmastudienganglangde}%
+   \newcommand{\hsmastudienganglang}{\hsmastudienganglangde}%
+   \newcommand{\hsmatitel}{\hsmatitelde}%
+   \newcommand{\hsmatutor}{Betreuer}%
+   \newcommand{\hsmafakultaetlang}{\hsmafakultaetlangde}%
+   \newcommand{\hsmalistoftables}{Tabellenverzeichnis}%
+   \newcommand{\hsmalistoffigures}{Abbildungsverzeichnis}%
+   \newcommand{\hsmalistings}{Quellcodeverzeichnis}%
+   \newcommand{\hsmaindex}{Index}%
+   \newcommand{\hsmaabbreviations}{Abkürzungsverzeichnis}%   
+   \selectlanguage{ngerman}}%
+  {\newcommand{\hsmatyp}{\hsmatypen}%
+   \newcommand{\hsmathesistype}{for the acquisition of the academic degree \hsmagrad}%
+   \newcommand{\hsmakoerperschaft}{\hsmakoerperschaften}%
+   \newcommand{\hsmastudiengangname}{Course of Studies: \hsmastudienganglang}%
+   \newcommand{\hsmastudienganglang}{\hsmastudienganglangen}%
+   \newcommand{\hsmatitel}{\hsmatitelen}%
+   \newcommand{\hsmatutor}{Tutors}
+   \newcommand{\hsmafakultaetlang}{\hsmafakultaetlangen}%
+   \newcommand{\hsmalistoftables}{List of Tables}%
+   \newcommand{\hsmalistoffigures}{List of Figures}%
+   \newcommand{\hsmalistings}{Listings}%
+   \newcommand{\hsmaindex}{Index}%
+   \newcommand{\hsmaabbreviations}{List of Abbreviations}%
+   \selectlanguage{english}}%
+
+
+% Daten in die Standard-Felder von KOMA-Script eintragen
+\titlehead{\hsmatyp\ in\  \hsmastudienganglang}
+\subject{}
+\title{\hsmatitel}
+\author{\hsmaauthor}
+\date{\small{\hsmadatum}}
+
+% Daten für das fertige PDF-Dokument
+\hypersetup{
+  pdftitle={\hsmatitel},  % Titel des Dokuments
+  pdfauthor={\hsmaautor},              % Autor
+  pdfsubject={\hsmatyp\ in\ \hsmastudienganglang},                % Thema
+  pdfkeywords={\hsmatitel}         % Schlüsselworte
+}
+
+\newlength{\bindekorrektur}
+\newlength{\seitenanfang}
+\newlength{\seitenbreite}
+  
+\setlength{\bindekorrektur}{-46mm}   % Korrektur der horizontalen Position
+\setlength{\seitenanfang}{0mm}       % Korrektur der vertikalen Position
+\setlength{\seitenbreite}{297mm}
+
+% \noindent \includegraphics[width=7cm, left]{hso.png}\hfill \includegraphics[width=9cm, right]{imla.png} \\
+\captionsetup[figure]{labelformat=empty}
+\noindent 
+\begin{figure}
+    \begin{subfigure}[b]{0.55\textwidth}
+        \centering
+		\raisebox{0.5cm}{\includegraphics[width=5cm,left]{../../uploaded/img/hso.png}}
+	\end{subfigure} 
+    %\hfill
+	\begin{subfigure}[b]{0.55\textwidth}
+		\centering
+		\raisebox{-0.5cm}{\includegraphics[width=5cm,center]{../../uploaded/img/imla.jpg}}
+        %\includegraphics[width=1cm,center]{../../uploaded/img/hk.jpg}
+	\end{subfigure} 
+	\caption[]{}
+\end{figure}
+\captionsetup[figure]{labelformat=simple}
+
+% Titel der Arbeit
+\begin{textblock*}{128mm}(41mm,\seitenanfang + 62mm) % 4,5cm vom linken Rand und 6,0cm vom oberen Rand
+  \centering\Large\sffamily
+  \vspace{12mm} % Kleiner zusätzlicher Abstand oben für bessere Optik
+  \textbf{2. Semester Report}
+\end{textblock*}
+
+\begin{textblock*}{\seitenbreite}(\bindekorrektur,\seitenanfang + 88mm)
+	\centering\large\sffamily
+	\hsmatitel
+\end{textblock*}
+
+% Name
+\begin{textblock*}{\seitenbreite}(\bindekorrektur,\seitenanfang + 108mm)
+  \centering\large\sffamily
+  \hsmaautor
+\end{textblock*}
+
+% Thesis
+%\begin{textblock*}{\seitenbreite}(\bindekorrektur,\seitenanfang + 130mm)
+%  \centering\large\sffamily
+%  \textbf{\hsmatyp}\\
+%  \begin{small}\hsmathesistype \end{small}\\
+%  \vspace{6mm}
+%  \hsmastudiengangname
+%\end{textblock*}
+
+% Fakultät
+\begin{textblock*}{\seitenbreite}(\bindekorrektur,\seitenanfang + 165mm)
+  \centering\large\sffamily
+  \hsmafakultaetlang\\
+  \vspace{2mm}
+  \hsmakoerperschaft
+\end{textblock*}
+
+% Datum
+\begin{textblock*}{\seitenbreite}(\bindekorrektur,\seitenanfang + 190mm)
+  \centering\large 
+  \textsf{\hsmadatum}
+\end{textblock*}
+
+% Firma
+%\begin{textblock*}{\seitenbreite}(\bindekorrektur,\seitenanfang + 215mm)
+%  \centering\large 
+%  \textsf{Durchgeführt bei der Firma \hsmafirma}
+%\end{textblock*}
+
+% Betreuer
+\begin{textblock*}{\seitenbreite}(\bindekorrektur,\seitenanfang + 240mm)
+  \centering\large\sffamily
+  \hsmatutor \\
+  \vspace{2mm}
+  \hsmabetreuer\\
+  \vspace{2mm}
+  \hsmazweitkorrektor
+\end{textblock*}
+
+% Bibliographische Informationen
+\null\newpage
+\thispagestyle{empty}
+  
+%\newcommand{\hsmabibde}{\begin{small}\textbf{\hsmaautorbib}: \\ \hsmatitelde \ / \hsmaautor. \ -- \\ \hsmatypde, \hsmaort : \hsmakoerperschaftde, \hsmajahr. \pageref{lastpage} Seiten.\end{small}}
+
+%\newcommand{\hsmabiben}{\begin{small}\textbf{\hsmaautorbib}: \\ \hsmatitelen \ / \hsmaautor. \ -- \\ \hsmatypen, \hsmaort : \hsmakoerperschaften, \hsmajahr. \pageref{lastpage} pages. \end{small}}
+
+%\ifthenelse{\equal{\hsmasprache}{de}}%
+%  {\hsmabibde \\ \vspace{0.5cm} \\ \hsmabiben}
+%  {\hsmabiben \\ \vspace{0.5cm} \\ \hsmabibde}
+
+
+%Vorwort
+%\clearpage\setcounter{page}{1}
+%\thispagestyle{empty}
+%\textsf{\large\textbf{Acknowledgment}}
+
+%---...---
+
+% Erklärung
+%\clearpage
+%\thispagestyle{empty}
+%\textsf{\large\textbf{Eidesstattliche Erklärung}}
+
+%Hiermit versichere ich eidesstattlich, dass die vorliegende Master-Thesis von mir selbststän-dig und ohne unerlaubte fremde Hilfe angefertigt worden ist, insbesondere, dass ich alle Stel-len, die wörtlich oder annähernd wörtlich oder dem Gedanken nach aus Veröffentlichungen, unveröffentlichten Unterlagen und Gesprächen entnommen worden sind, als solche an den entsprechenden Stellen innerhalb der Arbeit durch Zitate kenntlich gemacht habe, wobei in den Zitaten jeweils der Umfang der entnommenen Originalzitate kenntlich gemacht wurde. Ich bin mir bewusst, dass eine falsche Versicherung rechtliche Folgen haben wird.
+
+%\textsf{\large\textbf{Declaration on oath}}
+
+%I hereby declare on oath that this Bachelor's thesis has been prepared by me independently and without unauthorized external assistance, in particular, that I have identified all passages taken verbatim or approximately verbatim or in spirit from publications, unpublished documents, and conversations as such at the appropriate places within the thesis utilizing quotations, whereby the scope of the original quotations taken has been indicated in the quotations. I am aware that a false statement will have legal consequences.
+
+
+%\ifthenelse{\boolean{hsmapublizieren} \and \not\boolean{hsmasperrvermerk}}%
+%{
+%\vspace{0.5cm}
+%Ich bin damit einverstanden, dass meine Arbeit veröffentlicht wird, d.\,h. dass die Arbeit elektronisch gespeichert, in andere Formate konvertiert, auf den Servern der Hochschule Offenburg öffentlich zugänglich gemacht und über das Internet verbreitet werden darf. 
+%}{}%
+
+
+%\vspace{1cm}
+%\hsmaort, \hsmadatum \\
+%\vspace{1.2cm}	    
+%\hsmaautor
+
+%\vspace{2.5cm}
+
+%\textsf{\large\textbf{AI-Tool Disclaimer}}
+
+%Nowadays AI-Tools are everywhere and it is important to state what is human-made and what not. In reality, the work of AI and humans is woven together, and therefore, it is even more crucial to name and try to differentiate.\\
+% This work was written by a human for humans. 
+% The AI-Tool Grammarly \cite{Grammarly} was applied to correct grammar and spelling, for appealing language and best output for the readers. The text itself was not the creation of an AI nor AI assisted.\\
+% ChatGPT \cite{ChatGPT} was used for supporting during coding to create and debug tasks efficiently. It still remains the handcraft and thinking of the author.
+
+%I hereby affirm that the AI tool Grammarly \cite{Grammarly} was used solely to correct grammar, spelling, and to enhance the language for optimal clarity and appeal to the reader. The text itself, however, was not generated by AI, nor was it AI-assisted in its creation. Furthermore, I testify that ChatGPT \cite{ChatGPT} was employed as a supportive tool during the coding process, assisting with the creation and debugging of tasks in an efficient manner. Nevertheless, the work reflects the independent craftsmanship and reasoning of the author.
+
+%Ich versichere hiermit, dass das KI-Tool Grammarly \cite{Grammarly} ausschließlich dazu verwendet wurde, Grammatik und Rechtschreibung zu korrigieren und die Sprache zu verbessern, um eine optimale Klarheit und Attraktivität für den Leser zu erreichen. Der Text selbst wurde jedoch weder von der KI erstellt. Darüber hinaus bezeuge ich, dass ChatGPT \cite{ChatGPT} während des Programmierens als unterstützendes Werkzeug eingesetzt wurde, das die Erstellung und das Debugging von Aufgaben auf effiziente Weise unterstützte. Nichtsdestotrotz spiegelt die Arbeit das unabhängige Handwerk und die Überlegungen des Autors wider.
+
+%\ifthenelse{\boolean{hsmapublizieren} \and \not\boolean{hsmasperrvermerk}}%
+%{
+%\vspace{0.5cm}
+%I agree that my work may be published, i.e. that the work may be stored electronically, converted into other formats, made publicly accessible on the servers of Offenburg University of Applied Sciences and distributed via the Internet.  
+%}{}%
+
+
+%\vspace{1cm}
+%\hsmaort, \hsmadatum \\
+%\vspace{1.2cm}		      
+%\hsmaautor
+
+
+
+%\ifthenelse{\boolean{hsmasperrvermerk}}%
+%{%
+%\vspace{5cm}
+%\color{red}\textsf{\large\textbf{Sperrvermerk}}
+
+%Die vorliegende Abschlussarbeit beinhaltet vertrauliche Informationen und interne Daten des Unternehmens \hsmafirma.
+%Sie darf aus diesem Grund nur zu Prüfzwecken verwendet und ohne ausdrückliche Genehmigung durch die \hsmafirma weder Dritten zugänglich gemacht, noch ganz oder in Auszügen veröffentlicht werden. Die Sperrfrist endet 5 Jahre Jahre nach dem Einreichen der Arbeit bei der Hochschule Offenburg. Unbeschadet hiervon bleibt die Weitergabe der Arbeit und Einsicht in die Arbeit an die mit der Prüfung befassten Mitarbeiter der Hochschule und Prüfer möglich, die ihrerseits zur Geheimhaltung verpflichtet sind, sowie die Verwendung der Arbeit in eventuellen prüfungsrechtlichen Rechtsschutzverfahren nach Maßgabe der geltenden verwaltungsprozessualen Regeln.
+%\color{black}
+%}{}
+
+%\cleardoublepage
+
+% Abstract
+%\thispagestyle{empty}
+%\textsf{\large\textbf{Zusammenfassung}}
+%\subsubsection*{\hsmatitelde}\hsmaabstractde
+%\clearpage
+\thispagestyle{empty}
+\textsf{\large\textbf{Abstract}}
+%\subsubsection*{\hsmatitelen}\hsmaabstracten
+
+\subsubsection*{\hsmatitelen}
+\addcontentsline{toc}{subsubsection}{\hsmatitelen}
+\noindent
+
+\hsmaabstracten
+
+
+\RedeclareSectionCommand[runin=false]{subsubsection}

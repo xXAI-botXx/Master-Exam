@@ -155,6 +155,39 @@ Time: 11:35 O'Clock
 
 
 
+**31.10.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Google Meeting<br>
+Time: 11:35 O'Clock
+
+- Server crashed -> trainings got canceled -> restarted this time only 2 of them
+- Feedback Bericht: An sich sehr gut, aber mehr kondensieren!
+- Feedback Vortrag: Sehr gut
+- Wenn per SSH nicht, dann direkt Thomas schreiben
+- Num of Worker in DataLoder checken
+- Ray-Trcing prerendern
+- Mehr Kompremieren -> lieber weniger als mehr (Kondensieren/Aggregieren)
+- Keine Ahnung mitnehmen, und nur Wesentliche 
+- Wenn erste Ergebnisse, dann melden
+
+
+
+**20.10.2025 AI-Meeting**<br>
+
+Participants: Keuper, Sven, Louis, Paul, Lukas, Ich<br>
+Location: Google Meeting<br>
+Time: 09:30 O'Clock
+
+- Feedback Forschungsberichte in einzelnen Meetings
+- Elevator Pitch -> Bewertung bei Stephen (nächstes Meeting)
+- Ende des Semesters: Präsentation (Bisherige Experimente + Vorschau auf Masterarbeit) + Bericht
+- 3. Semster Postersession mit Pitch
+- Wissenschaftliches Programmieren: Ende des Semesters -> Block
+- Ende des Semsters: Mentoring startet, diesmal fangen wir früher an
+
+
+
 **17.10.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>

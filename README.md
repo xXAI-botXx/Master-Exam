@@ -155,6 +155,22 @@ Time: 11:35 O'Clock
 
 
 
+**07.11.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Google Meeting<br>
+Time: 11:35 O'Clock
+
+- A100er-Rechner ist erstmal frei
+- A100 Rechner => (nur) erste GPU verwenden GPU 0
+- Auf A100-Rechner setup von paired Image to Image
+- Meeting mit nur Martin möglich, falls nötig
+- Inferenz vom Cosmos Model machen
+- Models testen/evaluieren, sobald Schmidthuber12 wieder verfügbar
+- Nächste 2 Male fallen aber an sich aus
+
+
+
 **31.10.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>

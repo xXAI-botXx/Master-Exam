@@ -155,6 +155,20 @@ Time: 11:35 O'Clock
 
 
 
+**28.11.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Google Meeting<br>
+Time: 11:35 O'Clock
+
+- Pix2Pix irgendwelche Preprocessing Schritte?
+- Pix2Pix ips overfitting? teste auch auf trainingsdaten
+- Comos Predict weiter probieren
+- Masterarbeit, wenn dann jetzt dann starten (könnte mit Fraunhofer oder so) -> er würde das Thema jetzt dann ändern
+- Er würde mit NCA dann weiter machen (Neural Cellular Automata)
+
+
+
 **07.11.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>

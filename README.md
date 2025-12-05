@@ -155,6 +155,27 @@ Time: 11:35 O'Clock
 
 
 
+**05.12.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Google Meeting<br>
+Time: 11:35 O'Clock
+
+- Results:
+  - Ray-Tracing mit Standard Pix2Pix -> Overfitted nicht
+  - Weitere Experimente ausprobiert:
+    - Ray-Tracing mit Residual Design funktioniert nicht 
+    - Residual Design funktioniert nicht -> complex part (bei dem Datensatz mit weniger Gebäuden hat das aber funktioniert)
+    - Experimente mit Masking -> keine Verbesserung
+- Ein Kanal Ray-Tracing -> model muss nur intensitäten lernen => nur ray-tracing als input
+  - Ausprobieren mit 36 und 360
+- Ray-Tracing -> iterativ (zum Beispiel das man dann 200 Schritte hat)
+- Ray-Tracing -> funktioniert? Eventuell verbessern
+- Im neuen Jahr sollte ich mein Master-Thema wählen (eventuell mit Fraunhofer oder eben Zellulären Automaten)
+  - Überlege dir, über was du schreiben willst = sollte mit Image to Image zu tun haben
+
+
+
 **28.11.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>

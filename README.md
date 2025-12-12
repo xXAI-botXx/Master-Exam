@@ -155,6 +155,34 @@ Time: 11:35 O'Clock
 
 
 
+**11.12.2025 Weekly Meeting**<br>
+
+Participants: Keuper, Martin, Ich<br>
+Location: Google Meeting<br>
+Time: 11:35 O'Clock
+
+- Results:
+  - Nur Ray-Traces als Input implementiert
+  - RayTracing-Iterator (also mit Zeit-Dimension) hinzugefügt
+  - Ray-Tracing Algorithmus optimiert -> neu vorberechnet
+  - Experimente mit neuen Ray / nur Reflektion gestartet -> Server hat abgebrochen, daher neustart -> warte auf Ergebnisse
+    - Laufendes Experiment: Nur mit Ray-Traces Reflexionen vorhersagen
+- Simulation könnte man Schrittweise machen
+  - Die Pfad Länge limitieren
+  - Damit würde man eine Art Schrittweise Vorhersage bekommen
+  - Schau mal, wie schwer das gehen würde
+
+- Ergebnisse in den Chat schreiben von Experiment (wenn fertig)
+- Semesterbericht über beide Themen / nur über Physgen? -> würde dann jetzt schon damit anfangen
+  - Einfach über dieses Semester
+
+- Bericht mehr struktur -> nicht zu lang nicht zu viel, nur paar Seiten keine 20 Seiten
+  - Erst kleine zusammenfassung des letzten semesters
+  - Muss nicht aussehen wie ein Paper, aber wissenschaftlich (Quellen)
+
+
+
+
 **05.12.2025 Weekly Meeting**<br>
 
 Participants: Keuper, Martin, Ich<br>

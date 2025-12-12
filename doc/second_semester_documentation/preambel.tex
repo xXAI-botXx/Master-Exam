@@ -4,7 +4,7 @@
     a4paper,                % DIN-A4-Papier
     12pt,                   % Schriftgöße
     headings=small,         % Kleine Überschriften
-    headsepline=true,       % Trennlinie am Kopf der Seite
+    headsepline=false,       % Trennlinie am Kopf der Seite
     footsepline=false,      % Keine Trennlinie am Fuß der Seite
     bibliography=totoc,     % Literaturverzeichnis in das Inhaltsverzeichnis aufnehmen
     twoside=off,            % Für doppelseitigen Druck auf on stellen, off für einseitig
@@ -80,6 +80,7 @@
 \newcolumntype{m}{>{\hsize=.5\hsize}X}
 \newcolumntype{s}{>{\hsize=.3\hsize}X}
 \usepackage{tikz}
+\usepackage{enumitem}  % dense listings
 
 
 \setlength{\bibitemsep}{1em}     % Abstand zwischen den Literaturangaben
@@ -170,7 +171,11 @@
 
 % In der Kopfzeile nur die kurze Kapitelbezeichnung (ohne Kapitel davor)
 \renewcommand*\chaptermarkformat{\thechapter\autodot\enskip}
-\automark[chapter]{chapter}
+% \automark[chapter]{chapter}
+\automark{} % remove automatic marks
+\ihead{}    % Kopfzeile links leeren
+\chead{}    % Kopfzeile mitte leeren
+\ohead{}    % Kopfzeile rechts leeren
 
 % Einstellungen für Schriftarten
 \setkomafont{pagehead}{\normalfont\sffamily}
